@@ -4,6 +4,10 @@ import "./globals.css";
 import Navbar from "@/components/Navbar";
 import Header from "@/components/header";
 
+import 'swiper/css';
+import 'swiper/css/pagination';
+import 'swiper/css/scrollbar';
+
 const urbanist = Urbanist({
   variable: "--font-geist-sans",
   subsets: ["latin"],

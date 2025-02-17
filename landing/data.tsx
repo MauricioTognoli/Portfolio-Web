@@ -1,4 +1,4 @@
-import { BookText, CodeSquare, HomeIcon, UserRound, Linkedin, Crop, Pencil, Computer, Book, Rocket, Speech, TwitterIcon, GithubIcon } from "lucide-react";
+import { BookText, CodeSquare, HomeIcon, UserRound, Linkedin, Crop, Pencil, Computer, Book, Rocket, TwitterIcon, GithubIcon } from "lucide-react";
 
 export const socialNetworks = [
     {
@@ -43,12 +43,6 @@ export const itemsNavbar = [
         title: "Target",
         icon: <CodeSquare size={25} color="#fff" strokeWidth={1} />,
         link: "/portfolio",
-    },
-    {
-        id: 5,
-        title: "Home",
-        icon: <Speech size={25} color="#fff" strokeWidth={1} />,
-        link: "/testimonials",
     },
 ];
 
