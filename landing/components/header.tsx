@@ -7,10 +7,10 @@ const Header = () => {
   return (
     <MotionTransition
       position="bottom"
-      className="absolute z-40 inline-block w-full t-5 md:t-10"
+      className=" z-40 inline-block w-full mt-10 t-5 md:t-10 px-20"
     >
       <header>
-        <div className="container justify-between max-w-6xl mx-auto md:flex">
+        <div className=" container justify-between max-w-6xl mx-auto md:flex">
           <Link href="/">
             <h1 className="my-3 text-4xl font-bold text-center md:text-left">
               Mauricio

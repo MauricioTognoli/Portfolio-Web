@@ -8,7 +8,7 @@ interface MotonTransitionProps {
   className?: string
 }
 
-const motionTransition = (props: MotonTransitionProps) => {
+const MotionTransition = (props: MotonTransitionProps) => {
   const { children, position, className } = props;
   return <motion.div variants={fadeIn(position)} initial='hidden'
   animate='visible'
@@ -16,4 +16,4 @@ const motionTransition = (props: MotonTransitionProps) => {
   className={className} >{children}</motion.div>;
 };
 
-export default motionTransition;
+export default MotionTransition;
