@@ -4,7 +4,7 @@ export const socialNetworks = [
     {
         id: 1,
         logo: <Linkedin size={30} strokeWidth={1} />,
-        src: "www.linkedin.com/in/mauricio-tognoli",
+        src: "https://www.linkedin.com/in/mauricio-tognoli/",
     },
     {
         id: 2,
