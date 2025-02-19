@@ -7,7 +7,7 @@ const Header = () => {
   return (
     <MotionTransition
       position="bottom"
-      className=" z-40 inline-block w-full mt-10 t-5 md:t-10 px-20"
+      className="relative z-40 inline-block w-full mt-10 t-5 md:t-10 px-20"
     >
       <header>
         <div className=" container justify-between max-w-6xl mx-auto md:flex">
@@ -23,7 +23,7 @@ const Header = () => {
                 key={id}
                 href={src}
                 target="_blank"
-                className="transition-all duration-300 hover:text-violet-800"
+                className="transition-all duration-300 hover:text-secondary"
               >
                 {logo}
               </Link>

@@ -47,7 +47,7 @@ const Cover = () => {
                 value: "#ffffff",
               },
               links: {
-                color: "#ffffff",
+                color: "#f68036",
                 distance: 150,
                 enable: true,
                 opacity: 0.5,

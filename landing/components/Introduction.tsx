@@ -7,26 +7,16 @@ import Link from "next/link";
 const Introduction = () => {
   return (
     <div className="z-20 w-full">
-      <div className="z-20 grid items-center h-full p-6 py-20 md:py-0 md:grid-cols-2">
-      <div className="relative h-full min-h-[400px] ">
-              <div className="absolute inset-0 max-w-[550px] max-h-[650px] bg-secondary rounded-full scale-95 translate-x-4 translate-y-4 transform rotate-3"></div>
-              <Image
-                src=
-                  "/home.jpg"
-                
-                alt="Profile"
-                width={150}
-                height={400}
-                unoptimized
-                className="absolute inset-0 w-full h-full max-w-[550px] max-h-[650px] object-cover object-top rounded-full scale-90 hover:scale-95 transition-transform duration-300"
-              />
-              <div className="absolute bottom-12 left-12 max-w-[550px]  bg-gray-900 bg-opacity-80 backdrop-blur-sm p-4 rounded-lg shadow-lg transform -rotate-3 hover:rotate-0 transition-all duration-300">
-                <p className="text-xl font-semibold">Front-end Developer</p>
-                <p className="text-blue-300">Junior</p>
-              </div>
-              </div>
-
-        <div className="flex flex-col justify-center max-w-md mt-4 ">
+      <div className="z-20 grid items-center h-full p-6 md:py-0 md:grid-cols-2">
+        <Image
+          src="/home.jpg"
+          priority
+          width="300"
+          height="100"
+          alt="Avatar"
+          className="rounded-full shadow-2xl m-auto shadow-secondary"
+        />
+        <div className="flex flex-col justify-center max-w-md mt-6 ">
           <h1 className="mb-5 text-2xl leading-tight text-center md:text-left md:text-4xl md:mb-10">
             Si Puedes Pensarlo,
             <TypeAnimation
@@ -47,10 +37,16 @@ const Introduction = () => {
             />
           </h1>
 
+          <h2 className="mx-auto mt-2 mb-4 text-2xl text-center md:mx-0 md:mb-8 md:text-left">
+            Hola, soy{" "}
+            <span className="font-bold text-secondary">Mauricio Tognoli</span>.
+          </h2>
           <p className="mx-auto mb-2 text-xl text-center md:mx-0 md:mb-8 md:text-left">
-            Como desarrollador frontend, me dedico a combinar diseño y
-            funcionalidad para crear experiencias digitales increibles y
-            accesibles.
+            Desarrollador Front-end de Buenos Aires, Argentina, apasionado por
+            crear experiencias digitales hermosas e intuitivas.
+            <br /> Mi objetivo es desafiarme en nuevos entornos, aprendiendo y
+            mejorando continuamente mis habilidades a través de diversos
+            proyectos.
           </p>
 
           <div className="flex items-center justify-center text-sm gap-3 mt-6 md:text-md md:justify-start md:gap-10">
@@ -61,8 +57,8 @@ const Introduction = () => {
               Ver proyectos
             </Link>
             <Link
-              href="/contact"
-              className="px-3 py-2 transition-all border-2 cursor-pointer text-secondary border-secondary text-md w-fit rounded-xl hover:shadow-lg hover:shadow-secondary"
+              href="mailto:tognolimauricio@gmail.com"
+              className="px-3 py-2 transition-all  cursor-pointer bg-secondary text-black font-semibold  text-md w-fit rounded-xl hover:shadow-lg hover:shadow-secondary"
             >
               Contacta conmigo
             </Link>

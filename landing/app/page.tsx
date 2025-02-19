@@ -4,12 +4,11 @@ import TransitionPage from "@/components/Transition-page";
 
 export default function Home() {
   return (
-    <main>
-      <TransitionPage/>
+    <main className="relative mb-32 md:top-16">
+      <TransitionPage />
       <div className="flex min-h-[100vh] h-full ">
-        <Cover/>
-        <Introduction/>
-
+        <Cover />
+        <Introduction />
       </div>
     </main>
   );

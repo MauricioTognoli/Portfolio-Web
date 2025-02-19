@@ -1,10 +1,10 @@
-import { BookText, CodeSquare, HomeIcon, UserRound, Linkedin, Crop, Pencil, Computer, Book, Rocket, TwitterIcon, GithubIcon } from "lucide-react";
+import { BookText, CodeSquare, HomeIcon, UserRound, Linkedin, Crop, Pencil, Computer, Book, Rocket, TwitterIcon, GithubIcon, Phone, Mail } from "lucide-react";
 
 export const socialNetworks = [
     {
         id: 1,
         logo: <Linkedin size={30} strokeWidth={1} />,
-        src: "Linkedin.com",
+        src: "www.linkedin.com/in/mauricio-tognoli",
     },
     {
         id: 2,
@@ -14,7 +14,17 @@ export const socialNetworks = [
     {
         id: 3,
         logo: <GithubIcon size={30} strokeWidth={1} />,
-        src: "#!",
+        src: "https://github.com/MauricioTognoli",
+    },
+    {
+        id: 4,
+        logo: <Phone size={30} strokeWidth={1} />,
+        src: "tel:+543487552390",
+    },
+    {
+        id: 5,
+        logo: <Mail size={30} strokeWidth={1} />,
+        src: "mailto:tognolimauricio@gmail.com",
     },
 ];
 
@@ -80,31 +90,24 @@ export const dataAboutPage = [
 export const dataCounter = [
     {
         id: 0,
-        endCounter: 10,
+        endCounter: 3,
         text: "Años de experiencia",
         lineRight: true,
         lineRightMobile: true,
     },
     {
         id: 1,
-        endCounter: 80,
+        endCounter: 4,
         text: "Clientes satisfechos",
         lineRight: true,
         lineRightMobile: false,
     },
     {
         id: 2,
-        endCounter: 220,
+        endCounter: 6,
         text: "Proyectos finalizados",
         lineRight: true,
         lineRightMobile: true,
-    },
-    {
-        id: 3,
-        endCounter: 30,
-        text: "Premios ganadores",
-        lineRight: false,
-        lineRightMobile: false,
     },
 ];
 
