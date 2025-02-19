@@ -9,7 +9,7 @@ export const socialNetworks = [
     {
         id: 2,
         logo: <TwitterIcon size={30} strokeWidth={1} />,
-        src: "#!",
+        src: "https://x.com/Mau_Tognoli",
     },
     {
         id: 3,
