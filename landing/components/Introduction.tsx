@@ -43,7 +43,7 @@ const Introduction = () => {
           </h2>
           <p className="mx-auto mb-2 text-xl text-center md:mx-0 md:mb-8 md:text-left">
             Desarrollador Front-end de Buenos Aires, Argentina, apasionado por
-            crear experiencias digitales hermosas e intuitivas.
+            crear experiencias digitales agradables e intuitivas.
             <br /> Mi objetivo es desafiarme en nuevos entornos, aprendiendo y
             mejorando continuamente mis habilidades a través de diversos
             proyectos.
