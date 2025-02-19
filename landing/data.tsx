@@ -1,4 +1,4 @@
-import { BookText, CodeSquare, HomeIcon, UserRound, Linkedin, Crop, Pencil, Computer, Book, Rocket, TwitterIcon, GithubIcon, Phone, Mail } from "lucide-react";
+import { BookText, CodeSquare, HomeIcon, UserRound, Linkedin, Crop, Pencil, Computer, Book, Rocket, TwitterIcon, GithubIcon, Phone, Mail, FileCode } from "lucide-react";
 
 export const socialNetworks = [
     {
@@ -53,6 +53,12 @@ export const itemsNavbar = [
         title: "Target",
         icon: <CodeSquare size={25} color="#fff" strokeWidth={1} />,
         link: "/portfolio",
+    },
+    {
+        id: 5,
+        title: "Target",
+        icon: <FileCode size={25} color="#fff" strokeWidth={1} />,
+        link: "/technologies",
     },
 ];
 
@@ -202,3 +208,106 @@ export const dataTestimonials = [
         imageUrl: "/profile6.png",
     },
 ];
+
+export const technologies = [
+    {
+      name: "React",
+      logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg",
+      category: "Frontend",
+    },
+    {
+      name: "TypeScript",
+      logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg",
+      category: "Language",
+    },
+    {
+      name: "JavaScript",
+      logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg",
+      category: "Language",
+    },
+    {
+      name: "HTML5",
+      logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg",
+      category: "Frontend",
+    },
+    {
+      name: "CSS3",
+      logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg",
+      category: "Frontend",
+    },
+    {
+      name: "Node.js",
+      logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg",
+      category: "Backend",
+    },
+    {
+      name: "Bootstrap",
+      logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/bootstrap/bootstrap-original.svg",
+      category: "Frontend",
+    },
+    {
+      name: "Git",
+      logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg",
+      category: "Tool",
+    },
+    {
+      name: "Next.js",
+      logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nextjs/nextjs-original.svg",
+      category: "Frontend",
+    },
+    {
+      name: "Tailwind",
+      logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tailwindcss/tailwindcss-original.svg",
+      category: "Frontend",
+    },
+    {
+      name: "Redux",
+      logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/redux/redux-original.svg",
+      category: "Frontend",
+    },
+    {
+      name: "MongoDB",
+      logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mongodb/mongodb-original.svg",
+      category: "Cloud",
+    },
+    {
+      name: "Express,js",
+      logo: "https://icongr.am/devicon/express-original.svg?size=128&color=ffffff",
+      category: "Backend",
+    },
+    {
+      name: "Docker",
+      logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/docker/docker-original.svg",
+      category: "Backend",
+    },
+    {
+      name: "PostgreSQL",
+      logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postgresql/postgresql-original.svg",
+      category: "Cloud",
+    },
+    {
+      name: "Webpack",
+      logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/webpack/webpack-original.svg",
+      category: "Tool",
+    },
+    {
+      name: "GitHub",
+      logo: "https://icongr.am/devicon/github-original.svg?size=128&color=ffffff",
+      category: "Tool",
+    },
+    {
+      name: "Vite",
+      logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vite/vite-original.svg",
+      category: "Tool",
+    },
+    {
+      name: "npm",
+      logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/npm/npm-original-wordmark.svg",
+      category: "Tool",
+    },
+    {
+      name: "Figma",
+      logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/figma/figma-original.svg",
+      category: "Tool",
+    }
+  ];
