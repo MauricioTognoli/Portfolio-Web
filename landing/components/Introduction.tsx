@@ -18,7 +18,7 @@ const Introduction = () => {
         />
         <div className="flex flex-col justify-center max-w-md mt-6 ">
           <h1 className="mb-5 text-2xl leading-tight text-center md:text-left md:text-4xl md:mb-10">
-            Si Puedes Pensarlo,
+            Si puedes pensarlo,
             <TypeAnimation
               sequence={[
                 "puedes programarlo",

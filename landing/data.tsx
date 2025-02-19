@@ -59,33 +59,28 @@ export const itemsNavbar = [
 export const dataAboutPage = [
     {
         id: 1,
-        title: "Frontend Developer",
-        subtitle: "TechSolutions",
-        description: "Colabora con un equipo dinámico para desarrollar interfaces de usuario atractivas y funcionales que impulsen el éxito de nuestros clientes en el mundo digital.",
-        date: "Nov 2023 ",
+        title: "Desarrollador Frontend",
+        subtitle: "Proyectos Personales",
+        description: "He trabajado en múltiples proyectos personales utilizando Next.js, React y Tailwind CSS, enfocándome en la creación de interfaces intuitivas y funcionales con una experiencia de usuario optimizada.",
+        date: "Actualidad",
     },
     {
         id: 2,
-        title: "Creador de Experiencias Digitales",
-        subtitle: "PixelCrafters",
-        description: "Trabaja en proyectos emocionantes que desafían los límites de la creatividad y la tecnología. Únete a nosotros mientras creamos experiencias digitales cautivadoras que inspiran y cautivan a nuestros usuarios.",
-        date: "May 2021",
+        title: "Formación en Desarrollo Fullstack",
+        subtitle: "Programa de Especialización",
+        description: "En 2024, completé mi formación como desarrollador fullstack, adquiriendo experiencia en frontend y backend con tecnologías modernas. Desarrollé aplicaciones prácticas, enfocándome en buenas prácticas y rendimiento.",
+        date: "2024",
     },
     {
         id: 3,
-        title: "Especialista en Desarrollo Frontend",
-        subtitle: "CodeForge Solutions",
-        description: "Como desarrollador frontend, tendrás la oportunidad de colaborar en proyectos diversos y desafiantes que te permitirán expandir tus habilidades y dejar tu huella en el mundo digital.",
-        date: "Ago 2019",
-    },
-    {
-        id: 4,
-        title: "Prácticas Grado",
-        subtitle: "WebWizards Inc.",
-        description: "Únete a nosotros mientras creamos sitios web y aplicaciones interactivas que sorprenden y deleitan a nuestros clientes. Si tienes pasión por el diseño y la programación, y disfrutas colaborar en un entorno creativo, ¡queremos conocerte!        ",
-        date: "Mar 2018",
-    },
-]
+        title: "Aprendizaje Autodidacta",
+        subtitle: "Desarrollo Web",
+        description: "En 2022, inicié mi camino en el desarrollo web de manera autodidacta, aprendiendo HTML, CSS, JavaScript y React. Experimenté con proyectos personales para reforzar mis conocimientos.",
+        date: "2022",
+    }
+];
+
+
 
 export const dataCounter = [
     {
@@ -106,6 +101,13 @@ export const dataCounter = [
         id: 2,
         endCounter: 6,
         text: "Proyectos finalizados",
+        lineRight: true,
+        lineRightMobile: true,
+    },
+    {
+        id: 3,
+        endCounter: 20,
+        text: "Tecnologias utilizadas",
         lineRight: true,
         lineRightMobile: true,
     },
