@@ -11,9 +11,9 @@ import {
   Rocket,
   TwitterIcon,
   GithubIcon,
-  Phone,
   Mail,
   FileCode,
+  FileUserIcon,
 } from "lucide-react";
 
 export const socialNetworks = [
@@ -34,8 +34,8 @@ export const socialNetworks = [
   },
   {
     id: 4,
-    logo: <Phone size={30} strokeWidth={1} />,
-    src: "tel:+543487552390",
+    logo: <FileUserIcon size={30} strokeWidth={1} />,
+    src: "https://drive.google.com/file/d/1vgbIBhHtwvgJfLofMtTlsgnN-QSFbbWd/view?usp=drivesdk",
   },
   {
     id: 5,
