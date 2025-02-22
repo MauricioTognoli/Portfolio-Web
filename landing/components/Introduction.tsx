@@ -13,7 +13,7 @@ const Introduction = () => {
           priority
           width="300"
           height="100"
-          alt="Avatar"
+          alt="Imagen de de Mauricio Tognoli"
           className="rounded-full shadow-2xl m-auto shadow-secondary"
         />
         <div className="flex flex-col justify-center max-w-md mt-6 ">
