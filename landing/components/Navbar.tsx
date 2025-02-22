@@ -17,8 +17,10 @@ const Navbar = () => {
               className={`px-3 py-2 transition duration-150 rounded-full cursor-pointer hover:bg-secondary ${
                 router === item.link && "bg-secondary"
               }`}
+              
             >
-              <Link href={item.link}>{item.icon}</Link>
+              <Link href={item.link}
+              title={item.title}>{item.icon}</Link>
             </div>
           ))}
         </div>

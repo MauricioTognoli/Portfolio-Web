@@ -11,7 +11,7 @@ interface PortfolioBoxProps {
     }
 }
 
-const PortfolioBox = (props: PortfolioBoxProps) => {
+const ProyectsBox = (props: PortfolioBoxProps) => {
     const { data } = props
     const { id, title, image, urlDemo, urlGithub } = data
 
@@ -48,4 +48,4 @@ const PortfolioBox = (props: PortfolioBoxProps) => {
     );
 }
 
-export default PortfolioBox
+export default ProyectsBox

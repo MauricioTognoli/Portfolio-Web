@@ -21,57 +21,63 @@ export const socialNetworks = [
     id: 1,
     logo: <Linkedin size={30} strokeWidth={1} />,
     src: "https://www.linkedin.com/in/mauricio-tognoli/",
+    description: "LinkedIn",
   },
   {
     id: 2,
     logo: <TwitterIcon size={30} strokeWidth={1} />,
     src: "https://x.com/Mau_Tognoli",
+    description: "Twitter (X)",
   },
   {
     id: 3,
     logo: <GithubIcon size={30} strokeWidth={1} />,
     src: "https://github.com/MauricioTognoli",
+    description: "GitHub",
   },
   {
     id: 4,
     logo: <FileUserIcon size={30} strokeWidth={1} />,
     src: "https://drive.google.com/file/d/1vgbIBhHtwvgJfLofMtTlsgnN-QSFbbWd/view?usp=drivesdk",
+    description: "Currículum",
   },
   {
     id: 5,
     logo: <Mail size={30} strokeWidth={1} />,
     src: "mailto:tognolimauricio@gmail.com",
+    description: "Correo",
   },
 ];
+
 
 export const itemsNavbar = [
   {
     id: 1,
-    title: "Home",
+    title: "Inicio",
     icon: <HomeIcon size={25} color="#fff" strokeWidth={1} />,
     link: "/",
   },
   {
     id: 2,
-    title: "User",
+    title: "Sobre mí",
     icon: <UserRound size={25} color="#fff" strokeWidth={1} />,
     link: "/about-me",
   },
   {
     id: 3,
-    title: "Book",
+    title: "Servicios",
     icon: <BookText size={25} color="#fff" strokeWidth={1} />,
     link: "/services",
   },
   {
     id: 4,
-    title: "Target",
+    title: "Proyectos",
     icon: <CodeSquare size={25} color="#fff" strokeWidth={1} />,
-    link: "/portfolio",
+    link: "/proyects",
   },
   {
     id: 5,
-    title: "Target",
+    title: "Tecnologías",
     icon: <FileCode size={25} color="#fff" strokeWidth={1} />,
     link: "/technologies",
   },
@@ -168,7 +174,7 @@ export const serviceData = [
   },
 ];
 
-export const dataPortfolio = [
+export const dataProyects = [
   {
     id: 1,
     title: "NexoTv",
