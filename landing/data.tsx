@@ -177,13 +177,20 @@ export const serviceData = [
 export const dataProyects = [
   {
     id: 1,
+    title: "Freiguel",
+    image: "/freiguel.png",
+    urlGithub: "https://github.com/MauricioTognoli",
+    urlDemo: "https://freiguel-web.vercel.app/en",
+  },
+  {
+    id: 2,
     title: "NexoTv",
     image: "/nexo.jpg",
     urlGithub: "https://github.com/MauricioTognoli/NexoTv.git",
     urlDemo: "https://nexo-tv.vercel.app/",
   },
   {
-    id: 2,
+    id: 3,
     title: "WeatherWeb",
     image: "/weather-web.png",
     urlGithub: "https://github.com/MauricioTognoli/WeatherWeb.git",

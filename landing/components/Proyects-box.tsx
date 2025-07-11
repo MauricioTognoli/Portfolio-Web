@@ -18,7 +18,7 @@ const ProyectsBox = (props: PortfolioBoxProps) => {
     return (
         <div
             key={id}
-            className="p-4 border border-teal-50 shadow-2xl shadow-secondary rounded-xl"
+            className="p-4 border border-secondary rounded-xl"
         >
             <h3 className="mb-4 text-xl">{title}</h3>
             <Image
