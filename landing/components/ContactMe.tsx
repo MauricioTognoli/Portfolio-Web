@@ -124,6 +124,10 @@ export function ContactMe() {
           </div>
 
           {/* Formulario */}
+          <div>
+          <h2 className="text-lg mb-10 max-w-2xl mx-auto text-pretty">
+            ¿Tienes un proyecto en mente? Estoy disponible para nuevas oportunidades y colaboraciones.
+          </h2>
           <Card className="p-6 lg:p-8">
             <form onSubmit={handleSubmit} className="space-y-6">
               <div className="space-y-2">
@@ -192,6 +196,7 @@ export function ContactMe() {
               </Button>
             </form>
           </Card>
+          </div>
         </div>
       </motion.div>
     </ContainerPage>

@@ -33,7 +33,7 @@ const Services = () => {
 
           <p className="mb-6 text-xl text-center md:text-left text-gray-300">
             Ofrezco servicios de desarrollo web frontend especializados en la
-            creación de sitios web y aplicaciones atractivas y funcionales.
+            creación de sitios web, aplicaciones atractivas y funcionales.
             Utilizando las últimas tecnologías, como React, TailwindCSS y
             JavaScript, diseño interfaces de usuario intuitivas y responsivas
             que reflejan la identidad de marca de mis clientes y mejoran su
