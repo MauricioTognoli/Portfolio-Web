@@ -1,12 +1,12 @@
 import type { Metadata } from "next";
 import {  Urbanist } from "next/font/google";
 import "./globals.css";
-import Navbar from "@/components/Navbar";
 import Header from "@/components/header";
 
 import 'swiper/css';
 import 'swiper/css/pagination';
 import 'swiper/css/scrollbar';
+import { Toaster } from "sonner";
 
 const urbanist = Urbanist({
   variable: "--font-geist-sans",
@@ -26,13 +26,13 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${urbanist.variable} antialiased`}
+        className={`${urbanist.variable} antialiased bg-black text-white`}
         >
-        <Navbar/>
         <Header/>
 
         
         {children}
+        <Toaster position="top-right" richColors />
       </body>
     </html>
   );

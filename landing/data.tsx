@@ -9,7 +9,6 @@ import {
   Computer,
   Book,
   Rocket,
-  TwitterIcon,
   GithubIcon,
   Mail,
   FileCode,
@@ -24,12 +23,6 @@ export const socialNetworks = [
     description: "LinkedIn",
   },
   {
-    id: 2,
-    logo: <TwitterIcon size={30} strokeWidth={1} />,
-    src: "https://x.com/Mau_Tognoli",
-    description: "Twitter (X)",
-  },
-  {
     id: 3,
     logo: <GithubIcon size={30} strokeWidth={1} />,
     src: "https://github.com/MauricioTognoli",
@@ -38,7 +31,7 @@ export const socialNetworks = [
   {
     id: 4,
     logo: <FileUserIcon size={30} strokeWidth={1} />,
-    src: "https://drive.google.com/file/d/1vgbIBhHtwvgJfLofMtTlsgnN-QSFbbWd/view?usp=drivesdk",
+    src: "https://drive.google.com/file/d/1EWv6dm2YTokw1v7vtQc0Qf0yAIHfdd8v/view?usp=drivesdk",
     description: "Currículum",
   },
   {
@@ -86,14 +79,32 @@ export const itemsNavbar = [
 export const dataAboutPage = [
   {
     id: 1,
-    title: "Desarrollador Frontend",
-    subtitle: "Proyectos Personales",
+    title: "Frontend Developer",
+    subtitle: "Powip",
     description:
-      "He trabajado en múltiples proyectos personales utilizando Next.js, React y Tailwind CSS, enfocándome en la creación de interfaces intuitivas y funcionales con una experiencia de usuario optimizada.",
+      "Desarrollo desde cero de una plataforma ERP SaaS de Ecommerce para reemplazar la solución anterior que no soportaba la alta carga de usuarios y datos. Participación activa en el diseño de UX/UI y en la implementación de una arquitectura frontend escalable y modular. Integración con REST APIs y gestión de datos optimizada mediante React Query y cacheado inteligente, mejorando los tiempos de carga y la experiencia de usuario. Trabajo colaborativo en un equipo pequeño bajo metodologías ágiles, aportando en decisiones técnicas y de diseño para garantizar rendimiento, escalabilidad y usabilidad.",
+    technologies: "Next.js, React, Tailwind CSS, React Query, Axios, Context API",
     date: "Actualidad",
   },
   {
     id: 2,
+    title: "UI Developer",
+    subtitle: "Freiguel (Remoto – ZimaBlue)",
+    description:
+      "Desarrollo de interfaces accesibles y mobile-first con Next.js 14 y Tailwind CSS. Implementación del sistema de navegación y páginas públicas, trabajando directamente con el equipo de diseño para asegurar consistencia visual y accesibilidad. Optimización del rendimiento de carga inicial y mejora en la navegación mediante buenas prácticas y una arquitectura moderna basada en Turborepo.",
+    technologies: "Next.js 14, Tailwind CSS, TypeScript, Turborepo",
+    date: "2025",
+  },
+  {
+    id: 3,
+    title: "Desarrollador Frontend",
+    subtitle: "Proyectos Personales",
+    description:
+      "He trabajado en múltiples proyectos personales utilizando Next.js, React y Tailwind CSS, enfocándome en la creación de interfaces intuitivas y funcionales con una experiencia de usuario optimizada.",
+    date: "2025",
+  },
+  {
+    id: 4,
     title: "Formación en Desarrollo Fullstack",
     subtitle: "Programa de Especialización",
     description:
@@ -101,7 +112,7 @@ export const dataAboutPage = [
     date: "2024",
   },
   {
-    id: 3,
+    id: 5,
     title: "Aprendizaje Autodidacta",
     subtitle: "Desarrollo Web",
     description:
@@ -110,17 +121,18 @@ export const dataAboutPage = [
   },
 ];
 
+
 export const dataCounter = [
   {
     id: 0,
-    endCounter: 3,
+    endCounter: 4,
     text: "Años de experiencia",
     lineRight: true,
     lineRightMobile: true,
   },
   {
     id: 1,
-    endCounter: 4,
+    endCounter: 5,
     text: "Clientes satisfechos",
     lineRight: true,
     lineRightMobile: false,
@@ -176,71 +188,24 @@ export const serviceData = [
 
 export const dataProyects = [
   {
-    id: 1,
-    title: "Freiguel",
-    image: "/freiguel.png",
-    urlGithub: "https://github.com/MauricioTognoli",
-    urlDemo: "https://freiguel-web.vercel.app/en",
-  },
-  {
-    id: 2,
-    title: "NexoTv",
-    image: "/nexo.jpg",
-    urlGithub: "https://github.com/MauricioTognoli/NexoTv.git",
-    urlDemo: "https://nexo-tv.vercel.app/",
-  },
-  {
-    id: 3,
-    title: "WeatherWeb",
-    image: "/weather-web.png",
-    urlGithub: "https://github.com/MauricioTognoli/WeatherWeb.git",
-    urlDemo: "https://weather-web-six-omega.vercel.app/",
-  },
-];
+      id: 1,
+      title: "Freiguel",
+      image: "/freiguel.png",
+      urlGithub: "https://github.com/mauriciotognoli",
+      urlDemo: "https://www.freiguel.pt/pt",
+      technologies: ["Next.js", "TypeScript", "Tailwind", "GraphQL", "Turborepo"],
+      description: "Desarrollé interfaces web accesibles y mobile-first utilizando Next.js 14, Tailwind CSS y TypeScript. Implementé el sistema de navegación y las páginas públicas de la plataforma, colaborando estrechamente con el equipo de diseño para asegurar consistencia visual y una experiencia de usuario óptima. También optimicé el rendimiento de carga inicial y mejoré la navegación, aplicando buenas prácticas de desarrollo en un entorno basado en Turborepo.",
+    },
+    {
+      id: 2,
+      title: "NexoTv",
+      image: "/nexo.jpg",
+      urlGithub: "https://github.com/mauriciotognoli/nexotv",
+      urlDemo: "https://nexotv.vercel.app",
+      technologies: ["React", "Apollo", "Tailwind"],
+      description: "Desarrollé una plataforma de streaming de películas y series utilizando Next.js, React y Tailwind CSS, enfocándome en una experiencia de usuario fluida y atractiva. Implementé funcionalidades como búsqueda global, filtrado por categorías, paginación y visualización dinámica de contenido. La arquitectura del frontend es modular y escalable, integrando datos desde un backend simulado con GraphQL, y optimizando la carga y renderizado de los componentes para garantizar rendimiento y accesibilidad.",
+    },
 
-export const dataTestimonials = [
-  {
-    id: 1,
-    name: "George Snow",
-    description:
-      "¡Increíble plataforma! Los testimonios aquí son genuinos y me han ayudado a tomar decisiones informadas. ¡Altamente recomendado!",
-    imageUrl: "/profile1.png",
-  },
-  {
-    id: 2,
-    name: "Juan Pérez",
-    description:
-      "Me encanta la variedad de testimonios disponibles en esta página. Es inspirador ver cómo otras personas han superado desafíos similares a los míos. ¡Gracias por esta invaluable fuente de motivación!",
-    imageUrl: "/profile2.png",
-  },
-  {
-    id: 3,
-    name: "María García",
-    description:
-      "Excelente recurso para obtener opiniones auténticas sobre diferentes productos y servicios. Me ha ayudado mucho en mis compras en línea. ¡Bravo por este sitio!",
-    imageUrl: "/profile3.png",
-  },
-  {
-    id: 4,
-    name: "Laura Snow",
-    description:
-      "¡Qué descubrimiento tan fantástico! Los testimonios aquí son honestos y detallados. Me siento más seguro al tomar decisiones después de leer las experiencias compartidas por otros usuarios.",
-    imageUrl: "/profile4.png",
-  },
-  {
-    id: 5,
-    name: "Carlos Sánchez",
-    description:
-      "Una joya en la web. Los testimonios son fáciles de encontrar y están bien organizados. ¡Definitivamente mi destino número uno cuando necesito referencias confiables!",
-    imageUrl: "/profile5.png",
-  },
-  {
-    id: 6,
-    name: "Antonio Martínez",
-    description:
-      "¡Fantástico recurso para aquellos que buscan validación antes de tomar decisiones importantes! Los testimonios aquí son veraces y realmente útiles. ¡Gracias por simplificar mi proceso de toma de decisiones!",
-    imageUrl: "/profile6.png",
-  },
 ];
 
 export const technologies = [
@@ -251,16 +216,16 @@ export const technologies = [
     src: "https://es.react.dev/",
   },
   {
+    name: "Next.js",
+    logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nextjs/nextjs-original.svg",
+    category: "Frontend",
+    src: "https://nextjs.org/",
+  },
+  {
     name: "TypeScript",
     logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg",
     category: "Language",
     src: "https://www.typescriptlang.org/",
-  },
-  {
-    name: "JavaScript",
-    logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg",
-    category: "Language",
-    src: "https://www.javascript.com/",
   },
   {
     name: "HTML5",
@@ -293,10 +258,10 @@ export const technologies = [
     src: "https://git-scm.com/",
   },
   {
-    name: "Next.js",
-    logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nextjs/nextjs-original.svg",
-    category: "Frontend",
-    src: "https://nextjs.org/",
+    name: "JavaScript",
+    logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg",
+    category: "Language",
+    src: "https://www.javascript.com/",
   },
   {
     name: "Tailwind",
