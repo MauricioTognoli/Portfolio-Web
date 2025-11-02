@@ -7,8 +7,8 @@ import { useInView } from "react-intersection-observer";
 
 const CounterServices = () => {
   const [ref, inView] = useInView({
-    triggerOnce: true, // solo se activa una vez
-    threshold: 0.3, // porcentaje visible del elemento antes de activar
+    triggerOnce: true,
+    threshold: 0.3,
   });
 
   return (
@@ -24,7 +24,8 @@ const CounterServices = () => {
           <motion.div
             key={id}
             className={`${
-              lineRight && "border-2 border-transparent md:border-e-gray-100 mt-5"
+              lineRight &&
+              "border-2 border-transparent md:border-e-gray-100 mt-5"
             } ${
               lineRightMobile && "border-e-gray-100"
             } last:border-e-0 last:md:border-e-0`}
@@ -33,8 +34,7 @@ const CounterServices = () => {
             transition={{ duration: 0.6, delay: id * 0.2 }}
           >
             <p className="flex mb-2 text-2xl font-extrabold md:text-3xl text-secondary">
-              +
-              {inView && <CountUp end={endCounter} start={0} duration={3} />}
+              +{inView && <CountUp end={endCounter} start={0} duration={3} />}
             </p>
             <p className="text-xs uppercase max-w-[100px]">{text}</p>
           </motion.div>

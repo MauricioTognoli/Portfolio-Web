@@ -9,12 +9,10 @@ import { ChevronDown } from "lucide-react";
 const Technologies = () => {
   const [showAll, setShowAll] = useState(false);
 
-  // Mostrar solo la primera fila (5 tecnologías)
   const visibleTechs = showAll ? technologies : technologies.slice(0, 5);
 
   return (
     <div className="text-center">
-      {/* Grid de tecnologías */}
       <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-8 justify-items-center">
         <AnimatePresence>
           {visibleTechs.map((tech, index) => (
@@ -43,7 +41,6 @@ const Technologies = () => {
         </AnimatePresence>
       </div>
 
-      {/* Botón para expandir/colapsar con animación */}
       <motion.div
         initial={false}
         animate={{ y: showAll ? 20 : 0 }}

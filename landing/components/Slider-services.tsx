@@ -11,7 +11,6 @@ import "swiper/css/navigation";
 const SliderServices = () => {
   return (
     <div className="relative flex flex-col items-center">
-      {/* Swiper */}
       <Swiper
         breakpoints={{
           320: { slidesPerView: 1, spaceBetween: 15 },
@@ -19,7 +18,7 @@ const SliderServices = () => {
           1024: { slidesPerView: 3, spaceBetween: 20 },
         }}
         pagination={{ clickable: true }}
-        navigation // <-- simple, Swiper crea los botones automáticamente
+        navigation
         modules={[Pagination, Navigation]}
         className="min-h-[280px] md:min-h-[340px] w-[270px] md:w-[550px]"
       >
@@ -32,7 +31,11 @@ const SliderServices = () => {
                 hover:border-secondary border-2"
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: index * 0.1, ease: "easeOut" }}
+              transition={{
+                duration: 0.6,
+                delay: index * 0.1,
+                ease: "easeOut",
+              }}
             >
               <div className="mb-4 text-4xl text-secondary">{item.icon}</div>
               <div>

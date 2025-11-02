@@ -7,7 +7,7 @@ import { animate, motion } from "framer-motion";
 import { Button } from "./ui/button";
 
 const Introduction = () => {
-   const scrollToProjects = () => {
+  const scrollToProjects = () => {
     const element = document.getElementById("projects");
     if (element) {
       const top = element.offsetTop;
@@ -16,7 +16,7 @@ const Introduction = () => {
         onUpdate(value) {
           window.scrollTo(0, value);
         },
-        ease: [0.25, 0.1, 0.25, 1], // easing suave tipo "easeInOut"
+        ease: [0.25, 0.1, 0.25, 1],
       });
     }
   };
@@ -79,8 +79,7 @@ const Introduction = () => {
             viewport={{ once: true, amount: 0.3 }}
             transition={{ duration: 0.6, delay: 0.3 }}
           >
-            Hola, soy{" "}
-            <span className="font-bold text-secondary">M</span>auricio{" "}
+            Hola, soy <span className="font-bold text-secondary">M</span>auricio{" "}
             <span className="font-bold text-secondary">T</span>ognoli
           </motion.h2>
 
@@ -106,15 +105,11 @@ const Introduction = () => {
             viewport={{ once: true, amount: 0.3 }}
             transition={{ duration: 0.6, delay: 0.5 }}
           >
-            
-              <Button  variant='outline' onClick={scrollToProjects}>
+            <Button variant="outline" onClick={scrollToProjects}>
               Ver proyectos
-              </Button>
-            <Link
-              href="mailto:tognolimauricio@gmail.com">
-              <Button>
-              Contacta conmigo
-              </Button>
+            </Button>
+            <Link href="mailto:tognolimauricio@gmail.com">
+              <Button>Contacta conmigo</Button>
             </Link>
           </motion.nav>
         </div>

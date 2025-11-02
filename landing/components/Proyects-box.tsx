@@ -42,15 +42,13 @@ const ProyectsBox = ({ projects }: ProjectsBoxProps) => {
 
   return (
     <div className="relative grid grid-cols-1 md:grid-cols-4 items-center justify-center w-full mx-auto gap-6  overflow-hidden">
-      {/* Flecha Izquierda */}
       <button
         onClick={prevProject}
         className="absolute left-2 top-1/2 -translate-y-1/2 bg-black/30 hover:bg-black/50 text-secondary p-2 rounded-full transition"
       >
-        <ChevronLeft size={28}  />
+        <ChevronLeft size={28} />
       </button>
 
-      {/* Proyecto Principal (3 columnas) con animación */}
       <div className="md:col-span-3 border border-white hover:border-secondary rounded-2xl p-5 bg-gray-800/40 hover:bg-gray-800 transition-all duration-300 backdrop-blur-md shadow-lg shadow-slate-800 relative overflow-hidden">
         <AnimatePresence mode="wait" custom={direction}>
           <motion.div
@@ -75,21 +73,15 @@ const ProyectsBox = ({ projects }: ProjectsBoxProps) => {
                 "Proyecto destacado enfocado en experiencia de usuario y rendimiento."}
             </p>
 
-            {/* Botones */}
             <div className="flex gap-4 mb-4">
-              <Link
-                href={current.urlGithub}
-                target="_blank">
+              <Link href={current.urlGithub} target="_blank">
                 <Button variant="outline">GitHub</Button>
               </Link>
-              <Link
-                href={current.urlDemo}
-                target="_blank" >
-                    <Button>Live Demo</Button>
+              <Link href={current.urlDemo} target="_blank">
+                <Button>Live Demo</Button>
               </Link>
             </div>
 
-            {/* Desplegable de tecnologías */}
             <div className="border-t border-gray-600 pt-3">
               <button
                 onClick={() => setShowTech((prev) => !prev)}
@@ -129,7 +121,6 @@ const ProyectsBox = ({ projects }: ProjectsBoxProps) => {
         </AnimatePresence>
       </div>
 
-      {/* Preview del siguiente proyecto con animación */}
       <AnimatePresence mode="wait">
         <motion.div
           key={next.id}
@@ -147,13 +138,10 @@ const ProyectsBox = ({ projects }: ProjectsBoxProps) => {
             height={160}
             className="rounded-xl object-cover shadow-md"
           />
-          <p className="mt-2 text-sm font-medium text-gray-200">
-            {next.title}
-          </p>
+          <p className="mt-2 text-sm font-medium text-gray-200">{next.title}</p>
         </motion.div>
       </AnimatePresence>
 
-      {/* Flecha Derecha */}
       <button
         onClick={nextProject}
         className="absolute right-2 top-1/2 -translate-y-1/2 bg-black/30 hover:bg-black/50 text-secondary p-2 rounded-full transition"

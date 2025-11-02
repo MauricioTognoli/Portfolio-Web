@@ -5,9 +5,8 @@ import { motion } from "framer-motion";
 import { useInView } from "react-intersection-observer";
 import { dataAboutPage } from "@/data";
 
-// Definimos el tipo de props
 interface TimeLineItemProps {
-  data: typeof dataAboutPage[0];
+  data: (typeof dataAboutPage)[0];
 }
 
 const TimeLineItem: React.FC<TimeLineItemProps> = ({ data }) => {

@@ -42,7 +42,6 @@ export const socialNetworks = [
   },
 ];
 
-
 export const itemsNavbar = [
   {
     id: 1,
@@ -83,7 +82,8 @@ export const dataAboutPage = [
     subtitle: "Powip",
     description:
       "Desarrollo desde cero de una plataforma ERP SaaS de Ecommerce para reemplazar la solución anterior que no soportaba la alta carga de usuarios y datos. Participación activa en el diseño de UX/UI y en la implementación de una arquitectura frontend escalable y modular. Integración con REST APIs y gestión de datos optimizada mediante React Query y cacheado inteligente, mejorando los tiempos de carga y la experiencia de usuario. Trabajo colaborativo en un equipo pequeño bajo metodologías ágiles, aportando en decisiones técnicas y de diseño para garantizar rendimiento, escalabilidad y usabilidad.",
-    technologies: "Next.js, React, Tailwind CSS, React Query, Axios, Context API",
+    technologies:
+      "Next.js, React, Tailwind CSS, React Query, Axios, Context API",
     date: "Actualidad",
   },
   {
@@ -120,7 +120,6 @@ export const dataAboutPage = [
     date: "2022",
   },
 ];
-
 
 export const dataCounter = [
   {
@@ -188,24 +187,25 @@ export const serviceData = [
 
 export const dataProyects = [
   {
-      id: 1,
-      title: "Freiguel",
-      image: "/freiguel.png",
-      urlGithub: "https://github.com/mauriciotognoli",
-      urlDemo: "https://www.freiguel.pt/pt",
-      technologies: ["Next.js", "TypeScript", "Tailwind", "GraphQL", "Turborepo"],
-      description: "Desarrollé interfaces web accesibles y mobile-first utilizando Next.js 14, Tailwind CSS y TypeScript. Implementé el sistema de navegación y las páginas públicas de la plataforma, colaborando estrechamente con el equipo de diseño para asegurar consistencia visual y una experiencia de usuario óptima. También optimicé el rendimiento de carga inicial y mejoré la navegación, aplicando buenas prácticas de desarrollo en un entorno basado en Turborepo.",
-    },
-    {
-      id: 2,
-      title: "NexoTv",
-      image: "/nexo.jpg",
-      urlGithub: "https://github.com/mauriciotognoli/nexotv",
-      urlDemo: "https://nexotv.vercel.app",
-      technologies: ["React", "Apollo", "Tailwind"],
-      description: "Desarrollé una plataforma de streaming de películas y series utilizando Next.js, React y Tailwind CSS, enfocándome en una experiencia de usuario fluida y atractiva. Implementé funcionalidades como búsqueda global, filtrado por categorías, paginación y visualización dinámica de contenido. La arquitectura del frontend es modular y escalable, integrando datos desde un backend simulado con GraphQL, y optimizando la carga y renderizado de los componentes para garantizar rendimiento y accesibilidad.",
-    },
-
+    id: 1,
+    title: "Freiguel",
+    image: "/freiguel.png",
+    urlGithub: "https://github.com/mauriciotognoli",
+    urlDemo: "https://www.freiguel.pt/pt",
+    technologies: ["Next.js", "TypeScript", "Tailwind", "GraphQL", "Turborepo"],
+    description:
+      "Desarrollé interfaces web accesibles y mobile-first utilizando Next.js 14, Tailwind CSS y TypeScript. Implementé el sistema de navegación y las páginas públicas de la plataforma, colaborando estrechamente con el equipo de diseño para asegurar consistencia visual y una experiencia de usuario óptima. También optimicé el rendimiento de carga inicial y mejoré la navegación, aplicando buenas prácticas de desarrollo en un entorno basado en Turborepo.",
+  },
+  {
+    id: 2,
+    title: "NexoTv",
+    image: "/nexo.jpg",
+    urlGithub: "https://github.com/mauriciotognoli/nexotv",
+    urlDemo: "https://nexotv.vercel.app",
+    technologies: ["React", "Apollo", "Tailwind"],
+    description:
+      "Desarrollé una plataforma de streaming de películas y series utilizando Next.js, React y Tailwind CSS, enfocándome en una experiencia de usuario fluida y atractiva. Implementé funcionalidades como búsqueda global, filtrado por categorías, paginación y visualización dinámica de contenido. La arquitectura del frontend es modular y escalable, integrando datos desde un backend simulado con GraphQL, y optimizando la carga y renderizado de los componentes para garantizar rendimiento y accesibilidad.",
+  },
 ];
 
 export const technologies = [

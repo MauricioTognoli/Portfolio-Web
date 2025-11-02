@@ -1,4 +1,3 @@
-
 import Introduction from "@/components/Introduction";
 import TransitionPage from "@/components/Transition-page";
 import AboutMe from "@/components/AboutMe";
@@ -14,12 +13,12 @@ export default function Home() {
       <div className="flex-row h-full ">
         <Introduction />
         <AboutMe />
-        <Services/>
+        <Services />
         <div id="projects">
-        <Proyects />
+          <Proyects />
         </div>
-        <Stack/>
-        <ContactMe/>
+        <Stack />
+        <ContactMe />
       </div>
     </main>
   );

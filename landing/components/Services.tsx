@@ -20,7 +20,6 @@ const Services = () => {
         animate={inView ? { opacity: 1, y: 0 } : {}}
         transition={{ duration: 0.8, ease: "easeOut" }}
       >
-        {/* Texto */}
         <motion.div
           className="min-h-[400px]"
           initial={{ opacity: 0, x: -50 }}
@@ -54,7 +53,6 @@ const Services = () => {
           </motion.div>
         </motion.div>
 
-        {/* Slider animado */}
         <motion.div
           initial={{ opacity: 0, x: 50 }}
           animate={inView ? { opacity: 1, x: 0 } : {}}

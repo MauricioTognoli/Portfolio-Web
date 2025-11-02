@@ -35,11 +35,15 @@ export function ContactMe() {
         process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY!
       );
 
-      toast.success("✅ Tu mensaje fue enviado con éxito. ¡Gracias por contactarme!");
+      toast.success(
+        "✅ Tu mensaje fue enviado con éxito. ¡Gracias por contactarme!"
+      );
       form.reset();
     } catch (error) {
       console.error("Error al enviar el mensaje:", error);
-      toast.error("❌ Ocurrió un error al enviar el mensaje. Intenta nuevamente.");
+      toast.error(
+        "❌ Ocurrió un error al enviar el mensaje. Intenta nuevamente."
+      );
     } finally {
       setIsSubmitting(false);
     }
@@ -65,10 +69,11 @@ export function ContactMe() {
         </motion.h1>
 
         <div className="grid md:grid-cols-2 gap-8 lg:gap-12">
-          {/* Información */}
           <div className="space-y-6">
             <div>
-              <h3 className="text-2xl font-semibold mb-6">Información de Contacto</h3>
+              <h3 className="text-2xl font-semibold mb-6">
+                Información de Contacto
+              </h3>
               <div className="space-y-4">
                 <div className="flex items-start gap-4">
                   <div className="p-3 bg-secondary/10 rounded-lg">
@@ -76,12 +81,12 @@ export function ContactMe() {
                   </div>
                   <div>
                     <p className="font-medium">Email</p>
-                    <a
+                    <Link
                       href="mailto:Tognolimauricio@gmail.com"
                       className="text-muted-foreground hover:text-secondary transition-colors"
                     >
                       Tognolimauricio@gmail.com
-                    </a>
+                    </Link>
                   </div>
                 </div>
 
@@ -91,13 +96,14 @@ export function ContactMe() {
                   </div>
                   <div>
                     <p className="font-medium">Ubicación</p>
-                    <p className="text-muted-foreground">Buenos Aires, Argentina</p>
+                    <p className="text-muted-foreground">
+                      Buenos Aires, Argentina
+                    </p>
                   </div>
                 </div>
               </div>
             </div>
 
-            {/* Redes */}
             <div className="pt-6">
               <h4 className="font-medium mb-4">Sígueme en</h4>
               <div className="flex gap-3">
@@ -123,79 +129,83 @@ export function ContactMe() {
             </div>
           </div>
 
-          {/* Formulario */}
           <div>
-          <h2 className="text-lg mb-10 max-w-2xl mx-auto text-pretty">
-            ¿Tienes un proyecto en mente? Estoy disponible para nuevas oportunidades y colaboraciones.
-          </h2>
-          <Card className="p-6 lg:p-8">
-            <form onSubmit={handleSubmit} className="space-y-6">
-              <div className="space-y-2">
-                <label htmlFor="from_name" className="text-sm font-medium">
-                  Nombre
-                </label>
-                <Input
-                  id="from_name"
-                  name="from_name"
-                  placeholder="Tu nombre"
-                  required
-                  disabled={isSubmitting}
-                />
-              </div>
+            <h2 className="text-lg mb-10 max-w-2xl mx-auto text-pretty">
+              ¿Tienes un proyecto en mente? Estoy disponible para nuevas
+              oportunidades y colaboraciones.
+            </h2>
+            <Card className="p-6 lg:p-8">
+              <form onSubmit={handleSubmit} className="space-y-6">
+                <div className="space-y-2">
+                  <label htmlFor="from_name" className="text-sm font-medium">
+                    Nombre
+                  </label>
+                  <Input
+                    id="from_name"
+                    name="from_name"
+                    placeholder="Tu nombre"
+                    required
+                    disabled={isSubmitting}
+                  />
+                </div>
 
-              <div className="space-y-2">
-                <label htmlFor="from_email" className="text-sm font-medium">
-                  Email
-                </label>
-                <Input
-                  id="from_email"
-                  name="from_email"
-                  type="email"
-                  placeholder="tu@email.com"
-                  required
-                  disabled={isSubmitting}
-                />
-              </div>
+                <div className="space-y-2">
+                  <label htmlFor="from_email" className="text-sm font-medium">
+                    Email
+                  </label>
+                  <Input
+                    id="from_email"
+                    name="from_email"
+                    type="email"
+                    placeholder="tu@email.com"
+                    required
+                    disabled={isSubmitting}
+                  />
+                </div>
 
-              <div className="space-y-2">
-                <label htmlFor="subject" className="text-sm font-medium">
-                  Asunto
-                </label>
-                <Input
-                  id="subject"
-                  name="subject"
-                  placeholder="¿En qué puedo ayudarte?"
-                  required
-                  disabled={isSubmitting}
-                />
-              </div>
+                <div className="space-y-2">
+                  <label htmlFor="subject" className="text-sm font-medium">
+                    Asunto
+                  </label>
+                  <Input
+                    id="subject"
+                    name="subject"
+                    placeholder="¿En qué puedo ayudarte?"
+                    required
+                    disabled={isSubmitting}
+                  />
+                </div>
 
-              <div className="space-y-2">
-                <label htmlFor="message" className="text-sm font-medium">
-                  Mensaje
-                </label>
-                <Textarea
-                  id="message"
-                  name="message"
-                  placeholder="Cuéntame sobre tu proyecto..."
-                  rows={5}
-                  required
-                  disabled={isSubmitting}
-                />
-              </div>
+                <div className="space-y-2">
+                  <label htmlFor="message" className="text-sm font-medium">
+                    Mensaje
+                  </label>
+                  <Textarea
+                    id="message"
+                    name="message"
+                    placeholder="Cuéntame sobre tu proyecto..."
+                    rows={5}
+                    required
+                    disabled={isSubmitting}
+                  />
+                </div>
 
-              <Button type="submit" className="w-full" disabled={isSubmitting}>
-                {isSubmitting ? (
-                  <>Enviando...</>
-                ) : (
-                  <>
-                    <Send className="w-4 h-4 mr-2" />
-                    Enviar Mensaje
-                  </>
-                )}
-              </Button>
-            </form>
-          </Card>
+                <Button
+                  type="submit"
+                  className="w-full"
+                  disabled={isSubmitting}
+                >
+                  {isSubmitting ? (
+                    <>Enviando...</>
+                  ) : (
+                    <>
+                      <Send className="w-4 h-4 mr-2" />
+                      Enviar Mensaje
+                    </>
+                  )}
+                </Button>
+              </form>
+            </Card>
           </div>
         </div>
       </motion.div>
