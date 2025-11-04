@@ -1,10 +1,16 @@
+"use client";
 import Link from "next/link";
 import Image from "next/image";
 import React from "react";
 import MotionTransition from "./Transition-component";
 import { socialNetworks } from "@/data";
+import { track } from "@vercel/analytics";
 
 const Header = () => {
+  const handleSocialClick = (description: string) => {
+    track("click_red_social", { red: description });
+  };
+
   return (
     <MotionTransition
       position="bottom"
@@ -28,6 +34,7 @@ const Header = () => {
               target="_blank"
               title={description}
               className="transition-all duration-300 hover:text-secondary"
+              onClick={() => handleSocialClick(description)}
             >
               {logo}
             </Link>

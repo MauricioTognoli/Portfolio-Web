@@ -8,6 +8,8 @@ import "swiper/css/pagination";
 import "swiper/css/scrollbar";
 import { Toaster } from "sonner";
 
+import { Analytics } from "@vercel/analytics/react";
+
 const urbanist = Urbanist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
@@ -77,6 +79,7 @@ export default function RootLayout({
       <body className={`${urbanist.variable} antialiased bg-black text-white`}>
         <Header />
         {children}
+        <Analytics />
         <Toaster position="top-center" richColors />
       </body>
     </html>

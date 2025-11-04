@@ -5,9 +5,12 @@ import { TypeAnimation } from "react-type-animation";
 import Link from "next/link";
 import { animate, motion } from "framer-motion";
 import { Button } from "./ui/button";
+import { track } from "@vercel/analytics";
 
 const Introduction = () => {
   const scrollToProjects = () => {
+    track("ver_proyectos", { origen: "intro_section" });
+
     const element = document.getElementById("projects");
     if (element) {
       const top = element.offsetTop;
@@ -20,13 +23,18 @@ const Introduction = () => {
       });
     }
   };
+
+  const handleContactClick = () => {
+    track("contacto_click", { metodo: "boton_intro" });
+  };
+
   return (
     <section
       className="min-h-screen flex flex-col mt-32 items-center md:justify-evenly gap-10 px-4 py-20 md:flex-row md:gap-20 md:px-0 md:mt-0"
       aria-label="Introducción de Mauricio Tognoli"
     >
       <motion.figure
-        className="flex justify-center "
+        className="flex justify-center"
         initial={{ opacity: 0, scale: 0.8 }}
         whileInView={{ opacity: 1, scale: 1 }}
         viewport={{ once: true, amount: 0.4 }}
@@ -108,7 +116,11 @@ const Introduction = () => {
             <Button variant="outline" onClick={scrollToProjects}>
               Ver proyectos
             </Button>
-            <Link href="mailto:tognolimauricio@gmail.com">
+
+            <Link
+              href="mailto:tognolimauricio@gmail.com"
+              onClick={handleContactClick}
+            >
               <Button>Contacta conmigo</Button>
             </Link>
           </motion.nav>
