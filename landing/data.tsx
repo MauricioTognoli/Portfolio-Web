@@ -13,6 +13,7 @@ import {
   Mail,
   FileCode,
   FileUserIcon,
+  Twitter,
 } from "lucide-react";
 
 export const socialNetworks = [
@@ -21,6 +22,12 @@ export const socialNetworks = [
     logo: <Linkedin size={30} strokeWidth={1} />,
     src: "https://www.linkedin.com/in/mauricio-tognoli/",
     description: "LinkedIn",
+  },
+  {
+    id: 2,
+    logo: <Twitter size={30} strokeWidth={1} />,
+    src: "https://x.com/MauricioTognoli",
+    description: "Twitter",
   },
   {
     id: 3,
