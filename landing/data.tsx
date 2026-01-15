@@ -207,7 +207,7 @@ export const dataProyects = [
   title: "SOS Service",
   image: "/sos-service.png",
   urlGithub: "https://github.com/mauriciotognoli",
-  urlDemo: "https://sosservice.pt",
+  urlDemo: "https://prepro-sos-service-web.vercel.app/en",
   technologies: ["Next.js", "React", "TypeScript", "Tailwind CSS", "Turborepo"],
   description:
     "Desarrollo de una landing page corporativa desde cero para SOS Service, empresa de servicios de reparación y mantenimiento del hogar con sede en Madeira, Portugal. Implementación completa de la interfaz de usuario a partir de un diseño provisto, aplicando buenas prácticas de UI/UX, accesibilidad y diseño responsive. Optimización de SEO y performance para mejorar la visibilidad online y la captación de clientes, incorporando estructura semántica, metadata, animaciones y microinteracciones. Arquitectura frontend escalable y mantenible utilizando Turborepo.",
