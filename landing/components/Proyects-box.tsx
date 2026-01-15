@@ -60,13 +60,15 @@ const ProyectsBox = ({ projects }: ProjectsBoxProps) => {
             transition={{ duration: 0.4, ease: "easeInOut" }}
           >
             <h2 className="text-2xl font-semibold mb-3">{current.title}</h2>
-            <Image
-              src={current.image}
-              alt={current.title}
-              width={800}
-              height={450}
-              className="w-full h-[300px] md:h-[400px] object-cover rounded-xl mb-4"
-            />
+           <Image
+  src={current.image}
+  alt={current.title}
+  width={800}
+  height={450}
+  className="w-full h-auto rounded-xl mb-4"
+/>
+
+
 
             <p className="text-sm text-gray-300 mb-3">
               {current.description ||
@@ -122,25 +124,40 @@ const ProyectsBox = ({ projects }: ProjectsBoxProps) => {
       </div>
 
       <AnimatePresence mode="wait">
-        <motion.div
-          key={next.id}
-          initial={{ opacity: 0, x: 40 }}
-          animate={{ opacity: 1, x: 0 }}
-          exit={{ opacity: 0, x: -40 }}
-          transition={{ duration: 0.4 }}
-          className="hidden md:flex flex-col items-center md:col-span-1 opacity-70 hover:opacity-100 transition"
-        >
-          <p className="text-sm mb-2 text-gray-400">Siguiente</p>
-          <Image
-            src={next.image}
-            alt={next.title}
-            width={250}
-            height={160}
-            className="rounded-xl object-cover shadow-md"
-          />
-          <p className="mt-2 text-sm font-medium text-gray-200">{next.title}</p>
-        </motion.div>
-      </AnimatePresence>
+  <motion.div
+    key={next.id}
+    onClick={nextProject}
+    role="button"
+    tabIndex={0}
+    onKeyDown={(e) => {
+      if (e.key === "Enter" || e.key === " ") {
+        nextProject()
+      }
+    }}
+    initial={{ opacity: 0, x: 40 }}
+    animate={{ opacity: 1, x: 0 }}
+    exit={{ opacity: 0, x: -40 }}
+    transition={{ duration: 0.4 }}
+    className="hidden md:flex flex-col items-center md:col-span-1 
+               opacity-70 hover:opacity-100 transition 
+               cursor-pointer select-none"
+  >
+    <p className="text-sm mb-2 text-gray-400">Siguiente</p>
+
+    <Image
+      src={next.image}
+      alt={next.title}
+      width={250}
+      height={160}
+      className="rounded-xl object-cover shadow-md"
+    />
+
+    <p className="mt-2 text-sm font-medium text-gray-200">
+      {next.title}
+    </p>
+  </motion.div>
+</AnimatePresence>
+
 
       <button
         onClick={nextProject}

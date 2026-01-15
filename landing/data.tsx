@@ -38,7 +38,7 @@ export const socialNetworks = [
   {
     id: 4,
     logo: <FileUserIcon size={30} strokeWidth={1} />,
-    src: "https://drive.google.com/file/d/1EWv6dm2YTokw1v7vtQc0Qf0yAIHfdd8v/view?usp=drivesdk",
+    src: "https://docs.google.com/document/d/13k-dT-JRagXQx-YnZ1PNsU8A6FJBiA-q/edit?usp=drivesdk&ouid=114730073055255632550&rtpof=true&sd=true",
     description: "Currículum",
   },
   {
@@ -86,24 +86,33 @@ export const dataAboutPage = [
   {
     id: 1,
     title: "Frontend Developer",
+    subtitle: "SOS Service (Freelance – ZimaBlue)",
+    description:
+      "Desarrollo de una landing page corporativa desde cero para SOS Service, empresa de servicios de reparación y mantenimiento del hogar con sede en Madeira, Portugal. Implementación completa de la interfaz de usuario a partir de un diseño provisto, aplicando buenas prácticas de UI/UX, accesibilidad y diseño responsive. Optimización de performance y SEO para mejorar la visibilidad y la captación de clientes, incluyendo estructura semántica, metadata y microinteracciones. Construcción de una arquitectura frontend escalable y mantenible utilizando Turborepo.",
+    technologies: "Next.js, React, TypeScript, Tailwind CSS, Turborepo",
+    date: "2026",
+  },
+  {
+    id: 2,
+    title: "Frontend Developer",
     subtitle: "Powip",
     description:
       "Desarrollo desde cero de una plataforma ERP SaaS de Ecommerce para reemplazar la solución anterior que no soportaba la alta carga de usuarios y datos. Participación activa en el diseño de UX/UI y en la implementación de una arquitectura frontend escalable y modular. Integración con REST APIs y gestión de datos optimizada mediante React Query y cacheado inteligente, mejorando los tiempos de carga y la experiencia de usuario. Trabajo colaborativo en un equipo pequeño bajo metodologías ágiles, aportando en decisiones técnicas y de diseño para garantizar rendimiento, escalabilidad y usabilidad.",
     technologies:
       "Next.js, React, Tailwind CSS, React Query, Axios, Context API",
-    date: "Actualidad",
+    date: "2025",
   },
   {
-    id: 2,
+    id: 3,
     title: "UI Developer",
-    subtitle: "Freiguel (Remoto – ZimaBlue)",
+    subtitle: "Freiguel (Freelance – ZimaBlue)",
     description:
       "Desarrollo de interfaces accesibles y mobile-first con Next.js 14 y Tailwind CSS. Implementación del sistema de navegación y páginas públicas, trabajando directamente con el equipo de diseño para asegurar consistencia visual y accesibilidad. Optimización del rendimiento de carga inicial y mejora en la navegación mediante buenas prácticas y una arquitectura moderna basada en Turborepo.",
     technologies: "Next.js 14, Tailwind CSS, TypeScript, Turborepo",
     date: "2025",
   },
   {
-    id: 3,
+    id: 4,
     title: "Desarrollador Frontend",
     subtitle: "Proyectos Personales",
     description:
@@ -111,7 +120,7 @@ export const dataAboutPage = [
     date: "2025",
   },
   {
-    id: 4,
+    id: 5,
     title: "Formación en Desarrollo Fullstack",
     subtitle: "Programa de Especialización",
     description:
@@ -119,7 +128,7 @@ export const dataAboutPage = [
     date: "2024",
   },
   {
-    id: 5,
+    id: 6,
     title: "Aprendizaje Autodidacta",
     subtitle: "Desarrollo Web",
     description:
@@ -194,7 +203,17 @@ export const serviceData = [
 
 export const dataProyects = [
   {
-    id: 1,
+  id: 1,
+  title: "SOS Service",
+  image: "/sos-service.png",
+  urlGithub: "https://github.com/mauriciotognoli",
+  urlDemo: "https://sosservice.pt",
+  technologies: ["Next.js", "React", "TypeScript", "Tailwind CSS", "Turborepo"],
+  description:
+    "Desarrollo de una landing page corporativa desde cero para SOS Service, empresa de servicios de reparación y mantenimiento del hogar con sede en Madeira, Portugal. Implementación completa de la interfaz de usuario a partir de un diseño provisto, aplicando buenas prácticas de UI/UX, accesibilidad y diseño responsive. Optimización de SEO y performance para mejorar la visibilidad online y la captación de clientes, incorporando estructura semántica, metadata, animaciones y microinteracciones. Arquitectura frontend escalable y mantenible utilizando Turborepo.",
+},
+  {
+    id: 2,
     title: "Freiguel",
     image: "/freiguel.png",
     urlGithub: "https://github.com/mauriciotognoli",
@@ -204,7 +223,7 @@ export const dataProyects = [
       "Desarrollé interfaces web accesibles y mobile-first utilizando Next.js 14, Tailwind CSS y TypeScript. Implementé el sistema de navegación y las páginas públicas de la plataforma, colaborando estrechamente con el equipo de diseño para asegurar consistencia visual y una experiencia de usuario óptima. También optimicé el rendimiento de carga inicial y mejoré la navegación, aplicando buenas prácticas de desarrollo en un entorno basado en Turborepo.",
   },
   {
-    id: 2,
+    id: 3,
     title: "NexoTv",
     image: "/nexo.jpg",
     urlGithub: "https://github.com/mauriciotognoli/nexotv",
