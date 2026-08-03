@@ -1,64 +1,137 @@
 "use client";
+
+import { useEffect, useState } from "react";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
+import { Moon, Sun, Languages, Menu, X } from "lucide-react";
+import { AnimatePresence, motion } from "framer-motion";
+import { useTheme } from "@/lib/theme";
+import { useLanguage } from "@/lib/i18n";
 import Image from "next/image";
-import React, { useState, useEffect } from "react";
-import MotionTransition from "./Transition-component";
-import { socialNetworks } from "@/data";
-import { track } from "@vercel/analytics";
+
+const Logo = () => (
+  <Image
+    src="/logo-mt.png"
+    alt="Logo Mauricio Tognoli"
+    width={50}
+    height={50}
+    priority
+  />
+);
 
 const Header = () => {
-  const handleSocialClick = (description: string) => {
-    track("click_red_social", { red: description });
-  };
-
-  const [isVisible, setIsVisible] = useState(true);
-  let lastScrollY = 0;
+  const pathname = usePathname();
+  const isHome = pathname === "/";
+  const { theme, toggleTheme } = useTheme();
+  const { lang, t, toggleLang } = useLanguage();
+  const [mobileOpen, setMobileOpen] = useState(false);
 
   useEffect(() => {
-    const handleScroll = () => {
-      const currentScrollY = window.scrollY;
-      if (currentScrollY > lastScrollY && currentScrollY > 100) {
-        setIsVisible(false);
-      } else {
-        setIsVisible(true);
-      }
-      lastScrollY = currentScrollY;
+    setMobileOpen(false);
+  }, [pathname]);
+
+  useEffect(() => {
+    document.body.style.overflow = mobileOpen ? "hidden" : "";
+    return () => {
+      document.body.style.overflow = "";
     };
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
+  }, [mobileOpen]);
 
   return (
-    <MotionTransition
-      position="bottom"
-      className={`fixed top-0 left-0 z-50 w-full px-6 md:px-20 py-4 backdrop-blur-md bg-black/30 transition-transform duration-300 ${isVisible ? 'translate-y-0' : '-translate-y-full'}`}
-    >
-      <header className="max-w-6xl mx-auto flex flex-col md:flex-row items-center justify-between">
-        <div className="flex flex-row">
-          <Image
-            src="/logo-mt.png"
-            alt="Logo de Mauricio Tognoli"
-            width={70}
-            height={70}
-          />
-        </div>
+    <nav className="mt-nav">
+      <Link href="/" className="mt-nav-logo">
+        <Logo />
+        <span className="mt-nav-name">Mauricio Tognoli</span>
+      </Link>
 
-        <div className="flex items-center justify-center gap-6 mt-4 md:mt-0">
-          {socialNetworks.map(({ logo, src, description, id }) => (
+      {isHome ? (
+        <ul className="mt-nav-center">
+          <li>
+            <a href="#experience">{t.nav.experience}</a>
+          </li>
+          <li>
+            <Link href="/features">{t.nav.features}</Link>
+          </li>
+          <li>
+            <a href="#projects">{t.nav.projects}</a>
+          </li>
+          <li>
+            <a href="#components">{t.nav.components}</a>
+          </li>
+          <li>
+            <a href="#skills">{t.nav.skills}</a>
+          </li>
+        </ul>
+      ) : (
+        <Link href="/" className="mt-nav-back mt-nav-back-desktop">
+          {t.nav.back}
+        </Link>
+      )}
+
+      <div className="mt-nav-right">
+        <button
+          className="icon-btn"
+          onClick={toggleTheme}
+          title="Toggle theme"
+          aria-label="Toggle theme"
+        >
+          {theme === "dark" ? <Sun size={15} /> : <Moon size={15} />}
+        </button>
+        <button
+          className="lang-btn"
+          onClick={toggleLang}
+          title="Switch language"
+          aria-label="Switch language"
+        >
+          <Languages size={14} />
+          <span>{lang === "es" ? "EN" : "ES"}</span>
+        </button>
+        <Link href={isHome ? "#contact" : "/#contact"} className="mt-nav-cta mt-nav-cta-desktop">
+          {t.nav.cta}
+        </Link>
+        <button
+          className="icon-btn mt-mobile-toggle"
+          onClick={() => setMobileOpen((v) => !v)}
+          title="Menu"
+          aria-label="Toggle menu"
+          aria-expanded={mobileOpen}
+        >
+          {mobileOpen ? <X size={16} /> : <Menu size={16} />}
+        </button>
+      </div>
+
+      <AnimatePresence>
+        {mobileOpen && (
+          <motion.div
+            className="mt-mobile-panel"
+            initial={{ opacity: 0, y: -12 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -12 }}
+            transition={{ duration: 0.2, ease: "easeOut" }}
+          >
+            {isHome ? (
+              <>
+                <a href="#experience" onClick={() => setMobileOpen(false)}>{t.nav.experience}</a>
+                <Link href="/features" onClick={() => setMobileOpen(false)}>{t.nav.features}</Link>
+                <a href="#projects" onClick={() => setMobileOpen(false)}>{t.nav.projects}</a>
+                <a href="#components" onClick={() => setMobileOpen(false)}>{t.nav.components}</a>
+                <a href="#skills" onClick={() => setMobileOpen(false)}>{t.nav.skills}</a>
+              </>
+            ) : (
+              <Link href="/" onClick={() => setMobileOpen(false)}>{t.nav.back}</Link>
+            )}
             <Link
-              key={id}
-              href={src}
-              target="_blank"
-              title={description}
-              className="transition-all duration-300 hover:text-secondary"
-              onClick={() => handleSocialClick(description)}
+              href={isHome ? "#contact" : "/#contact"}
+              className="mt-nav-cta"
+              style={{ marginTop: 8, justifyContent: "center" }}
+              onClick={() => setMobileOpen(false)}
             >
-              {logo}
+              {t.nav.cta}
             </Link>
-          ))}
-        </div>
-      </header>
-    </MotionTransition>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </nav>
   );
 };
 

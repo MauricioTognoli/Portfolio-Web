@@ -4,21 +4,12 @@ import type React from "react";
 import { useState } from "react";
 import emailjs from "emailjs-com";
 import { toast } from "sonner";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Textarea } from "@/components/ui/textarea";
-import { Card } from "@/components/ui/card";
-import { Mail, MapPin, Send, Github, Linkedin } from "lucide-react";
-import ContainerPage from "./Container-page";
 import { motion } from "framer-motion";
-import { useInView } from "react-intersection-observer";
-import Link from "next/link";
+import { Mail, MapPin, Send, Github, Linkedin, CheckCircle2 } from "lucide-react";
+import { useLanguage } from "@/lib/i18n";
 
 export function ContactMe() {
-  const [ref, inView] = useInView({
-    triggerOnce: true,
-    threshold: 0.2,
-  });
+  const { t } = useLanguage();
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -35,180 +26,99 @@ export function ContactMe() {
         process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY!
       );
 
-      toast.success(
-        "✅ Tu mensaje fue enviado con éxito. ¡Gracias por contactarme!"
-      );
+      toast.success("✅ Tu mensaje fue enviado con éxito. ¡Gracias por contactarme!");
       form.reset();
     } catch (error) {
       console.error("Error al enviar el mensaje:", error);
-      toast.error(
-        "❌ Ocurrió un error al enviar el mensaje. Intenta nuevamente."
-      );
+      toast.error("❌ Ocurrió un error al enviar el mensaje. Intenta nuevamente.");
     } finally {
       setIsSubmitting(false);
     }
   };
 
   return (
-    <ContainerPage className="mb-52">
-      <motion.div
-        ref={ref}
-        className="flex flex-col justify-center h-full"
-        initial={{ opacity: 0, y: 40 }}
-        animate={inView ? { opacity: 1, y: 0 } : {}}
-        transition={{ duration: 0.8, ease: "easeOut" }}
-      >
-        {/* Título */}
-        <motion.h1
-          className="text-2xl leading-tight md:text-4xl text-center my-10 md:text-left"
-          initial={{ opacity: 0, y: 30 }}
-          animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.7, delay: 0.2 }}
-        >
-          Contacta <span className="font-bold text-secondary">conmigo</span>
-        </motion.h1>
-
-        <div className="grid md:grid-cols-2 gap-8 lg:gap-12">
-          <div className="space-y-6">
-            <div>
-              <h3 className="text-2xl font-semibold mb-6">
-                Información de Contacto
-              </h3>
-              <div className="space-y-4">
-                <div className="flex items-start gap-4">
-                  <div className="p-3 bg-secondary/10 rounded-lg">
-                    <Mail className="w-5 h-5 text-secondary" />
-                  </div>
-                  <div>
-                    <p className="font-medium">Email</p>
-                    <Link
-                      href="mailto:Tognolimauricio@gmail.com"
-                      className="text-muted-foreground hover:text-secondary transition-colors"
-                    >
-                      Tognolimauricio@gmail.com
-                    </Link>
-                  </div>
-                </div>
-
-                <div className="flex items-start gap-4">
-                  <div className="p-3 bg-secondary/10 rounded-lg">
-                    <MapPin className="w-5 h-5 text-secondary" />
-                  </div>
-                  <div>
-                    <p className="font-medium">Ubicación</p>
-                    <p className="text-muted-foreground">
-                      Buenos Aires, Argentina
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div className="pt-6">
-              <h4 className="font-medium mb-4">Sígueme en</h4>
-              <div className="flex gap-3">
-                <Link
-                  href="https://github.com/MauricioTognoli"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="p-3 bg-secondary hover:bg-secondary/80 rounded-lg transition-colors"
-                  aria-label="GitHub"
-                >
-                  <Github className="w-5 h-5" />
-                </Link>
-                <Link
-                  href="https://www.linkedin.com/in/mauricio-tognoli/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="p-3 bg-secondary hover:bg-secondary/80 rounded-lg transition-colors"
-                  aria-label="LinkedIn"
-                >
-                  <Linkedin className="w-5 h-5" />
-                </Link>
-              </div>
-            </div>
-          </div>
-
+    <section className="mt-contact mt-section" id="contact">
+      <div className="mt-section-inner">
+        <div className="mt-open-to-work">
+          <div className="mt-otw-icon"><CheckCircle2 size={17} color="#4ade80" /></div>
           <div>
-            <h2 className="text-lg mb-10 max-w-2xl mx-auto text-pretty">
-              ¿Tienes un proyecto en mente? Estoy disponible para nuevas
-              oportunidades y colaboraciones.
-            </h2>
-            <Card className="p-6 lg:p-8">
-              <form onSubmit={handleSubmit} className="space-y-6">
-                <div className="space-y-2">
-                  <label htmlFor="from_name" className="text-sm font-medium">
-                    Nombre
-                  </label>
-                  <Input
-                    id="from_name"
-                    name="from_name"
-                    placeholder="Tu nombre"
-                    required
-                    disabled={isSubmitting}
-                  />
-                </div>
-
-                <div className="space-y-2">
-                  <label htmlFor="from_email" className="text-sm font-medium">
-                    Email
-                  </label>
-                  <Input
-                    id="from_email"
-                    name="from_email"
-                    type="email"
-                    placeholder="tu@email.com"
-                    required
-                    disabled={isSubmitting}
-                  />
-                </div>
-
-                <div className="space-y-2">
-                  <label htmlFor="subject" className="text-sm font-medium">
-                    Asunto
-                  </label>
-                  <Input
-                    id="subject"
-                    name="subject"
-                    placeholder="¿En qué puedo ayudarte?"
-                    required
-                    disabled={isSubmitting}
-                  />
-                </div>
-
-                <div className="space-y-2">
-                  <label htmlFor="message" className="text-sm font-medium">
-                    Mensaje
-                  </label>
-                  <Textarea
-                    id="message"
-                    name="message"
-                    placeholder="Cuéntame sobre tu proyecto..."
-                    rows={5}
-                    required
-                    disabled={isSubmitting}
-                  />
-                </div>
-
-                <Button
-                  type="submit"
-                  className="w-full"
-                  disabled={isSubmitting}
-                >
-                  {isSubmitting ? (
-                    <>Enviando...</>
-                  ) : (
-                    <>
-                      <Send className="w-4 h-4 mr-2" />
-                      Enviar Mensaje
-                    </>
-                  )}
-                </Button>
-              </form>
-            </Card>
+            <div className="mt-otw-title">{t.otw.title}</div>
+            <div className="mt-otw-sub">{t.otw.sub}</div>
           </div>
         </div>
-      </motion.div>
-    </ContainerPage>
+
+        <div className="mt-contact-inner">
+          <motion.div
+            initial={{ opacity: 0, y: 24 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.2 }}
+            transition={{ duration: 0.6, ease: "easeOut" }}
+          >
+            <div className="mt-section-label">{t.contact.label}</div>
+            <h2 className="mt-contact-headline">
+              {t.contact.title}
+              <br />
+              <span className="accent">{t.contact.titleAccent}</span>
+            </h2>
+            <p className="mt-contact-desc">{t.contact.desc}</p>
+
+            <div className="mt-contact-links">
+              <a href="mailto:tognolimauricio@gmail.com" className="mt-contact-link">
+                <div className="mt-contact-link-icon"><Mail size={15} /></div>
+                tognolimauricio@gmail.com
+              </a>
+              <div className="mt-contact-link" style={{ cursor: "default" }}>
+                <div className="mt-contact-link-icon"><MapPin size={15} /></div>
+                Buenos Aires, Argentina
+              </div>
+              <a href="https://github.com/MauricioTognoli" target="_blank" rel="noopener noreferrer" className="mt-contact-link">
+                <div className="mt-contact-link-icon"><Github size={15} /></div>
+                github.com/MauricioTognoli
+              </a>
+              <a href="https://www.linkedin.com/in/mauricio-tognoli/" target="_blank" rel="noopener noreferrer" className="mt-contact-link">
+                <div className="mt-contact-link-icon"><Linkedin size={15} /></div>
+                linkedin.com/in/mauricio-tognoli
+              </a>
+            </div>
+          </motion.div>
+
+          <motion.div
+            className="mt-contact-form"
+            initial={{ opacity: 0, y: 24 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.2 }}
+            transition={{ duration: 0.6, delay: 0.1, ease: "easeOut" }}
+          >
+            <div className="mt-form-title">{t.contact.formTitle}</div>
+            <form onSubmit={handleSubmit}>
+              <div className="mt-form-group">
+                <label className="mt-form-label" htmlFor="from_name">{t.contact.name}</label>
+                <input id="from_name" name="from_name" className="mt-form-input" placeholder={t.contact.namePh} required disabled={isSubmitting} />
+              </div>
+              <div className="mt-form-group">
+                <label className="mt-form-label" htmlFor="from_email">{t.contact.email}</label>
+                <input id="from_email" name="from_email" type="email" className="mt-form-input" placeholder={t.contact.emailPh} required disabled={isSubmitting} />
+              </div>
+              <div className="mt-form-group">
+                <label className="mt-form-label" htmlFor="subject">{t.contact.subject}</label>
+                <input id="subject" name="subject" className="mt-form-input" placeholder={t.contact.subjectPh} required disabled={isSubmitting} />
+              </div>
+              <div className="mt-form-group">
+                <label className="mt-form-label" htmlFor="message">{t.contact.message}</label>
+                <textarea id="message" name="message" className="mt-form-input" placeholder={t.contact.messagePh} rows={5} required disabled={isSubmitting} />
+              </div>
+              <button type="submit" className="mt-form-submit" disabled={isSubmitting}>
+                {isSubmitting ? t.contact.sending : (
+                  <>
+                    <Send size={14} />
+                    {t.contact.submit}
+                  </>
+                )}
+              </button>
+            </form>
+          </motion.div>
+        </div>
+      </div>
+    </section>
   );
 }
