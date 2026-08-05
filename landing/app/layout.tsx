@@ -7,9 +7,6 @@ import Footer from "@/components/Footer";
 import { ThemeProvider } from "@/lib/theme";
 import { LanguageProvider } from "@/lib/i18n";
 
-import "swiper/css";
-import "swiper/css/pagination";
-import "swiper/css/scrollbar";
 import { Toaster } from "sonner";
 
 import { Analytics } from "@vercel/analytics/react";

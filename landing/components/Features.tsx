@@ -4,29 +4,31 @@ import Link from "next/link";
 import { motion } from "framer-motion";
 import { useLanguage } from "@/lib/i18n";
 import { dataFeatures } from "@/data";
+import { sectionPad, SectionInner, SectionLabel, SectionTitle } from "./Section";
+import { btnSecondary, miniCard, miniPreview, miniBadge } from "./uiClasses";
 
 const MiniPreview = ({ variant }: { variant: number }) => (
-  <div style={{ position: "absolute", inset: "14px 14px 0", background: "var(--mt-surface)", border: "1px solid var(--mt-border)", borderRadius: "8px 8px 0 0", overflow: "hidden", boxShadow: "0 8px 30px rgba(0,0,0,.5)" }}>
-    <div style={{ height: 22, background: "var(--mt-surface-2)", borderBottom: "1px solid var(--mt-border)", display: "flex", alignItems: "center", padding: "0 8px", gap: 4 }}>
-      <div style={{ width: 7, height: 7, borderRadius: "50%", background: "#ff5f57" }} />
-      <div style={{ width: 7, height: 7, borderRadius: "50%", background: "#febc2e" }} />
-      <div style={{ width: 7, height: 7, borderRadius: "50%", background: "#28c840" }} />
+  <div className="absolute inset-x-3.5 top-3.5 bottom-0 overflow-hidden rounded-t-lg border border-mt-border bg-mt-surface shadow-[0_8px_30px_rgba(0,0,0,.5)]">
+    <div className="flex h-5.5 items-center gap-1 border-b border-mt-border bg-mt-surface-2 px-2">
+      <div className="h-[7px] w-[7px] rounded-full bg-[#ff5f57]" />
+      <div className="h-[7px] w-[7px] rounded-full bg-[#febc2e]" />
+      <div className="h-[7px] w-[7px] rounded-full bg-[#28c840]" />
     </div>
     {variant === 0 ? (
-      <div style={{ padding: 8, display: "flex", flexDirection: "column", gap: 5 }}>
-        <div style={{ height: 6, background: "var(--mt-border-bright)", borderRadius: 3 }} />
-        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 5 }}>
-          <div style={{ height: 24, background: "var(--mt-border)", borderRadius: 4 }} />
-          <div style={{ height: 24, background: "rgba(242,100,25,.15)", borderRadius: 4, border: "1px solid rgba(242,100,25,.2)" }} />
+      <div className="flex flex-col gap-1.25 p-2">
+        <div className="h-1.5 rounded-[3px] bg-mt-border-bright" />
+        <div className="grid grid-cols-2 gap-1.25">
+          <div className="h-6 rounded bg-mt-border" />
+          <div className="h-6 rounded border border-[rgba(242,100,25,.2)] bg-[rgba(242,100,25,.15)]" />
         </div>
       </div>
     ) : (
-      <div style={{ padding: 8, display: "flex", flexDirection: "column", gap: 5 }}>
-        <div style={{ height: 6, background: "rgba(242,100,25,.35)", borderRadius: 3, width: "50%" }} />
-        <div style={{ height: 30, background: "var(--mt-surface-2)", borderRadius: 4, position: "relative", overflow: "hidden", marginTop: 2 }}>
-          <div style={{ position: "absolute", bottom: 0, left: 0, right: 0, display: "flex", gap: 2, alignItems: "flex-end", padding: 3 }}>
+      <div className="flex flex-col gap-1.25 p-2">
+        <div className="h-1.5 w-1/2 rounded-[3px] bg-[rgba(242,100,25,.35)]" />
+        <div className="relative mt-0.5 h-7.5 overflow-hidden rounded bg-mt-surface-2">
+          <div className="absolute inset-x-0 bottom-0 flex items-end gap-0.5 p-[3px]">
             {[55, 75, 45, 90, 65].map((h, i) => (
-              <div key={i} style={{ flex: 1, height: `${h}%`, background: "var(--mt-orange)", borderRadius: 1, opacity: 0.65 + i * 0.05 }} />
+              <div key={i} className="flex-1 rounded-[1px] bg-mt-orange" style={{ height: `${h}%`, opacity: 0.65 + i * 0.05 }} />
             ))}
           </div>
         </div>
@@ -40,20 +42,20 @@ const Features = () => {
   const items = dataFeatures[lang].filter((f) => [1, 2, 5, 6].includes(f.id));
 
   return (
-    <section className="mt-features mt-section">
-      <div className="mt-section-inner">
-        <div style={{ display: "flex", alignItems: "flex-end", justifyContent: "space-between", flexWrap: "wrap", gap: 16, marginBottom: 48 }}>
+    <section className={`border-t border-mt-border bg-mt-surface transition-colors duration-300 ${sectionPad}`}>
+      <SectionInner>
+        <div className="mb-12 flex flex-wrap items-end justify-between gap-4">
           <div>
-            <div className="mt-section-label">{t.features.label}</div>
-            <h2 className="mt-section-title" style={{ marginBottom: 10 }}>
-              {t.features.title1} <span style={{ color: "var(--mt-orange)" }}>{t.features.title2}</span>
-            </h2>
-            <p style={{ color: "var(--mt-text-60)", fontSize: 13, maxWidth: 460, lineHeight: 1.65 }}>{t.features.desc}</p>
+            <SectionLabel>{t.features.label}</SectionLabel>
+            <SectionTitle className="mb-2.5">
+              {t.features.title1} <span className="text-mt-orange">{t.features.title2}</span>
+            </SectionTitle>
+            <p className="max-w-[460px] text-[13px] leading-[1.65] text-mt-text-60">{t.features.desc}</p>
           </div>
-          <Link href="/features" className="btn-secondary" style={{ flexShrink: 0 }}>{t.features.viewAll}</Link>
+          <Link href="/features" className={`${btnSecondary} shrink-0`}>{t.features.viewAll}</Link>
         </div>
 
-        <div className="mt-features-grid">
+        <div className="grid grid-cols-2 gap-4.5 max-[900px]:grid-cols-1">
           {items.map((f, i) => (
             <motion.div
               key={f.id}
@@ -62,28 +64,28 @@ const Features = () => {
               viewport={{ once: true, amount: 0.2 }}
               transition={{ duration: 0.5, delay: i * 0.06, ease: "easeOut" }}
             >
-              <Link href="/features" className="mt-hp-mini-card" style={{ display: "block" }}>
-                <div className="mt-hp-mini-preview">
+              <Link href="/features" className={miniCard}>
+                <div className={miniPreview}>
                   <MiniPreview variant={i % 2} />
-                  <div style={{ position: "absolute", top: 10, left: 10, background: "rgba(8,8,8,.8)", backdropFilter: "blur(8px)", border: "1px solid var(--mt-border-bright)", color: "var(--mt-text-60)", padding: "3px 9px", borderRadius: 100, fontSize: 10, textTransform: "uppercase", letterSpacing: ".05em" }}>{f.category}</div>
-                  <div style={{ position: "absolute", top: 10, right: 10, background: "rgba(8,8,8,.8)", backdropFilter: "blur(8px)", border: "1px solid var(--mt-border-bright)", color: "var(--mt-orange)", padding: "3px 9px", borderRadius: 100, fontSize: 10 }}>{f.company}</div>
+                  <div className={`${miniBadge} left-2.5 text-mt-text-60 tracking-wider uppercase`}>{f.category}</div>
+                  <div className={`${miniBadge} right-2.5 text-mt-orange`}>{f.company}</div>
                 </div>
-                <div style={{ padding: 20 }}>
-                  <h3 style={{ fontFamily: "var(--mt-font-display)", fontWeight: 700, fontSize: 15, letterSpacing: "-.4px", marginBottom: 7, lineHeight: 1.3 }}>{f.tagline}</h3>
-                  <div style={{ display: "flex", flexWrap: "wrap", gap: 5, marginBottom: 12 }}>
+                <div className="p-5">
+                  <h3 className="mb-1.75 font-mt-display text-[15px] leading-[1.3] font-bold tracking-[-0.4px]">{f.tagline}</h3>
+                  <div className="mb-3 flex flex-wrap gap-1.25">
                     {f.tags.slice(0, 3).map((tag) => (
-                      <span key={tag} style={{ background: "var(--mt-tag-bg)", border: "1px solid var(--mt-border)", color: "var(--mt-text-60)", padding: "2px 8px", borderRadius: 3, fontSize: 10 }}>{tag}</span>
+                      <span key={tag} className="rounded-[3px] border border-mt-border bg-mt-tag-bg px-2 py-0.5 text-[10px] text-mt-text-60">{tag}</span>
                     ))}
                   </div>
-                  <div style={{ fontSize: 12, color: "var(--mt-orange)" }}>{t.features.cta}</div>
+                  <div className="text-xs text-mt-orange">{t.features.cta}</div>
                 </div>
               </Link>
             </motion.div>
           ))}
         </div>
 
-        <div className="mt-features-disclaimer">{t.features.disclaimer}</div>
-      </div>
+        <div className="mt-5 text-[11px] text-mt-text-30">{t.features.disclaimer}</div>
+      </SectionInner>
     </section>
   );
 };

@@ -5,6 +5,9 @@ import { AnimatePresence, motion } from "framer-motion";
 import { LayoutGrid, List, X, ExternalLink, Github, ChevronLeft, ChevronRight, Lock } from "lucide-react";
 import { useLanguage } from "@/lib/i18n";
 import { dataProjects, type ProjectItem } from "@/data";
+import ScreenshotFrame from "./ScreenshotFrame";
+import { btnPrimary, btnGhost } from "./uiClasses";
+import * as pk from "./pageKit";
 
 type ProjectType = "all" | ProjectItem["type"];
 type StackFilter = "all" | "nextjs" | "react" | "tailwind" | "graphql";
@@ -38,88 +41,138 @@ const stackFilters: { value: StackFilter; label: string }[] = [
 const statusLabel: Record<ProjectItem["status"], { es: string; en: string }> = {
   live: { es: "En producción", en: "Live" },
   wip: { es: "En progreso", en: "In progress" },
-  private: { es: "Privado", en: "Private" },
+  private: { es: "Aún no disponible", en: "Not yet available" },
+};
+
+const statusDotColor: Record<ProjectItem["status"], string> = {
+  live: "bg-[#4ade80] shadow-[0_0_6px_#4ade80]",
+  wip: "bg-[#fbbf24] shadow-[0_0_6px_#fbbf24]",
+  private: "bg-mt-text-30",
 };
 
 const browserDots = ["#ff5f57", "#febc2e", "#28c840"];
 
-const CardBrowserMock = () => (
-  <div className="mtp-browser-mock">
-    <div className="mtp-browser-bar">
-      <div style={{ display: "flex", gap: 5 }}>
-        {browserDots.map((c) => <div key={c} style={{ width: 8, height: 8, borderRadius: "50%", background: c }} />)}
+const CardBrowserMock = ({ project }: { project: ProjectItem }) => (
+  <div className={pk.pkBrowserMock}>
+    <div className={pk.pkBrowserBar}>
+      <div className="flex gap-1.25">
+        {browserDots.map((c) => <div key={c} className="h-2 w-2 rounded-full" style={{ background: c }} />)}
       </div>
-      <div className="mtp-browser-url" />
+      <div className={pk.pkBrowserUrl} />
     </div>
-    <div className="mtp-browser-body">
-      <div className="mtp-brow orange" />
-      <div className="mtp-brow short" />
-      <div className="mtp-brow-grid">
-        <div className="mtp-brow-block" />
-        <div className="mtp-brow-block accent" />
-        <div className="mtp-brow-block" />
-        <div className="mtp-brow-block" />
+    {project.screenshots ? (
+      <div className={pk.pkBrowserShot}>
+        <ScreenshotFrame
+          src={project.screenshots.desktop[0].src}
+          alt={`${project.title} — ${project.screenshots.desktop[0].label}`}
+          naturalWidth={project.screenshots.desktop[0].width}
+          naturalHeight={project.screenshots.desktop[0].height}
+        />
       </div>
-    </div>
+    ) : (
+      <div className={pk.pkBrowserBody}>
+        <div className={`${pk.pkBrow} w-1/2 bg-[rgba(242,100,25,.35)]`} />
+        <div className={`${pk.pkBrow} w-[65%]`} />
+        <div className={pk.pkBrowGrid}>
+          <div className={pk.pkBrowBlock} />
+          <div className={`${pk.pkBrowBlock} ${pk.pkBrowBlockAccent}`} />
+          <div className={pk.pkBrowBlock} />
+          <div className={pk.pkBrowBlock} />
+        </div>
+      </div>
+    )}
   </div>
 );
 
+const ScreenshotGallery = ({ project }: { project: ProjectItem }) => {
+  if (!project.screenshots) return null;
+  const { desktop, mobile } = project.screenshots;
+  return (
+    <div className={pk.pkShotGallery}>
+      {desktop.map((shot, i) => (
+        <div key={shot.src} className={`${pk.pkShotGalleryItem}${i === 0 ? ` ${pk.pkShotGalleryItemWide}` : ""}`}>
+          <ScreenshotFrame
+            src={shot.src}
+            alt={`${project.title} — ${shot.label}`}
+            naturalWidth={shot.width}
+            naturalHeight={shot.height}
+            mode="scroll"
+          />
+          <div className={pk.pkGalleryLabel}>{shot.label}</div>
+        </div>
+      ))}
+      {mobile?.map((shot) => (
+        <div key={shot.src} className={pk.pkShotGalleryItem}>
+          <ScreenshotFrame
+            src={shot.src}
+            alt={`${project.title} — ${shot.label}`}
+            naturalWidth={shot.width}
+            naturalHeight={shot.height}
+            mode="scroll"
+          />
+          <div className={pk.pkGalleryLabel}>{shot.label}</div>
+        </div>
+      ))}
+    </div>
+  );
+};
+
 const GalleryScreen = ({ variant, label }: { variant: number; label: string }) => (
-  <div className={`mtp-gallery-item${variant === 0 ? " wide" : ""}`}>
-    <div className="mtp-gscreen">
-      <div className="mtp-gscreen-bar">
-        {browserDots.map((c) => <div key={c} className="mtp-gscreen-dot" style={{ background: c }} />)}
+  <div className={`${pk.pkGalleryItem}${variant === 0 ? ` ${pk.pkGalleryItemWide}` : ""}`}>
+    <div className={pk.pkGscreen}>
+      <div className={pk.pkGscreenBar}>
+        {browserDots.map((c) => <div key={c} className={pk.pkGscreenDot} style={{ background: c }} />)}
       </div>
       {variant === 0 && (
-        <div className="mtp-gscreen-body">
-          <div className="mtp-gscreen-row orange" />
-          <div className="mtp-gscreen-row short" />
-          <div className="mtp-gscreen-blocks">
-            <div className="mtp-gscreen-block accent" /><div className="mtp-gscreen-block" /><div className="mtp-gscreen-block" />
+        <div className={pk.pkGscreenBody}>
+          <div className={`${pk.pkGscreenRow} w-[45%] bg-[rgba(242,100,25,.3)]`} />
+          <div className={`${pk.pkGscreenRow} w-[60%]`} />
+          <div className={pk.pkGscreenBlocks}>
+            <div className={`${pk.pkGscreenBlock} ${pk.pkGscreenBlockAccent}`} /><div className={pk.pkGscreenBlock} /><div className={pk.pkGscreenBlock} />
           </div>
-          <div className="mtp-gscreen-chart">
+          <div className={pk.pkGscreenChart}>
             {[35, 55, 45, 70, 60, 80, 65, 90, 75, 85, 70, 95].map((h, i) => (
-              <div key={i} className="mtp-gscreen-chart-bar" style={{ left: `${i * 8.33}%`, height: `${h}%` }} />
+              <div key={i} className={pk.pkGscreenChartBar} style={{ left: `${i * 8.33}%`, height: `${h}%` }} />
             ))}
           </div>
         </div>
       )}
       {variant === 1 && (
-        <div className="mtp-gscreen-body" style={{ display: "grid", gridTemplateColumns: "80px 1fr", gap: 6 }}>
-          <div style={{ background: "var(--mt-surface-3)", borderRight: "1px solid var(--mt-border)", display: "flex", flexDirection: "column", gap: 5, padding: 6 }}>
-            <div style={{ height: 8, background: "rgba(242,100,25,.4)", borderRadius: 3, width: "80%" }} />
-            <div style={{ height: 6, background: "var(--mt-border-bright)", borderRadius: 3 }} />
-            <div style={{ height: 6, background: "var(--mt-border-bright)", borderRadius: 3 }} />
+        <div className={`${pk.pkGscreenBody} grid grid-cols-[80px_1fr] gap-1.5`}>
+          <div className="flex flex-col gap-1.25 border-r border-mt-border bg-mt-surface-3 p-1.5">
+            <div className="h-2 w-4/5 rounded-[3px] bg-[rgba(242,100,25,.4)]" />
+            <div className="h-1.5 rounded-[3px] bg-mt-border-bright" />
+            <div className="h-1.5 rounded-[3px] bg-mt-border-bright" />
           </div>
-          <div style={{ display: "flex", flexDirection: "column", gap: 5 }}>
-            <div className="mtp-gscreen-row orange" />
-            <div className="mtp-gscreen-row" />
-            <div className="mtp-gscreen-row short" />
+          <div className="flex flex-col gap-1.25">
+            <div className={`${pk.pkGscreenRow} w-[45%] bg-[rgba(242,100,25,.3)]`} />
+            <div className={pk.pkGscreenRow} />
+            <div className={`${pk.pkGscreenRow} w-[60%]`} />
           </div>
         </div>
       )}
       {variant === 2 && (
-        <div className="mtp-gscreen-body">
-          <div className="mtp-gscreen-row" />
-          <div className="mtp-gscreen-blocks" style={{ gridTemplateColumns: "1fr 1fr" }}>
-            <div className="mtp-gscreen-block accent" style={{ height: 44 }} />
-            <div className="mtp-gscreen-block" style={{ height: 44 }} />
+        <div className={pk.pkGscreenBody}>
+          <div className={pk.pkGscreenRow} />
+          <div className="mt-1 grid grid-cols-2 gap-1">
+            <div className={`${pk.pkGscreenBlock} ${pk.pkGscreenBlockAccent} h-11`} />
+            <div className={`${pk.pkGscreenBlock} h-11`} />
           </div>
-          <div className="mtp-gscreen-row short" style={{ marginTop: 4 }} />
-          <div className="mtp-gscreen-row" style={{ width: "90%" }} />
+          <div className={`${pk.pkGscreenRow} mt-1 w-[60%]`} />
+          <div className={`${pk.pkGscreenRow} w-[90%]`} />
         </div>
       )}
       {variant === 3 && (
-        <div className="mtp-gscreen-body">
-          <div className="mtp-gscreen-row orange" />
-          <div className="mtp-gscreen-row" />
-          <div className="mtp-gscreen-blocks">
-            <div className="mtp-gscreen-block" /><div className="mtp-gscreen-block accent" /><div className="mtp-gscreen-block" />
+        <div className={pk.pkGscreenBody}>
+          <div className={`${pk.pkGscreenRow} w-[45%] bg-[rgba(242,100,25,.3)]`} />
+          <div className={pk.pkGscreenRow} />
+          <div className={pk.pkGscreenBlocks}>
+            <div className={pk.pkGscreenBlock} /><div className={`${pk.pkGscreenBlock} ${pk.pkGscreenBlockAccent}`} /><div className={pk.pkGscreenBlock} />
           </div>
         </div>
       )}
     </div>
-    <div className="mtp-gallery-label">{label}</div>
+    <div className={pk.pkGalleryLabel}>{label}</div>
   </div>
 );
 
@@ -184,50 +237,50 @@ const ProyectosClient = () => {
 
   return (
     <>
-      <div className="mtp-header">
-        <div className="mtp-header-grid-bg" />
-        <div className="mtp-header-glow" />
-        <div className="mtp-header-inner">
-          <div className="mtp-breadcrumb">
-            <a href="/">Home</a>
+      <div className={pk.pkHeader}>
+        <div className={pk.pkHeaderGridBg} />
+        <div className={pk.pkHeaderGlow} />
+        <div className={pk.pkHeaderInner}>
+          <div className={pk.pkBreadcrumb}>
+            <a className={pk.pkBreadcrumbLink} href="/">Home</a>
             <span>/</span>
-            <span style={{ color: "var(--mt-text-60)" }}>{t.nav.projects}</span>
+            <span className="text-mt-text-60">{t.nav.projects}</span>
           </div>
-          <h1 className="mtp-title">
-            {lang === "es" ? <>Todo el <span className="accent">trabajo,</span></> : <>All the <span className="accent">work,</span></>}
+          <h1 className={pk.pkTitle}>
+            {lang === "es" ? <>Todo el <span className="text-mt-orange">trabajo,</span></> : <>All the <span className="text-mt-orange">work,</span></>}
             <br />
-            <span className="serif">{lang === "es" ? "sin relleno." : "no filler."}</span>
+            <span className="font-mt-serif font-normal italic">{lang === "es" ? "sin relleno." : "no filler."}</span>
           </h1>
-          <p className="mtp-subtitle">
+          <p className={pk.pkSubtitle}>
             {lang === "es"
               ? "Un archivo curado de las interfaces y productos que diseñé y construí — cada uno con un problema real, restricciones reales y resultados reales."
               : "A curated archive of the interfaces and products I've designed and built — each one with a real problem, real constraints, and real results."}
           </p>
-          <div className="mtp-stats">
+          <div className={pk.pkStats}>
             <div>
-              <div className="mtp-stat-n">{projects.length}</div>
-              <div className="mtp-stat-l">{t.nav.projects}</div>
+              <div className={pk.pkStatN}>{projects.length}</div>
+              <div className={pk.pkStatL}>{t.nav.projects}</div>
             </div>
             <div>
-              <div className="mtp-stat-n">3<span>+</span></div>
-              <div className="mtp-stat-l">{lang === "es" ? "Industrias" : "Industries"}</div>
+              <div className={pk.pkStatN}>3<span className="text-mt-orange">+</span></div>
+              <div className={pk.pkStatL}>{lang === "es" ? "Industrias" : "Industries"}</div>
             </div>
             <div>
-              <div className="mtp-stat-n">100<span>%</span></div>
-              <div className="mtp-stat-l">{lang === "es" ? "Real" : "Real"}</div>
+              <div className={pk.pkStatN}>100<span className="text-mt-orange">%</span></div>
+              <div className={pk.pkStatL}>{lang === "es" ? "Real" : "Real"}</div>
             </div>
           </div>
         </div>
       </div>
 
-      <div className="mtp-toolbar">
-        <div className="mtp-toolbar-inner">
-          <span className="mtp-filter-label">Type:</span>
-          <div style={{ display: "flex", gap: 6, flexWrap: "wrap" }}>
+      <div className={pk.pkToolbar}>
+        <div className={pk.pkToolbarInner}>
+          <span className={pk.pkFilterLabel}>Type:</span>
+          <div className="flex flex-wrap gap-1.5">
             {typeFilters.map((f) => (
               <button
                 key={f.value}
-                className={`mtp-filter-pill${type === f.value ? " active" : ""}`}
+                className={`${pk.pkFilterPill}${type === f.value ? ` ${pk.pkFilterPillActive}` : ""}`}
                 onClick={() => setType(f.value)}
               >
                 {lang === "es" ? f.es : f.en}
@@ -235,14 +288,14 @@ const ProyectosClient = () => {
             ))}
           </div>
 
-          <div className="mtp-sep" />
+          <div className={pk.pkSep} />
 
-          <span className="mtp-filter-label">Stack:</span>
-          <div style={{ display: "flex", gap: 6, flexWrap: "wrap" }}>
+          <span className={pk.pkFilterLabel}>Stack:</span>
+          <div className="flex flex-wrap gap-1.5">
             {stackFilters.map((f) => (
               <button
                 key={f.value}
-                className={`mtp-filter-pill${stack === f.value ? " active" : ""}`}
+                className={`${pk.pkFilterPill}${stack === f.value ? ` ${pk.pkFilterPillActive}` : ""}`}
                 onClick={() => setStack(f.value)}
               >
                 {f.label}
@@ -250,10 +303,10 @@ const ProyectosClient = () => {
             ))}
           </div>
 
-          <div className="mtp-sep" />
+          <div className={pk.pkSep} />
 
           <select
-            className="mtp-sort-select"
+            className={pk.pkSortSelect}
             value={sort}
             onChange={(e) => setSort(e.target.value as SortOption)}
           >
@@ -262,77 +315,77 @@ const ProyectosClient = () => {
             <option value="alpha">A → Z</option>
           </select>
 
-          <span className="mtp-results-count">
+          <span className={pk.pkResultsCount}>
             {filtered.length} {lang === "es" ? "proyectos" : "projects"}
           </span>
 
-          <div className="mtp-view-toggle">
-            <button className={`mtp-view-btn${view === "grid" ? " active" : ""}`} onClick={() => setView("grid")} title="Grid view">
+          <div className={pk.pkViewToggle}>
+            <button className={`${pk.pkViewBtn}${view === "grid" ? ` ${pk.pkViewBtnActive}` : ""}`} onClick={() => setView("grid")} title="Grid view">
               <LayoutGrid size={16} />
             </button>
-            <button className={`mtp-view-btn${view === "list" ? " active" : ""}`} onClick={() => setView("list")} title="List view">
+            <button className={`${pk.pkViewBtn}${view === "list" ? ` ${pk.pkViewBtnActive}` : ""}`} onClick={() => setView("list")} title="List view">
               <List size={16} />
             </button>
           </div>
         </div>
       </div>
 
-      <div className="mtp-main">
+      <div className={pk.pkMain}>
         {filtered.length === 0 ? (
-          <div className="mtp-no-results">
-            <div style={{ fontFamily: "var(--mt-font-mono)", fontSize: 28, marginBottom: 12 }}>∅</div>
-            <div style={{ fontFamily: "var(--mt-font-display)", fontSize: 18, fontWeight: 600, marginBottom: 8, color: "var(--mt-text-60)" }}>
+          <div className={pk.pkNoResults}>
+            <div className="mb-3 font-mt-mono text-[28px]">∅</div>
+            <div className="font-mt-display text-lg font-semibold text-mt-text-60">
               {lang === "es" ? "Ningún proyecto coincide con este filtro" : "No projects match this filter"}
             </div>
           </div>
         ) : view === "grid" ? (
-          <div className="mtp-grid">
+          <div className={pk.pkGrid}>
             {filtered.map((p, i) => (
               <div
                 key={p.id}
                 role="button"
                 tabIndex={0}
-                className={`mtp-card${p.featured && i === 0 ? " featured" : ""}`}
+                className={`${pk.pkCard}${p.featured && i === 0 ? ` ${pk.pkCardFeatured}` : ""}`}
                 onClick={() => openModal(p.id)}
                 onKeyDown={onActivate(() => openModal(p.id))}
               >
-                <div className="mtp-card-preview">
-                  <CardBrowserMock />
-                  <div className="mtp-preview-gradient" />
-                  <div className="mtp-cat-badge">{p.category}</div>
-                  <div className="mtp-status-badge">
-                    <div className={`mtp-status-dot ${p.status}`} />
+                <div className={`${pk.pkCardPreview}${p.featured && i === 0 ? ` ${pk.pkCardPreviewFeatured}` : ""}`}>
+                  <CardBrowserMock project={p} />
+                  <div className={pk.pkPreviewGradient} />
+                  <div className={pk.pkCatBadge}>{p.category}</div>
+                  <div className={pk.pkStatusBadge}>
+                    <div className={`${pk.pkStatusDot} ${statusDotColor[p.status]}`} />
                     {lang === "es" ? statusLabel[p.status].es : statusLabel[p.status].en}
                   </div>
                 </div>
-                <div className="mtp-card-body">
-                  <div className="mtp-card-meta">
-                    <span className="mtp-card-type">{p.type}</span>
-                    <span className="mtp-card-year">{p.year}</span>
+                <div className={pk.pkCardBody}>
+                  <div className={pk.pkCardMeta}>
+                    <span className={pk.pkCardType}>{p.type}</span>
+                    <span className={pk.pkCardYear}>{p.year}</span>
                   </div>
-                  <div className="mtp-card-title">{p.title}</div>
-                  <div className="mtp-card-desc">{p.tagline}</div>
-                  <div className="mtp-card-metrics">
+                  <div className={pk.pkCardTitle}>{p.title}</div>
+                  <div className={pk.pkCardDesc}>{p.tagline}</div>
+                  <div className={pk.pkCardMetrics}>
                     {p.metrics.slice(0, 3).map((m) => (
                       <div key={m.lbl}>
-                        <div className="mtp-card-metric-val">{m.val}</div>
-                        <div className="mtp-card-metric-lbl">{m.lbl}</div>
+                        <div className={pk.pkCardMetricVal}>{m.val}</div>
+                        <div className={pk.pkCardMetricLbl}>{m.lbl}</div>
                       </div>
                     ))}
                   </div>
-                  <div className="mtp-card-stack">
-                    {p.stackPills.slice(0, 5).map((s) => <span key={s} className="mtp-stag">{s}</span>)}
+                  <div className={pk.pkCardStack}>
+                    {p.stackPills.slice(0, 5).map((s) => <span key={s} className={pk.pkStag}>{s}</span>)}
                   </div>
-                  <div className="mtp-card-footer">
-                    <span className="mtp-card-cta">{t.projects.cta}</span>
-                    <div className="mtp-card-links" onClick={(e) => e.stopPropagation()}>
+                  <div className={pk.pkCardFooter}>
+                    <span className={pk.pkCardCta}>{t.projects.cta}</span>
+                    <div className={pk.pkCardLinks} onClick={(e) => e.stopPropagation()}>
                       {p.liveUrl && (
-                        <a className="mtp-card-link" href={p.liveUrl} target="_blank" rel="noopener noreferrer" title="Live site">
+                        <a className={pk.pkCardLink} href={p.liveUrl} target="_blank" rel="noopener noreferrer" title="Live site">
                           <ExternalLink size={13} />
                         </a>
                       )}
                       {p.githubUrl && (
-                        <a className="mtp-card-link" href={p.githubUrl} target="_blank" rel="noopener noreferrer" title="GitHub">
+                        <a className={pk.pkCardLink} href={p.githubUrl} target="_blank" rel="noopener noreferrer" title="GitHub">
                           <Github size={13} />
                         </a>
                       )}
@@ -343,33 +396,33 @@ const ProyectosClient = () => {
             ))}
           </div>
         ) : (
-          <div className="mtp-list">
+          <div className={pk.pkList}>
             {filtered.map((p) => (
               <div
                 key={p.id}
                 role="button"
                 tabIndex={0}
-                className="mtp-lcard"
+                className={pk.pkLcard}
                 onClick={() => openModal(p.id)}
                 onKeyDown={onActivate(() => openModal(p.id))}
               >
-                <div className="mtp-lcard-icon">{p.title.slice(0, 2).toUpperCase()}</div>
+                <div className={pk.pkLcardIcon}>{p.title.slice(0, 2).toUpperCase()}</div>
                 <div>
-                  <div className="mtp-lcard-top" style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 4 }}>
-                    <div className="mtp-lcard-title">{p.title}</div>
-                    <span className="mtp-lcard-cat">{p.category}</span>
+                  <div className="mb-1 flex items-center gap-2.5">
+                    <div className={pk.pkLcardTitle}>{p.title}</div>
+                    <span className={pk.pkLcardCat}>{p.category}</span>
                   </div>
-                  <div className="mtp-lcard-desc">{p.tagline}</div>
-                  <div className="mtp-lcard-stack">
-                    {p.stackPills.slice(0, 6).map((s) => <span key={s} className="mtp-lcard-stag">{s}</span>)}
+                  <div className={pk.pkLcardDesc}>{p.tagline}</div>
+                  <div className={pk.pkLcardStack}>
+                    {p.stackPills.slice(0, 6).map((s) => <span key={s} className={pk.pkLcardStag}>{s}</span>)}
                   </div>
                 </div>
-                <div className="mtp-lcard-right">
-                  <div style={{ textAlign: "right" }}>
-                    <div className="mtp-lcard-metric-val">{p.metrics[0].val}</div>
-                    <div className="mtp-lcard-metric-lbl">{p.metrics[0].lbl}</div>
+                <div className={pk.pkLcardRight}>
+                  <div className="text-right">
+                    <div className={pk.pkLcardMetricVal}>{p.metrics[0].val}</div>
+                    <div className={pk.pkLcardMetricLbl}>{p.metrics[0].lbl}</div>
                   </div>
-                  <ChevronRight size={18} color="var(--mt-text-30)" />
+                  <ChevronRight size={18} className="text-mt-text-30" />
                 </div>
               </div>
             ))}
@@ -380,7 +433,7 @@ const ProyectosClient = () => {
       <AnimatePresence>
         {activeProject && modalIndex !== null && (
           <motion.div
-            className="mtp-modal-overlay"
+            className={pk.pkModalOverlay}
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
@@ -388,71 +441,75 @@ const ProyectosClient = () => {
             onClick={(e) => { if (e.target === e.currentTarget) setModalIndex(null); }}
           >
             <motion.div
-              className="mtp-modal"
+              className={`${pk.pkModal}${activeProject.screenshots ? ` ${pk.pkModalWide}` : ""}`}
               initial={{ opacity: 0, y: 20, scale: 0.97 }}
               animate={{ opacity: 1, y: 0, scale: 1 }}
               exit={{ opacity: 0, y: 20, scale: 0.97 }}
               transition={{ duration: 0.25, ease: "easeOut" }}
             >
-              <div className="mtp-modal-header">
+              <div className={pk.pkModalHeader}>
                 <div>
-                  <div className="mtp-modal-category">{activeProject.category} · {activeProject.year}</div>
-                  <div className="mtp-modal-title">{activeProject.title}</div>
+                  <div className={pk.pkModalCategory}>{activeProject.category} · {activeProject.year}</div>
+                  <div className={pk.pkModalTitle}>{activeProject.title}</div>
                 </div>
-                <button className="mtp-modal-close" onClick={() => setModalIndex(null)} aria-label="Close">
+                <button className={pk.pkModalClose} onClick={() => setModalIndex(null)} aria-label="Close">
                   <X size={16} />
                 </button>
               </div>
 
-              <div className="mtp-modal-tabs">
+              <div className={pk.pkModalTabs}>
                 {(["overview", "gallery", "stack"] as Tab[]).map((tb) => (
-                  <button key={tb} className={`mtp-modal-tab${tab === tb ? " active" : ""}`} onClick={() => setTab(tb)}>
+                  <button key={tb} className={`${pk.pkModalTab}${tab === tb ? ` ${pk.pkModalTabActive}` : ""}`} onClick={() => setTab(tb)}>
                     {tb === "overview" ? "Overview" : tb === "gallery" ? "Gallery" : "Tech Stack"}
                   </button>
                 ))}
               </div>
 
-              <div className="mtp-modal-body">
+              <div className={pk.pkModalBody}>
                 {tab === "overview" && (
                   <div>
-                    <p className="mtp-modal-desc-full">{activeProject.desc}</p>
-                    <div className="mtp-modal-stat-row">
+                    <p className={pk.pkModalDescFull}>{activeProject.desc}</p>
+                    <div className={pk.pkModalStatRow}>
                       {activeProject.metrics.map((m) => (
-                        <div key={m.lbl} className="mtp-modal-stat">
-                          <div className="mtp-modal-stat-val">{m.val}</div>
-                          <div className="mtp-modal-stat-lbl">{m.lbl}</div>
+                        <div key={m.lbl} className={pk.pkModalStat}>
+                          <div className={pk.pkModalStatVal}>{m.val}</div>
+                          <div className={pk.pkModalStatLbl}>{m.lbl}</div>
                         </div>
                       ))}
                     </div>
-                    <div className="mtp-modal-challenge">
-                      <div className="mtp-modal-challenge-label">{lang === "es" ? "El desafío" : "The challenge"}</div>
-                      <div className="mtp-modal-challenge-text">{activeProject.challenge}</div>
+                    <div className={pk.pkModalChallenge}>
+                      <div className={pk.pkModalChallengeLabel}>{lang === "es" ? "El desafío" : "The challenge"}</div>
+                      <div className={pk.pkModalChallengeText}>{activeProject.challenge}</div>
                     </div>
-                    <div className="mtp-modal-kp-title">{lang === "es" ? "Puntos clave" : "Key outcomes"}</div>
-                    <ul className="mtp-modal-kp-list">
+                    <div className={pk.pkModalKpTitle}>{lang === "es" ? "Puntos clave" : "Key outcomes"}</div>
+                    <ul className={pk.pkModalKpList}>
                       {activeProject.keypoints.map((k, i) => (
-                        <li key={i} className="mtp-modal-kp-item" dangerouslySetInnerHTML={{ __html: k }} />
+                        <li key={i} className={pk.pkModalKpItem} dangerouslySetInnerHTML={{ __html: k }} />
                       ))}
                     </ul>
                   </div>
                 )}
 
                 {tab === "gallery" && (
-                  <div className="mtp-gallery-grid">
-                    {activeProject.screens.map((label, i) => (
-                      <GalleryScreen key={label} variant={i} label={label} />
-                    ))}
-                  </div>
+                  activeProject.screenshots ? (
+                    <ScreenshotGallery project={activeProject} />
+                  ) : (
+                    <div className={pk.pkGalleryGrid}>
+                      {activeProject.screens.map((label, i) => (
+                        <GalleryScreen key={label} variant={i} label={label} />
+                      ))}
+                    </div>
+                  )
                 )}
 
                 {tab === "stack" && (
                   <div>
                     {(Object.entries(activeProject.stack) as [string, string[]][]).map(([group, items]) => (
-                      <div key={group} className="mtp-stack-section">
-                        <div className="mtp-stack-section-title">{group.charAt(0).toUpperCase() + group.slice(1)}</div>
-                        <div className="mtp-stack-pills">
+                      <div key={group} className={pk.pkStackSection}>
+                        <div className={pk.pkStackSectionTitle}>{group.charAt(0).toUpperCase() + group.slice(1)}</div>
+                        <div className={pk.pkStackPills}>
                           {items.map((s) => (
-                            <span key={s} className={`mtp-stack-pill${group === "core" ? " core" : ""}`}>{s}</span>
+                            <span key={s} className={`${pk.pkStackPill}${group === "core" ? ` ${pk.pkStackPillCore}` : ""}`}>{s}</span>
                           ))}
                         </div>
                       </div>
@@ -461,26 +518,26 @@ const ProyectosClient = () => {
                 )}
               </div>
 
-              <div className="mtp-modal-footer">
-                <div className="mtp-modal-footer-links">
+              <div className={pk.pkModalFooter}>
+                <div className={pk.pkModalFooterLinks}>
                   {activeProject.liveUrl ? (
-                    <a href={activeProject.liveUrl} target="_blank" rel="noopener noreferrer" className="btn-primary">
+                    <a href={activeProject.liveUrl} target="_blank" rel="noopener noreferrer" className={btnPrimary}>
                       {lang === "es" ? "Ver en vivo →" : "View live →"}
                     </a>
                   ) : (
-                    <span className="btn-primary" style={{ opacity: 0.5, cursor: "default" }}>
-                      <Lock size={13} /> {lang === "es" ? "Proyecto privado" : "Private project"}
+                    <span className={`${btnPrimary} cursor-default opacity-50`}>
+                      <Lock size={13} /> {lang === "es" ? "Aún no disponible al público" : "Not yet publicly available"}
                     </span>
                   )}
                   {activeProject.githubUrl && (
-                    <a href={activeProject.githubUrl} target="_blank" rel="noopener noreferrer" className="btn-ghost">GitHub</a>
+                    <a href={activeProject.githubUrl} target="_blank" rel="noopener noreferrer" className={btnGhost}>GitHub</a>
                   )}
                 </div>
-                <div className="mtp-modal-nav-btns">
-                  <button className="mtp-modal-nav-btn" disabled={modalIndex === 0} onClick={() => setModalIndex((i) => (i !== null ? i - 1 : i))}>
+                <div className={pk.pkModalNavBtns}>
+                  <button className={pk.pkModalNavBtn} disabled={modalIndex === 0} onClick={() => setModalIndex((i) => (i !== null ? i - 1 : i))}>
                     <ChevronLeft size={16} />
                   </button>
-                  <button className="mtp-modal-nav-btn" disabled={modalIndex === filtered.length - 1} onClick={() => setModalIndex((i) => (i !== null ? i + 1 : i))}>
+                  <button className={pk.pkModalNavBtn} disabled={modalIndex === filtered.length - 1} onClick={() => setModalIndex((i) => (i !== null ? i + 1 : i))}>
                     <ChevronRight size={16} />
                   </button>
                 </div>

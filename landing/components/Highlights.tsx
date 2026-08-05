@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import { Zap, Layers, Globe2, Figma, Gauge } from "lucide-react";
 import { useLanguage } from "@/lib/i18n";
 import { dataHighlights } from "@/data";
+import { sectionPad, SectionInner, SectionLabel, SectionTitle } from "./Section";
 
 const container = {
   hidden: {},
@@ -15,73 +16,83 @@ const item = {
   visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: "easeOut" as const } },
 };
 
+const bentoCard =
+  "relative overflow-hidden rounded-2xl border border-mt-border bg-mt-card-bg p-7 transition-all duration-300 hover:-translate-y-0.5 hover:border-mt-border-bright before:absolute before:inset-0 before:bg-[radial-gradient(circle_at_50%_0%,var(--mt-orange-dim)_0%,transparent_60%)] before:opacity-0 before:transition-opacity before:duration-300 before:content-[''] hover:before:opacity-100";
+const bentoIcon =
+  "relative mb-4.5 flex h-10 w-10 items-center justify-center rounded-[10px] border border-[rgba(242,100,25,0.2)] bg-mt-orange-dim text-mt-orange";
+const bentoNumber = "relative mb-2 font-mt-display text-[42px] leading-none font-bold tracking-[-0.04em] [font-variant-numeric:tabular-nums]";
+const bentoLabel = "relative text-[13px] leading-normal text-mt-text-60";
+const bentoTitle = "relative mb-2 font-mt-display text-[17px] font-semibold tracking-[-0.02em]";
+const techBar = "relative mt-3.5 flex flex-wrap gap-1.5";
+const techTag = "rounded-full border border-mt-border bg-mt-tag-bg px-2.5 py-[3px] font-mt-mono text-[11px] text-mt-text-60";
+
 const Highlights = () => {
   const { t } = useLanguage();
 
   return (
-    <section className="mt-highlights mt-section">
-      <div className="mt-section-inner">
-        <div className="mt-section-label">{t.highlights.label}</div>
-        <h2 className="mt-section-title">
+    <section className={`border-t border-b border-mt-border bg-mt-surface transition-colors duration-300 ${sectionPad}`}>
+      <SectionInner>
+        <SectionLabel>{t.highlights.label}</SectionLabel>
+        <SectionTitle>
           {t.highlights.title1}
           <br />
           {t.highlights.title2}
-        </h2>
+        </SectionTitle>
 
         <motion.div
-          className="mt-bento-grid"
+          className="grid grid-cols-12 gap-3.5 max-[900px]:grid-cols-6 max-[560px]:grid-cols-1"
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, amount: 0.2 }}
           variants={container}
         >
-          <motion.div className="mt-bento-card mt-b1" variants={item}>
-            <div className="mt-bento-icon"><Zap size={18} /></div>
-            <div className="mt-bento-number">
-              {dataHighlights.b1Number}<span>{dataHighlights.b1Suffix}</span>
+          <motion.div className={`${bentoCard} col-span-4 max-[900px]:col-span-3 max-[560px]:col-span-1`} variants={item}>
+            <div className={bentoIcon}><Zap size={18} /></div>
+            <div className={bentoNumber}>
+              {dataHighlights.b1Number}<span className="text-mt-orange">{dataHighlights.b1Suffix}</span>
             </div>
-            <div className="mt-bento-label">{t.highlights.b1Label}</div>
+            <div className={bentoLabel}>{t.highlights.b1Label}</div>
           </motion.div>
 
-          <motion.div className="mt-bento-card mt-b2" variants={item}>
-            <div className="mt-bento-icon"><Layers size={18} /></div>
-            <div className="mt-bento-number">
-              {dataHighlights.b2Number}<span>{dataHighlights.b2Suffix}</span>
+          <motion.div className={`${bentoCard} col-span-4 max-[900px]:col-span-3 max-[560px]:col-span-1`} variants={item}>
+            <div className={bentoIcon}><Layers size={18} /></div>
+            <div className={bentoNumber}>
+              {dataHighlights.b2Number}<span className="text-mt-orange">{dataHighlights.b2Suffix}</span>
             </div>
-            <div className="mt-bento-label">{t.highlights.b2Label}</div>
+            <div className={bentoLabel}>{t.highlights.b2Label}</div>
           </motion.div>
 
-          <motion.div className="mt-bento-card mt-b3" variants={item}>
-            <div className="mt-bento-icon"><Globe2 size={18} /></div>
-            <div className="mt-bento-number">
-              {dataHighlights.b3Number}<span>{dataHighlights.b3Suffix}</span>
+          <motion.div className={`${bentoCard} col-span-4 max-[900px]:col-span-3 max-[560px]:col-span-1`} variants={item}>
+            <div className={bentoIcon}><Globe2 size={18} /></div>
+            <div className={bentoNumber}>
+              {dataHighlights.b3Number}<span className="text-mt-orange">{dataHighlights.b3Suffix}</span>
             </div>
-            <div className="mt-bento-label">{t.highlights.b3Label}</div>
+            <div className={bentoLabel}>{t.highlights.b3Label}</div>
           </motion.div>
 
-          <motion.div className="mt-bento-card mt-b4" variants={item}>
-            <div className="mt-bento-icon"><Figma size={18} /></div>
-            <div className="mt-bento-title">{t.highlights.b4Title}</div>
-            <div className="mt-bento-label">{t.highlights.b4Desc}</div>
-            <div className="mt-tech-bar">
-              <span className="mt-tech-tag">Figma</span>
-              <span className="mt-tech-tag">Design Tokens</span>
-              <span className="mt-tech-tag">Tailwind CSS</span>
+          <motion.div className={`${bentoCard} col-span-6 max-[560px]:col-span-1`} variants={item}>
+            <div className={bentoIcon}><Figma size={18} /></div>
+            <div className={bentoTitle}>{t.highlights.b4Title}</div>
+            <div className={bentoLabel}>{t.highlights.b4Desc}</div>
+            <div className={techBar}>
+              <span className={techTag}>Figma</span>
+              <span className={techTag}>Design Tokens</span>
+              <span className={techTag}>Tailwind CSS</span>
             </div>
           </motion.div>
 
-          <motion.div className="mt-bento-card mt-b5" variants={item}>
-            <div className="mt-bento-icon"><Gauge size={18} /></div>
-            <div className="mt-bento-title">{t.highlights.b5Title}</div>
-            <div className="mt-bento-label">{t.highlights.b5Desc}</div>
-            <div className="mt-tech-bar">
-              <span className="mt-tech-tag">SEO</span>
-              <span className="mt-tech-tag">Code splitting</span>
-              <span className="mt-tech-tag">Lazy loading</span>
+          <motion.div className={`${bentoCard} col-span-6 max-[560px]:col-span-1`} variants={item}>
+            <div className={bentoIcon}><Gauge size={18} /></div>
+            <div className={bentoTitle}>{t.highlights.b5Title}</div>
+            <div className={bentoLabel}>{t.highlights.b5Desc}</div>
+            <div className={techBar}>
+              <span className={techTag}>SEO</span>
+              <span className={techTag}>Code splitting</span>
+              <span className={techTag}>Lazy loading</span>
             </div>
           </motion.div>
         </motion.div>
-      </div>
+      </SectionInner>
     </section>
   );
 };

@@ -7,12 +7,17 @@ const LogoCloud = () => {
   const { t } = useLanguage();
 
   return (
-    <div className="mt-logo-cloud">
-      <div className="mt-logo-cloud-inner">
-        <span className="mt-logo-cloud-label">{t.logocloud.label}</span>
-        <div className="mt-logo-cloud-items">
+    <div className="border-t border-b border-mt-border bg-mt-surface px-12 py-7 transition-colors duration-300 max-[560px]:px-5">
+      <div className="mx-auto flex max-w-[1320px] flex-wrap items-center gap-10">
+        <span className="whitespace-nowrap text-[11px] tracking-widest text-mt-text-30 uppercase">{t.logocloud.label}</span>
+        <div className="flex flex-1 flex-wrap items-center gap-8">
           {dataLogoCloud.map((name) => (
-            <span className="mt-logo-item" key={name}>{name}</span>
+            <span
+              className="cursor-default font-mt-display text-sm font-semibold tracking-[-0.01em] text-mt-text-30 transition-colors duration-200 hover:text-mt-text-60"
+              key={name}
+            >
+              {name}
+            </span>
           ))}
         </div>
       </div>

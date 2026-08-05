@@ -23,9 +23,9 @@ export default function Home() {
       <Highlights />
       <LogoCloud />
       <Experience />
-      <Features />
+      {/* <Features /> */}
       <ProjectsPreview />
-      <MTComponents />
+      {/* <MTComponents /> */}
       <Skills />
       <Testimonials />
       <RecruiterSnapshot />

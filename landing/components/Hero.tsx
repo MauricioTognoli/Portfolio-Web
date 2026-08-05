@@ -5,6 +5,7 @@ import Image from "next/image";
 import { motion } from "framer-motion";
 import { Globe2 } from "lucide-react";
 import { useLanguage } from "@/lib/i18n";
+import { btnPrimary, btnSecondary } from "./uiClasses";
 
 const fadeUp = {
   hidden: { opacity: 0, y: 20 },
@@ -26,41 +27,44 @@ const Hero = () => {
   ];
 
   return (
-    <section className="mt-hero">
-      <div className="mt-hero-grid-bg" />
-      <div className="mt-hero-glow" />
-      <div className="mt-hero-content">
+    <section className="relative flex min-h-screen flex-col justify-center overflow-hidden px-12 pt-35 pb-20 max-[900px]:px-6 max-[560px]:min-h-0 max-[560px]:px-5 max-[560px]:pt-27.5 max-[560px]:pb-14">
+      <div className="absolute inset-0 [background-image:linear-gradient(var(--mt-grid-line)_1px,transparent_1px),linear-gradient(90deg,var(--mt-grid-line)_1px,transparent_1px)] [background-size:64px_64px] [mask-image:radial-gradient(ellipse_80%_70%_at_50%_50%,black_30%,transparent_100%)]" />
+      <div className="pointer-events-none absolute -top-50 -right-50 h-200 w-200 bg-[radial-gradient(circle,rgba(242,100,25,0.13)_0%,transparent_70%)]" />
+      <div className="relative mx-auto grid w-full max-w-[1320px] grid-cols-[1fr_auto] items-center gap-20 max-[900px]:grid-cols-1 max-[900px]:text-center">
         <div>
           <motion.div
-            className="mt-hero-badges-row"
+            className="mb-7 flex flex-wrap items-center gap-2.5 max-[560px]:justify-center"
             initial="hidden"
             animate="visible"
-            style={{ display: "flex", alignItems: "center", gap: 10, flexWrap: "wrap", marginBottom: 28 }}
           >
-            <motion.div className="mt-hero-badge" custom={0} variants={fadeUp}>
-              <div className="mt-badge-dot" />
+            <motion.div
+              className="inline-flex items-center gap-2 rounded-full border border-[rgba(242,100,25,0.25)] bg-mt-orange-dim px-3.5 py-1.5 text-xs tracking-wider text-mt-orange"
+              custom={0}
+              variants={fadeUp}
+            >
+              <div className="h-1.5 w-1.5 animate-mt-pulse rounded-full bg-mt-orange" />
               <span>{t.hero.badge}</span>
             </motion.div>
             <motion.div
               custom={0.1}
               variants={fadeUp}
-              style={{ display: "inline-flex", alignItems: "center", gap: 7, background: "var(--mt-text-10)", border: "1px solid var(--mt-border)", color: "var(--mt-text-60)", padding: "6px 14px", borderRadius: 100, fontSize: 12 }}
+              className="inline-flex items-center gap-[7px] rounded-full border border-mt-border bg-mt-text-10 px-3.5 py-1.5 text-xs text-mt-text-60"
             >
-              <Globe2 size={14} color="var(--mt-orange)" />
+              <Globe2 size={14} className="text-mt-orange" />
               <span>{t.hero.location}</span>
             </motion.div>
             <motion.div
               custom={0.2}
               variants={fadeUp}
-              style={{ display: "inline-flex", alignItems: "center", gap: 7, background: "rgba(34,197,94,.08)", border: "1px solid rgba(34,197,94,.25)", color: "#4ade80", padding: "6px 14px", borderRadius: 100, fontSize: 12 }}
+              className="inline-flex items-center gap-[7px] rounded-full border border-[rgba(34,197,94,.25)] bg-[rgba(34,197,94,.08)] px-3.5 py-1.5 text-xs text-[#4ade80]"
             >
-              <div style={{ width: 6, height: 6, background: "#4ade80", borderRadius: "50%", boxShadow: "0 0 8px #4ade80" }} />
+              <div className="h-1.5 w-1.5 rounded-full bg-[#4ade80] shadow-[0_0_8px_#4ade80]" />
               <span>{t.hero.available}</span>
             </motion.div>
           </motion.div>
 
           <motion.h1
-            className="mt-hero-headline"
+            className="mb-6 font-mt-display text-[clamp(40px,6vw,80px)] leading-[1.04] font-bold tracking-[-0.04em]"
             initial="hidden"
             animate="visible"
             custom={0.15}
@@ -69,39 +73,57 @@ const Hero = () => {
             {t.hero.line1}
             <br />
             {t.hero.line2}
-            <span className="accent">{t.hero.line2Accent}</span>
+            <span className="text-mt-orange">{t.hero.line2Accent}</span>
             <br />
             {t.hero.line3}
-            <span className="serif">{t.hero.line3Accent}</span>
+            <span className="font-mt-serif font-normal italic">{t.hero.line3Accent}</span>
           </motion.h1>
 
-          <motion.p className="mt-hero-sub" initial="hidden" animate="visible" custom={0.25} variants={fadeUp}>
+          <motion.p
+            className="mb-9 max-w-[500px] text-[15px] leading-[1.75] text-mt-text-60 max-[900px]:mx-auto"
+            initial="hidden"
+            animate="visible"
+            custom={0.25}
+            variants={fadeUp}
+          >
             {t.hero.sub}
           </motion.p>
 
-          <motion.div className="mt-hero-actions" initial="hidden" animate="visible" custom={0.35} variants={fadeUp}>
-            <a href="#projects" className="btn-primary">{t.hero.cta1}</a>
-            <a href="#contact" className="btn-secondary">{t.hero.cta2}</a>
+          <motion.div
+            className="mb-14 flex flex-wrap items-center gap-3 max-[900px]:justify-center max-[560px]:flex-col max-[560px]:items-stretch max-[560px]:[&>a]:justify-center"
+            initial="hidden"
+            animate="visible"
+            custom={0.35}
+            variants={fadeUp}
+          >
+            <a href="#projects" className={btnPrimary}>{t.hero.cta1}</a>
+            <a href="#contact" className={btnSecondary}>{t.hero.cta2}</a>
           </motion.div>
 
-          <motion.div className="mt-hero-stats" initial="hidden" animate="visible" custom={0.45} variants={fadeUp}>
+          <motion.div
+            className="flex flex-wrap gap-10 max-[900px]:justify-center max-[560px]:gap-6 max-[560px]:gap-y-4"
+            initial="hidden"
+            animate="visible"
+            custom={0.45}
+            variants={fadeUp}
+          >
             {stats.map((stat, i) => (
               <Fragment key={stat.label}>
-                <div className="mt-stat">
-                  <div className="mt-stat-number">
+                <div className="flex flex-col gap-1">
+                  <div className="font-mt-display text-[28px] leading-none font-bold tracking-[-0.03em] [font-variant-numeric:tabular-nums]">
                     {stat.value}
-                    <span>{stat.suffix}</span>
+                    <span className="text-mt-orange">{stat.suffix}</span>
                   </div>
-                  <div className="mt-stat-label">{stat.label}</div>
+                  <div className="font-mt-mono text-[10px] tracking-[0.08em] text-mt-text-30 uppercase">{stat.label}</div>
                 </div>
-                {i < stats.length - 1 && <div className="mt-stat-divider" />}
+                {i < stats.length - 1 && <div className="w-px self-stretch bg-mt-border" />}
               </Fragment>
             ))}
           </motion.div>
         </div>
 
         <motion.div
-          className="mt-hero-logo-wrap"
+          className="flex items-center justify-center max-[900px]:order-[-1]"
           initial={{ opacity: 0, scale: 0.85 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
@@ -112,7 +134,7 @@ const Hero = () => {
             width={280}
             height={280}
             priority
-            className="mt-hero-logo-svg"
+            className="h-55 w-55 [filter:drop-shadow(0_0_48px_rgba(242,100,25,0.25))] max-[560px]:h-40 max-[560px]:w-40"
           />
         </motion.div>
       </div>

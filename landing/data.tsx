@@ -202,6 +202,13 @@ export interface ProjectMetric {
   lbl: string;
 }
 
+export interface ProjectScreenshot {
+  label: string;
+  src: string;
+  width: number;
+  height: number;
+}
+
 export interface ProjectStack {
   core: string[];
   styling: string[];
@@ -225,6 +232,10 @@ export interface ProjectItem {
   stack: ProjectStack;
   stackPills: string[];
   screens: string[];
+  screenshots?: {
+    desktop: ProjectScreenshot[];
+    mobile?: ProjectScreenshot[];
+  };
   liveUrl: string | null;
   githubUrl: string | null;
 }
@@ -275,6 +286,48 @@ export const dataProjects: Record<"es" | "en", ProjectItem[]> = {
         "Formulario de contacto",
         "Vista mobile",
       ],
+      screenshots: {
+        desktop: [
+          {
+            label: "Inicio",
+            src: "/sos-service/sos-service-desktop.png",
+            width: 1920,
+            height: 11216,
+          },
+          {
+            label: "Servicios",
+            src: "/sos-service/sos-service-services.png",
+            width: 1920,
+            height: 8116,
+          },
+          {
+            label: "Proyectos",
+            src: "/sos-service/sos-service-projects.png",
+            width: 1920,
+            height: 5632,
+          },
+          {
+            label: "Recrutamiento",
+            src: "/sos-service/sos-service-recruitment.png",
+            width: 1920,
+            height: 4690,
+          },
+          {
+            label: "Contacto",
+            src: "/sos-service/sos-service-contact.png",
+            width: 1920,
+            height: 3685,
+          },
+        ],
+        mobile: [
+          {
+            label: "Inicio (mobile)",
+            src: "/sos-service/sos-service-mobile.png",
+            width: 378,
+            height: 14387,
+          },
+        ],
+      },
       liveUrl: "https://prepro-sos-service-web.vercel.app/en",
       githubUrl: "https://github.com/mauriciotognoli",
     },
@@ -322,48 +375,64 @@ export const dataProjects: Record<"es" | "en", ProjectItem[]> = {
         "Navegación mobile",
         "Sección de detalle",
       ],
+      screenshots: {
+        desktop: [
+          { label: "Inicio", src: "/freiguel/freiguel-home.png", width: 1920, height: 4503 },
+          { label: "Productos", src: "/freiguel/freiguel-products.png", width: 1920, height: 5451 },
+          { label: "Contacto", src: "/freiguel/freiguel-contact.png", width: 1920, height: 1843 },
+        ],
+        mobile: [
+          { label: "Sobre nosotros (mobile)", src: "/freiguel/freiguel-about-mobile.png", width: 378, height: 4992 },
+        ],
+      },
       liveUrl: "https://www.freiguel.pt/pt",
       githubUrl: "https://github.com/mauriciotognoli",
     },
     {
       id: 3,
       featured: false,
-      title: "NexoTv",
-      category: "Streaming",
-      type: "app",
-      year: "2024",
-      status: "live",
-      tagline: "Plataforma de streaming de películas y series",
-      desc: "Plataforma de streaming de películas y series construida con Next.js, React y Tailwind CSS, con foco en una experiencia de usuario fluida. Funcionalidades como búsqueda global, filtrado por categorías, paginación y visualización dinámica de contenido, integrando datos desde un backend simulado con GraphQL.",
+      title: "Produp",
+      category: "SaaS",
+      type: "saas",
+      year: "2023",
+      status: "private",
+      tagline: "Plataforma SaaS migrada de React a Vue",
+      desc: "Producto SaaS en el que trabajé primero con React y luego participé en la migración del frontend a Vue, adaptando la arquitectura de componentes y manteniendo la paridad de funcionalidades durante la transición de stack.",
       challenge:
-        "Proyecto personal para practicar una arquitectura frontend modular integrando un backend simulado con GraphQL, priorizando búsqueda, filtrado y performance de renderizado.",
+        "Migrar el frontend de un producto SaaS en producción de React a Vue sin frenar el desarrollo de nuevas funcionalidades ni afectar la experiencia de los usuarios existentes.",
       metrics: [
-        { val: "Apollo", lbl: "GraphQL" },
-        { val: "Búsqueda", lbl: "Global" },
-        { val: "Paginación", lbl: "Dinámica" },
-        { val: "A11y", lbl: "Cuidada" },
+        { val: "React", lbl: "Etapa inicial" },
+        { val: "Vue", lbl: "Etapa actual" },
+        { val: "SaaS", lbl: "Producto" },
+        { val: "Migración", lbl: "De stack" },
       ],
       keypoints: [
-        "<strong>Búsqueda global</strong>, filtrado por categorías y paginación de contenido",
-        "Integración de datos desde un <strong>backend simulado con GraphQL</strong> (Apollo)",
-        "Arquitectura frontend <strong>modular y escalable</strong>",
-        "Optimización de carga y renderizado de componentes para <strong>rendimiento y accesibilidad</strong>",
+        "Desarrollo inicial de funcionalidades del producto <strong>SaaS</strong> con React",
+        "Participación en la <strong>migración del frontend de React a Vue</strong>",
+        "Mantenimiento de la <strong>paridad de funcionalidades</strong> durante la transición de stack",
+        "Trabajo con frameworks internos propios de la empresa (<strong>Devix</strong> y <strong>Nuxe</strong>) además de React y Vue",
       ],
       stack: {
-        core: ["React", "Next.js"],
+        core: ["React", "Vue"],
         styling: ["Tailwind CSS"],
-        ui: ["Apollo Client", "GraphQL"],
-        tooling: ["Vercel"],
+        ui: [],
+        tooling: ["Devix", "Nuxe"],
       },
-      stackPills: ["React", "Apollo", "GraphQL", "Tailwind CSS"],
+      stackPills: ["React", "Vue", "Tailwind CSS", "Devix", "Nuxe"],
       screens: [
-        "Home con catálogo",
-        "Búsqueda y filtros",
-        "Detalle de título",
+        "Panel principal",
+        "Vista de producto",
+        "Interfaz migrada a Vue",
         "Vista mobile",
       ],
-      liveUrl: "https://nexotv.vercel.app",
-      githubUrl: "https://github.com/mauriciotognoli/nexotv",
+      screenshots: {
+        desktop: [
+          { label: "Dashboard", src: "/produp/produp-dashboard.png", width: 1920, height: 1344 },
+          { label: "Inventario", src: "/produp/produp-inventario.png", width: 1920, height: 2094 },
+        ],
+      },
+      liveUrl: null,
+      githubUrl: null,
     },
     {
       id: 4,
@@ -372,7 +441,7 @@ export const dataProjects: Record<"es" | "en", ProjectItem[]> = {
       category: "SaaS · ERP",
       type: "saas",
       year: "2025",
-      status: "private",
+      status: "live",
       tagline: "Plataforma ERP SaaS de e-commerce construida desde cero",
       desc: "Plataforma ERP SaaS de e-commerce desarrollada desde cero para reemplazar una solución anterior que no soportaba la alta carga de usuarios y datos. Participación activa en el diseño de UX/UI y en la implementación de una arquitectura frontend escalable y modular, con integración a REST APIs y gestión de datos optimizada mediante React Query.",
       challenge:
@@ -409,7 +478,12 @@ export const dataProjects: Record<"es" | "en", ProjectItem[]> = {
         "Panel de pedidos",
         "Vista mobile",
       ],
-      liveUrl: null,
+      screenshots: {
+        desktop: [
+          { label: "Inicio", src: "/powip/powip-home.png", width: 1920, height: 7275 },
+        ],
+      },
+      liveUrl: "https://www.powip.lat/",
       githubUrl: null,
     },
   ],
@@ -453,7 +527,49 @@ export const dataProjects: Record<"es" | "en", ProjectItem[]> = {
         "Turborepo",
       ],
       screens: ["Homepage", "Services section", "Contact form", "Mobile view"],
-      liveUrl: "https://prepro-sos-service-web.vercel.app/en",
+      screenshots: {
+        desktop: [
+          {
+            label: "Home",
+            src: "/sos-service/sos-service-desktop.png",
+            width: 1920,
+            height: 11216,
+          },
+          {
+            label: "Services",
+            src: "/sos-service/sos-service-services.png",
+            width: 1920,
+            height: 8116,
+          },
+          {
+            label: "Projects",
+            src: "/sos-service/sos-service-projects.png",
+            width: 1920,
+            height: 5632,
+          },
+          {
+            label: "Recruitment",
+            src: "/sos-service/sos-service-recruitment.png",
+            width: 1920,
+            height: 4690,
+          },
+          {
+            label: "Contact",
+            src: "/sos-service/sos-service-contact.png",
+            width: 1920,
+            height: 3685,
+          },
+        ],
+        mobile: [
+          {
+            label: "Home (mobile)",
+            src: "/sos-service/sos-service-mobile.png",
+            width: 378,
+            height: 14387,
+          },
+        ],
+      },
+      liveUrl: "https://www.sosservice.pt/pt",
       githubUrl: "https://github.com/mauriciotognoli",
     },
     {
@@ -505,42 +621,43 @@ export const dataProjects: Record<"es" | "en", ProjectItem[]> = {
     {
       id: 3,
       featured: false,
-      title: "NexoTv",
-      category: "Streaming",
-      type: "app",
-      year: "2024",
-      status: "live",
-      tagline: "Movie and TV series streaming platform",
-      desc: "A movie and series streaming platform built with Next.js, React and Tailwind CSS, focused on a smooth user experience. Features include global search, category filtering, pagination, and dynamic content rendering, integrating data from a simulated GraphQL backend.",
+      title: "Produp",
+      category: "SaaS",
+      type: "saas",
+      year: "2023",
+      status: "private",
+      tagline: "SaaS platform migrated from React to Vue",
+      desc: "A SaaS product I first worked on with React and later helped migrate to Vue, adapting the component architecture and keeping feature parity throughout the stack transition.",
       challenge:
-        "A personal project to practice a modular frontend architecture integrating a simulated GraphQL backend, prioritizing search, filtering, and rendering performance.",
+        "Migrating the frontend of a production SaaS product from React to Vue without slowing down new feature development or affecting the experience of existing users.",
       metrics: [
-        { val: "Apollo", lbl: "GraphQL" },
-        { val: "Search", lbl: "Global" },
-        { val: "Pagination", lbl: "Dynamic" },
-        { val: "A11y", lbl: "Considered" },
+        { val: "React", lbl: "Initial stage" },
+        { val: "Vue", lbl: "Current stage" },
+        { val: "SaaS", lbl: "Product" },
+        { val: "Migration", lbl: "Stack" },
       ],
       keypoints: [
-        "<strong>Global search</strong>, category filtering and content pagination",
-        "Data integration from a <strong>simulated GraphQL backend</strong> (Apollo)",
-        "<strong>Modular, scalable</strong> frontend architecture",
-        "Optimized component loading and rendering for <strong>performance and accessibility</strong>",
+        "Initial development of <strong>SaaS</strong> product features with React",
+        "Participated in the <strong>frontend migration from React to Vue</strong>",
+        "Maintained <strong>feature parity</strong> throughout the stack transition",
+        "Worked with the company's own internal frameworks (<strong>Devix</strong> and <strong>Nuxe</strong>) alongside React and Vue",
       ],
       stack: {
-        core: ["React", "Next.js"],
+        core: ["React", "Vue"],
         styling: ["Tailwind CSS"],
-        ui: ["Apollo Client", "GraphQL"],
-        tooling: ["Vercel"],
+        ui: [],
+        tooling: ["Devix", "Nuxe"],
       },
-      stackPills: ["React", "Apollo", "GraphQL", "Tailwind CSS"],
-      screens: [
-        "Catalog home",
-        "Search and filters",
-        "Title detail",
-        "Mobile view",
-      ],
-      liveUrl: "https://nexotv.vercel.app",
-      githubUrl: "https://github.com/mauriciotognoli/nexotv",
+      stackPills: ["React", "Vue", "Tailwind CSS", "Devix", "Nuxe"],
+      screens: ["Main dashboard", "Product view", "Vue-migrated interface", "Mobile view"],
+      screenshots: {
+        desktop: [
+          { label: "Dashboard", src: "/produp/produp-dashboard.png", width: 1920, height: 1344 },
+          { label: "Inventory", src: "/produp/produp-inventario.png", width: 1920, height: 2094 },
+        ],
+      },
+      liveUrl: null,
+      githubUrl: null,
     },
     {
       id: 4,
@@ -549,7 +666,7 @@ export const dataProjects: Record<"es" | "en", ProjectItem[]> = {
       category: "SaaS · ERP",
       type: "saas",
       year: "2025",
-      status: "private",
+      status: "live",
       tagline: "SaaS e-commerce ERP platform built from scratch",
       desc: "A SaaS e-commerce ERP platform built from scratch to replace a previous solution that couldn't handle the user and data load. Active participation in UX/UI design and in a scalable, modular frontend architecture, with REST API integration and optimized data management via React Query.",
       challenge:
@@ -586,7 +703,12 @@ export const dataProjects: Record<"es" | "en", ProjectItem[]> = {
         "Orders panel",
         "Mobile view",
       ],
-      liveUrl: null,
+      screenshots: {
+        desktop: [
+          { label: "Home", src: "/powip/powip-home.png", width: 1920, height: 7275 },
+        ],
+      },
+      liveUrl: "https://www.powip.lat/",
       githubUrl: null,
     },
   ],

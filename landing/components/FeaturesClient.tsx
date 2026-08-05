@@ -5,6 +5,8 @@ import { LayoutGrid, List, X, ChevronLeft, ChevronRight } from "lucide-react";
 import { AnimatePresence, motion } from "framer-motion";
 import { useLanguage } from "@/lib/i18n";
 import { dataFeatures, type FeatureItem } from "@/data";
+import { btnGhost } from "./uiClasses";
+import * as pk from "./pageKit";
 
 type SortOption = "default" | "alpha" | "company";
 type View = "grid" | "list";
@@ -19,30 +21,30 @@ const onActivate = (fn: () => void) => (e: ReactKeyboardEvent) => {
 };
 
 const PhotoMock = ({ variant, tall = false }: { variant: number; tall?: boolean }) => (
-  <div className="mtp-gscreen">
-    <div className="mtp-gscreen-bar">
-      {browserDots.map((c) => <div key={c} className="mtp-gscreen-dot" style={{ background: c }} />)}
+  <div className={pk.pkGscreen}>
+    <div className={pk.pkGscreenBar}>
+      {browserDots.map((c) => <div key={c} className={pk.pkGscreenDot} style={{ background: c }} />)}
     </div>
-    <div className="mtp-gscreen-body">
-      <div className="mtp-gscreen-row orange" />
-      <div className="mtp-gscreen-row short" />
+    <div className={pk.pkGscreenBody}>
+      <div className={`${pk.pkGscreenRow} w-[45%] bg-[rgba(242,100,25,.3)]`} />
+      <div className={`${pk.pkGscreenRow} w-[60%]`} />
       {variant % 2 === 0 ? (
         <>
-          <div className="mtp-gscreen-blocks">
-            <div className="mtp-gscreen-block accent" /><div className="mtp-gscreen-block" /><div className="mtp-gscreen-block" />
+          <div className={pk.pkGscreenBlocks}>
+            <div className={`${pk.pkGscreenBlock} ${pk.pkGscreenBlockAccent}`} /><div className={pk.pkGscreenBlock} /><div className={pk.pkGscreenBlock} />
           </div>
           {tall && (
-            <div className="mtp-gscreen-chart">
+            <div className={pk.pkGscreenChart}>
               {[35, 55, 45, 70, 60, 80, 65, 90, 75, 85, 70, 95].map((h, i) => (
-                <div key={i} className="mtp-gscreen-chart-bar" style={{ left: `${i * 8.33}%`, height: `${h}%` }} />
+                <div key={i} className={pk.pkGscreenChartBar} style={{ left: `${i * 8.33}%`, height: `${h}%` }} />
               ))}
             </div>
           )}
         </>
       ) : (
-        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 5, marginTop: 4 }}>
-          <div className="mtp-gscreen-block accent" style={{ height: tall ? 60 : 28 }} />
-          <div className="mtp-gscreen-block" style={{ height: tall ? 60 : 28 }} />
+        <div className="mt-1 grid grid-cols-2 gap-1.25">
+          <div className={`${pk.pkGscreenBlock} ${pk.pkGscreenBlockAccent}`} style={{ height: tall ? 60 : 28 }} />
+          <div className={pk.pkGscreenBlock} style={{ height: tall ? 60 : 28 }} />
         </div>
       )}
     </div>
@@ -97,141 +99,141 @@ const FeaturesClient = () => {
 
   return (
     <>
-      <div className="mtp-header">
-        <div className="mtp-header-grid-bg" />
-        <div className="mtp-header-glow" />
-        <div className="mtp-header-inner">
-          <div className="mtp-breadcrumb">
-            <a href="/">Home</a>
+      <div className={pk.pkHeader}>
+        <div className={pk.pkHeaderGridBg} />
+        <div className={pk.pkHeaderGlow} />
+        <div className={pk.pkHeaderInner}>
+          <div className={pk.pkBreadcrumb}>
+            <a className={pk.pkBreadcrumbLink} href="/">Home</a>
             <span>/</span>
-            <span style={{ color: "var(--mt-text-60)" }}>{t.nav.features}</span>
+            <span className="text-mt-text-60">{t.nav.features}</span>
           </div>
-          <h1 className="mtp-title">
-            {lang === "es" ? <>Features que <span className="accent">construí,</span></> : <>Features I <span className="accent">built,</span></>}
+          <h1 className={pk.pkTitle}>
+            {lang === "es" ? <>Features que <span className="text-mt-orange">construí,</span></> : <>Features I <span className="text-mt-orange">built,</span></>}
             <br />
-            <span className="serif">{lang === "es" ? "en producción." : "in production."}</span>
+            <span className="font-mt-serif font-normal italic">{lang === "es" ? "en producción." : "in production."}</span>
           </h1>
-          <p className="mtp-subtitle">{t.features.desc}</p>
-          <div className="mtp-stats">
+          <p className={pk.pkSubtitle}>{t.features.desc}</p>
+          <div className={pk.pkStats}>
             <div>
-              <div className="mtp-stat-n">{items.length}</div>
-              <div className="mtp-stat-l">Features</div>
+              <div className={pk.pkStatN}>{items.length}</div>
+              <div className={pk.pkStatL}>Features</div>
             </div>
             <div>
-              <div className="mtp-stat-n">{companies.length}</div>
-              <div className="mtp-stat-l">{lang === "es" ? "Empresas" : "Companies"}</div>
+              <div className={pk.pkStatN}>{companies.length}</div>
+              <div className={pk.pkStatL}>{lang === "es" ? "Empresas" : "Companies"}</div>
             </div>
           </div>
         </div>
       </div>
 
-      <div className="mtp-toolbar">
-        <div className="mtp-toolbar-inner">
-          <span className="mtp-filter-label">{lang === "es" ? "Empresa:" : "Company:"}</span>
-          <div style={{ display: "flex", gap: 6, flexWrap: "wrap" }}>
-            <button className={`mtp-filter-pill${company === "all" ? " active" : ""}`} onClick={() => setCompany("all")}>
+      <div className={pk.pkToolbar}>
+        <div className={pk.pkToolbarInner}>
+          <span className={pk.pkFilterLabel}>{lang === "es" ? "Empresa:" : "Company:"}</span>
+          <div className="flex flex-wrap gap-1.5">
+            <button className={`${pk.pkFilterPill}${company === "all" ? ` ${pk.pkFilterPillActive}` : ""}`} onClick={() => setCompany("all")}>
               {lang === "es" ? "Todas" : "All"}
             </button>
             {companies.map((c) => (
-              <button key={c} className={`mtp-filter-pill${company === c ? " active" : ""}`} onClick={() => setCompany(c)}>
+              <button key={c} className={`${pk.pkFilterPill}${company === c ? ` ${pk.pkFilterPillActive}` : ""}`} onClick={() => setCompany(c)}>
                 {c}
               </button>
             ))}
           </div>
 
-          <div className="mtp-sep" />
+          <div className={pk.pkSep} />
 
-          <select className="mtp-sort-select" value={sort} onChange={(e) => setSort(e.target.value as SortOption)}>
+          <select className={pk.pkSortSelect} value={sort} onChange={(e) => setSort(e.target.value as SortOption)}>
             <option value="default">{lang === "es" ? "Orden por defecto" : "Default order"}</option>
             <option value="company">{lang === "es" ? "Por empresa" : "By company"}</option>
             <option value="alpha">A → Z</option>
           </select>
 
-          <span className="mtp-results-count">{filtered.length} features</span>
+          <span className={pk.pkResultsCount}>{filtered.length} features</span>
 
-          <div className="mtp-view-toggle">
-            <button className={`mtp-view-btn${view === "grid" ? " active" : ""}`} onClick={() => setView("grid")} title="Grid view">
+          <div className={pk.pkViewToggle}>
+            <button className={`${pk.pkViewBtn}${view === "grid" ? ` ${pk.pkViewBtnActive}` : ""}`} onClick={() => setView("grid")} title="Grid view">
               <LayoutGrid size={16} />
             </button>
-            <button className={`mtp-view-btn${view === "list" ? " active" : ""}`} onClick={() => setView("list")} title="List view">
+            <button className={`${pk.pkViewBtn}${view === "list" ? ` ${pk.pkViewBtnActive}` : ""}`} onClick={() => setView("list")} title="List view">
               <List size={16} />
             </button>
           </div>
         </div>
       </div>
 
-      <div className="mtp-main">
+      <div className={pk.pkMain}>
         {filtered.length === 0 ? (
-          <div className="mtp-no-results">
-            <div style={{ fontFamily: "var(--mt-font-mono)", fontSize: 28, marginBottom: 12 }}>∅</div>
-            <div style={{ fontFamily: "var(--mt-font-display)", fontSize: 18, fontWeight: 600, color: "var(--mt-text-60)" }}>
+          <div className={pk.pkNoResults}>
+            <div className="mb-3 font-mt-mono text-[28px]">∅</div>
+            <div className="font-mt-display text-lg font-semibold text-mt-text-60">
               {lang === "es" ? "Ninguna feature coincide con este filtro" : "No features match this filter"}
             </div>
           </div>
         ) : view === "grid" ? (
-          <div className="mtp-grid">
+          <div className={pk.pkGrid}>
             {filtered.map((f, i) => (
               <div
                 key={f.id}
                 role="button"
                 tabIndex={0}
-                className="mtp-card"
+                className={pk.pkCard}
                 onClick={() => openModal(f.id)}
                 onKeyDown={onActivate(() => openModal(f.id))}
               >
-                <div className="mtp-card-preview">
-                  <div className="mtp-browser-mock">
+                <div className={pk.pkCardPreview}>
+                  <div className={pk.pkBrowserMock}>
                     <PhotoMock variant={i} />
                   </div>
-                  <div className="mtp-preview-gradient" />
-                  <div className="mtp-cat-badge">{f.category}</div>
-                  <div className="mtp-status-badge">{f.company}</div>
+                  <div className={pk.pkPreviewGradient} />
+                  <div className={pk.pkCatBadge}>{f.category}</div>
+                  <div className={pk.pkStatusBadge}>{f.company}</div>
                 </div>
-                <div className="mtp-card-body">
-                  <div className="mtp-card-meta">
-                    <span className="mtp-card-type">{f.role}</span>
-                    <span className="mtp-card-year">{f.period}</span>
+                <div className={pk.pkCardBody}>
+                  <div className={pk.pkCardMeta}>
+                    <span className={pk.pkCardType}>{f.role}</span>
+                    <span className={pk.pkCardYear}>{f.period}</span>
                   </div>
-                  <div className="mtp-card-title">{f.tagline}</div>
-                  <div className="mtp-card-desc">{f.description}</div>
-                  <div className="mtp-card-stack">
-                    {f.tags.map((s) => <span key={s} className="mtp-stag">{s}</span>)}
+                  <div className={pk.pkCardTitle}>{f.tagline}</div>
+                  <div className={pk.pkCardDesc}>{f.description}</div>
+                  <div className={pk.pkCardStack}>
+                    {f.tags.map((s) => <span key={s} className={pk.pkStag}>{s}</span>)}
                   </div>
-                  <div className="mtp-card-footer">
-                    <span className="mtp-card-cta">{t.features.cta}</span>
+                  <div className={pk.pkCardFooter}>
+                    <span className={pk.pkCardCta}>{t.features.cta}</span>
                   </div>
                 </div>
               </div>
             ))}
           </div>
         ) : (
-          <div className="mtp-list">
+          <div className={pk.pkList}>
             {filtered.map((f) => (
               <div
                 key={f.id}
                 role="button"
                 tabIndex={0}
-                className="mtp-lcard"
+                className={pk.pkLcard}
                 onClick={() => openModal(f.id)}
                 onKeyDown={onActivate(() => openModal(f.id))}
               >
-                <div className="mtp-lcard-icon">{f.company.slice(0, 2).toUpperCase()}</div>
+                <div className={pk.pkLcardIcon}>{f.company.slice(0, 2).toUpperCase()}</div>
                 <div>
-                  <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 4 }}>
-                    <div className="mtp-lcard-title">{f.tagline}</div>
-                    <span className="mtp-lcard-cat">{f.category}</span>
+                  <div className="mb-1 flex items-center gap-2.5">
+                    <div className={pk.pkLcardTitle}>{f.tagline}</div>
+                    <span className={pk.pkLcardCat}>{f.category}</span>
                   </div>
-                  <div className="mtp-lcard-desc">{f.description}</div>
-                  <div className="mtp-lcard-stack">
-                    {f.tags.map((s) => <span key={s} className="mtp-lcard-stag">{s}</span>)}
+                  <div className={pk.pkLcardDesc}>{f.description}</div>
+                  <div className={pk.pkLcardStack}>
+                    {f.tags.map((s) => <span key={s} className={pk.pkLcardStag}>{s}</span>)}
                   </div>
                 </div>
-                <div className="mtp-lcard-right">
-                  <div style={{ textAlign: "right" }}>
-                    <div className="mtp-lcard-metric-val">{f.company}</div>
-                    <div className="mtp-lcard-metric-lbl">{f.period}</div>
+                <div className={pk.pkLcardRight}>
+                  <div className="text-right">
+                    <div className={pk.pkLcardMetricVal}>{f.company}</div>
+                    <div className={pk.pkLcardMetricLbl}>{f.period}</div>
                   </div>
-                  <ChevronRight size={18} color="var(--mt-text-30)" />
+                  <ChevronRight size={18} className="text-mt-text-30" />
                 </div>
               </div>
             ))}
@@ -242,7 +244,7 @@ const FeaturesClient = () => {
       <AnimatePresence>
         {active && modalIndex !== null && (
           <motion.div
-            className="mtp-modal-overlay"
+            className={pk.pkModalOverlay}
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
@@ -250,53 +252,53 @@ const FeaturesClient = () => {
             onClick={(e) => { if (e.target === e.currentTarget) setModalIndex(null); }}
           >
             <motion.div
-              className="mtp-modal"
+              className={pk.pkModal}
               initial={{ opacity: 0, y: 20, scale: 0.97 }}
               animate={{ opacity: 1, y: 0, scale: 1 }}
               exit={{ opacity: 0, y: 20, scale: 0.97 }}
               transition={{ duration: 0.25, ease: "easeOut" }}
             >
-              <div className="mtp-modal-header">
+              <div className={pk.pkModalHeader}>
                 <div>
-                  <div className="mtp-modal-category">{active.category} · {active.company}</div>
-                  <div className="mtp-modal-title">{active.tagline}</div>
+                  <div className={pk.pkModalCategory}>{active.category} · {active.company}</div>
+                  <div className={pk.pkModalTitle}>{active.tagline}</div>
                 </div>
-                <button className="mtp-modal-close" onClick={() => setModalIndex(null)} aria-label="Close">
+                <button className={pk.pkModalClose} onClick={() => setModalIndex(null)} aria-label="Close">
                   <X size={16} />
                 </button>
               </div>
 
-              <div className="mtp-modal-body">
-                <div className="mtp-gallery-item wide" style={{ marginBottom: 24 }}>
+              <div className={pk.pkModalBody}>
+                <div className={`${pk.pkGalleryItem} ${pk.pkGalleryItemWide} mb-6`}>
                   <PhotoMock variant={modalIndex} tall />
                 </div>
 
-                <p className="mtp-modal-desc-full" style={{ gridColumn: "unset", marginBottom: 20 }}>{active.description}</p>
+                <p className={`${pk.pkModalDescFull} mb-5`}>{active.description}</p>
 
-                <div className="mtp-modal-kp-title">{lang === "es" ? "Qué construí" : "What I built"}</div>
-                <ul className="mtp-modal-kp-list">
+                <div className={pk.pkModalKpTitle}>{lang === "es" ? "Qué construí" : "What I built"}</div>
+                <ul className={pk.pkModalKpList}>
                   {active.highlights.map((h, i) => (
-                    <li key={i} className="mtp-modal-kp-item" dangerouslySetInnerHTML={{ __html: h }} />
+                    <li key={i} className={pk.pkModalKpItem} dangerouslySetInnerHTML={{ __html: h }} />
                   ))}
                 </ul>
 
-                <div className="mtp-stack-section">
-                  <div className="mtp-stack-section-title">Stack</div>
-                  <div className="mtp-stack-pills">
-                    {active.tags.map((s) => <span key={s} className="mtp-stack-pill core">{s}</span>)}
+                <div className={pk.pkStackSection}>
+                  <div className={pk.pkStackSectionTitle}>Stack</div>
+                  <div className={pk.pkStackPills}>
+                    {active.tags.map((s) => <span key={s} className={`${pk.pkStackPill} ${pk.pkStackPillCore}`}>{s}</span>)}
                   </div>
                 </div>
               </div>
 
-              <div className="mtp-modal-footer">
-                <div className="mtp-modal-footer-links">
-                  <span className="btn-ghost" style={{ cursor: "default" }}>{active.role} · {active.period}</span>
+              <div className={pk.pkModalFooter}>
+                <div className={pk.pkModalFooterLinks}>
+                  <span className={`${btnGhost} cursor-default`}>{active.role} · {active.period}</span>
                 </div>
-                <div className="mtp-modal-nav-btns">
-                  <button className="mtp-modal-nav-btn" disabled={modalIndex === 0} onClick={() => setModalIndex((i) => (i !== null ? i - 1 : i))}>
+                <div className={pk.pkModalNavBtns}>
+                  <button className={pk.pkModalNavBtn} disabled={modalIndex === 0} onClick={() => setModalIndex((i) => (i !== null ? i - 1 : i))}>
                     <ChevronLeft size={16} />
                   </button>
-                  <button className="mtp-modal-nav-btn" disabled={modalIndex === filtered.length - 1} onClick={() => setModalIndex((i) => (i !== null ? i + 1 : i))}>
+                  <button className={pk.pkModalNavBtn} disabled={modalIndex === filtered.length - 1} onClick={() => setModalIndex((i) => (i !== null ? i + 1 : i))}>
                     <ChevronRight size={16} />
                   </button>
                 </div>
