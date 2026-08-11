@@ -93,6 +93,7 @@
   --animate-mt-pulse: mt-pulse 2s infinite;
   --animate-mt-marquee: mt-marquee 22s linear infinite;
   --animate-mt-shot-scroll: mt-shot-scroll var(--mt-shot-dur, 16s) ease-in-out infinite;
+  --animate-mt-shimmer: mt-shimmer 1.4s infinite;
 }
 
 html[data-theme] { scroll-behavior: smooth; }
@@ -125,3 +126,4 @@ body::before {
   46%, 54% { transform:translateY(calc(-1 * var(--mt-shot-dist, 0px))); }
   92%, 100% { transform:translateY(0); }
 }
+@keyframes mt-shimmer { 0%{background-position:200% 0} 100%{background-position:-200% 0} }

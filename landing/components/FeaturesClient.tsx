@@ -1,312 +1,141 @@
 "use client";
 
-import { useEffect, useMemo, useState, type KeyboardEvent as ReactKeyboardEvent } from "react";
-import { LayoutGrid, List, X, ChevronLeft, ChevronRight } from "lucide-react";
-import { AnimatePresence, motion } from "framer-motion";
+import { useState } from "react";
+import Link from "next/link";
+import Image from "next/image";
+import { motion } from "framer-motion";
+import { Camera } from "lucide-react";
 import { useLanguage } from "@/lib/i18n";
-import { dataFeatures, type FeatureItem } from "@/data";
-import { btnGhost } from "./uiClasses";
-import * as pk from "./pageKit";
+import { dataFeatureBlocks, featureImages, type FeatureBlock } from "@/data";
+import { btnPrimary } from "./uiClasses";
 
-type SortOption = "default" | "alpha" | "company";
-type View = "grid" | "list";
+const FeatureVisual = ({ f }: { f: FeatureBlock }) => {
+  const { lang } = useLanguage();
+  const [imageFailed, setImageFailed] = useState(false);
+  const src = featureImages[f.id];
 
-const browserDots = ["#ff5f57", "#febc2e", "#28c840"];
-
-const onActivate = (fn: () => void) => (e: ReactKeyboardEvent) => {
-  if (e.key === "Enter" || e.key === " ") {
-    e.preventDefault();
-    fn();
+  if (src && !imageFailed) {
+    return (
+      <>
+        <span className="absolute top-3.5 left-3.5 z-10 rounded-full border border-mt-border-bright bg-mt-bg/80 px-3 py-1 font-mt-mono text-[9px] tracking-widest text-mt-text-60 uppercase backdrop-blur-sm">
+          {lang === "es" ? "En producción" : "In production"}
+        </span>
+        <Image
+          src={src}
+          alt={f.title}
+          fill
+          sizes="(max-width: 900px) 100vw, 550px"
+          className="object-cover"
+          onError={() => setImageFailed(true)}
+        />
+      </>
+    );
   }
-};
 
-const PhotoMock = ({ variant, tall = false }: { variant: number; tall?: boolean }) => (
-  <div className={pk.pkGscreen}>
-    <div className={pk.pkGscreenBar}>
-      {browserDots.map((c) => <div key={c} className={pk.pkGscreenDot} style={{ background: c }} />)}
+  return (
+    <div className="flex h-full w-full items-center justify-center p-10">
+      <Image src="/logo-mt.png" alt="Mauricio Tognoli" width={96} height={96} className="opacity-90" />
     </div>
-    <div className={pk.pkGscreenBody}>
-      <div className={`${pk.pkGscreenRow} w-[45%] bg-[rgba(242,100,25,.3)]`} />
-      <div className={`${pk.pkGscreenRow} w-[60%]`} />
-      {variant % 2 === 0 ? (
-        <>
-          <div className={pk.pkGscreenBlocks}>
-            <div className={`${pk.pkGscreenBlock} ${pk.pkGscreenBlockAccent}`} /><div className={pk.pkGscreenBlock} /><div className={pk.pkGscreenBlock} />
-          </div>
-          {tall && (
-            <div className={pk.pkGscreenChart}>
-              {[35, 55, 45, 70, 60, 80, 65, 90, 75, 85, 70, 95].map((h, i) => (
-                <div key={i} className={pk.pkGscreenChartBar} style={{ left: `${i * 8.33}%`, height: `${h}%` }} />
-              ))}
-            </div>
-          )}
-        </>
-      ) : (
-        <div className="mt-1 grid grid-cols-2 gap-1.25">
-          <div className={`${pk.pkGscreenBlock} ${pk.pkGscreenBlockAccent}`} style={{ height: tall ? 60 : 28 }} />
-          <div className={pk.pkGscreenBlock} style={{ height: tall ? 60 : 28 }} />
-        </div>
-      )}
-    </div>
-  </div>
-);
+  );
+};
 
 const FeaturesClient = () => {
   const { lang, t } = useLanguage();
-  const items = dataFeatures[lang];
-  const companies = useMemo(() => Array.from(new Set(items.map((f) => f.company))), [items]);
-
-  const [company, setCompany] = useState<string>("all");
-  const [sort, setSort] = useState<SortOption>("default");
-  const [view, setView] = useState<View>("grid");
-  const [modalIndex, setModalIndex] = useState<number | null>(null);
-
-  const filtered = useMemo(() => {
-    let list = items.filter((f) => company === "all" || f.company === company);
-    list = [...list];
-    if (sort === "alpha") list.sort((a, b) => a.tagline.localeCompare(b.tagline));
-    else if (sort === "company") list.sort((a, b) => a.company.localeCompare(b.company) || a.id - b.id);
-    else list.sort((a, b) => a.id - b.id);
-    return list;
-  }, [items, company, sort]);
-
-  useEffect(() => {
-    setModalIndex(null);
-  }, [company, sort, view, lang]);
-
-  useEffect(() => {
-    if (modalIndex === null) return;
-    document.body.style.overflow = "hidden";
-    const onKey = (e: KeyboardEvent) => {
-      if (e.key === "Escape") setModalIndex(null);
-      if (e.key === "ArrowLeft") setModalIndex((i) => (i !== null ? Math.max(0, i - 1) : i));
-      if (e.key === "ArrowRight") setModalIndex((i) => (i !== null ? Math.min(filtered.length - 1, i + 1) : i));
-    };
-    window.addEventListener("keydown", onKey);
-    return () => {
-      document.body.style.overflow = "";
-      window.removeEventListener("keydown", onKey);
-    };
-  }, [modalIndex, filtered.length]);
-
-  const openModal = (id: number) => {
-    const idx = filtered.findIndex((f) => f.id === id);
-    if (idx === -1) return;
-    setModalIndex(idx);
-  };
-
-  const active: FeatureItem | null = modalIndex !== null && modalIndex < filtered.length ? filtered[modalIndex] : null;
+  const blocks = dataFeatureBlocks[lang];
 
   return (
     <>
-      <div className={pk.pkHeader}>
-        <div className={pk.pkHeaderGridBg} />
-        <div className={pk.pkHeaderGlow} />
-        <div className={pk.pkHeaderInner}>
-          <div className={pk.pkBreadcrumb}>
-            <a className={pk.pkBreadcrumbLink} href="/">Home</a>
+      <div className="relative overflow-hidden px-12 pt-32.5 pb-17.5 max-[900px]:px-6 max-[560px]:px-5 max-[560px]:pt-25 max-[560px]:pb-11">
+        <div className="absolute inset-0 [background-image:linear-gradient(var(--mt-grid-line)_1px,transparent_1px),linear-gradient(90deg,var(--mt-grid-line)_1px,transparent_1px)] [background-size:56px_56px] [mask-image:radial-gradient(ellipse_100%_100%_at_50%_0%,black_20%,transparent_100%)]" />
+        <div className="pointer-events-none absolute -top-30 left-1/2 h-112.5 w-175 -translate-x-1/2 bg-[radial-gradient(circle,rgba(242,100,25,0.12)_0%,transparent_70%)]" />
+        <div className="relative mx-auto max-w-[1100px]">
+          <div className="mb-5.5 flex items-center gap-2 font-mt-mono text-[11px] text-mt-text-30">
+            <Link href="/" className="text-mt-text-30 no-underline transition-colors duration-200 hover:text-mt-orange">home</Link>
             <span>/</span>
-            <span className="text-mt-text-60">{t.nav.features}</span>
+            <span className="text-mt-text-60">features</span>
           </div>
-          <h1 className={pk.pkTitle}>
-            {lang === "es" ? <>Features que <span className="text-mt-orange">construí,</span></> : <>Features I <span className="text-mt-orange">built,</span></>}
+          <h1 className="mb-5 font-mt-display text-[clamp(38px,5.5vw,72px)] leading-[1.02] font-bold tracking-[-0.04em]">
+            {t.features.pageTitle1}
             <br />
-            <span className="font-mt-serif font-normal italic">{lang === "es" ? "en producción." : "in production."}</span>
+            <span className="font-mt-serif font-normal text-mt-orange italic">{t.features.pageTitle2}</span>
           </h1>
-          <p className={pk.pkSubtitle}>{t.features.desc}</p>
-          <div className={pk.pkStats}>
-            <div>
-              <div className={pk.pkStatN}>{items.length}</div>
-              <div className={pk.pkStatL}>Features</div>
-            </div>
-            <div>
-              <div className={pk.pkStatN}>{companies.length}</div>
-              <div className={pk.pkStatL}>{lang === "es" ? "Empresas" : "Companies"}</div>
-            </div>
+          <p className="max-w-[540px] text-[15px] leading-[1.7] text-mt-text-60">{t.features.pageSubtitle}</p>
+          <div className="mt-6.5 inline-flex items-center gap-2 rounded-full border border-[rgba(242,100,25,.25)] bg-mt-orange-dim px-4 py-2 text-[12.5px] text-mt-orange">
+            <Camera size={14} className="shrink-0" />
+            {t.features.hint}
           </div>
         </div>
       </div>
 
-      <div className={pk.pkToolbar}>
-        <div className={pk.pkToolbarInner}>
-          <span className={pk.pkFilterLabel}>{lang === "es" ? "Empresa:" : "Company:"}</span>
-          <div className="flex flex-wrap gap-1.5">
-            <button className={`${pk.pkFilterPill}${company === "all" ? ` ${pk.pkFilterPillActive}` : ""}`} onClick={() => setCompany("all")}>
-              {lang === "es" ? "Todas" : "All"}
-            </button>
-            {companies.map((c) => (
-              <button key={c} className={`${pk.pkFilterPill}${company === c ? ` ${pk.pkFilterPillActive}` : ""}`} onClick={() => setCompany(c)}>
-                {c}
-              </button>
-            ))}
-          </div>
-
-          <div className={pk.pkSep} />
-
-          <select className={pk.pkSortSelect} value={sort} onChange={(e) => setSort(e.target.value as SortOption)}>
-            <option value="default">{lang === "es" ? "Orden por defecto" : "Default order"}</option>
-            <option value="company">{lang === "es" ? "Por empresa" : "By company"}</option>
-            <option value="alpha">A → Z</option>
-          </select>
-
-          <span className={pk.pkResultsCount}>{filtered.length} features</span>
-
-          <div className={pk.pkViewToggle}>
-            <button className={`${pk.pkViewBtn}${view === "grid" ? ` ${pk.pkViewBtnActive}` : ""}`} onClick={() => setView("grid")} title="Grid view">
-              <LayoutGrid size={16} />
-            </button>
-            <button className={`${pk.pkViewBtn}${view === "list" ? ` ${pk.pkViewBtnActive}` : ""}`} onClick={() => setView("list")} title="List view">
-              <List size={16} />
-            </button>
-          </div>
-        </div>
-      </div>
-
-      <div className={pk.pkMain}>
-        {filtered.length === 0 ? (
-          <div className={pk.pkNoResults}>
-            <div className="mb-3 font-mt-mono text-[28px]">∅</div>
-            <div className="font-mt-display text-lg font-semibold text-mt-text-60">
-              {lang === "es" ? "Ninguna feature coincide con este filtro" : "No features match this filter"}
-            </div>
-          </div>
-        ) : view === "grid" ? (
-          <div className={pk.pkGrid}>
-            {filtered.map((f, i) => (
-              <div
-                key={f.id}
-                role="button"
-                tabIndex={0}
-                className={pk.pkCard}
-                onClick={() => openModal(f.id)}
-                onKeyDown={onActivate(() => openModal(f.id))}
-              >
-                <div className={pk.pkCardPreview}>
-                  <div className={pk.pkBrowserMock}>
-                    <PhotoMock variant={i} />
-                  </div>
-                  <div className={pk.pkPreviewGradient} />
-                  <div className={pk.pkCatBadge}>{f.category}</div>
-                  <div className={pk.pkStatusBadge}>{f.company}</div>
-                </div>
-                <div className={pk.pkCardBody}>
-                  <div className={pk.pkCardMeta}>
-                    <span className={pk.pkCardType}>{f.role}</span>
-                    <span className={pk.pkCardYear}>{f.period}</span>
-                  </div>
-                  <div className={pk.pkCardTitle}>{f.tagline}</div>
-                  <div className={pk.pkCardDesc}>{f.description}</div>
-                  <div className={pk.pkCardStack}>
-                    {f.tags.map((s) => <span key={s} className={pk.pkStag}>{s}</span>)}
-                  </div>
-                  <div className={pk.pkCardFooter}>
-                    <span className={pk.pkCardCta}>{t.features.cta}</span>
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
-        ) : (
-          <div className={pk.pkList}>
-            {filtered.map((f) => (
-              <div
-                key={f.id}
-                role="button"
-                tabIndex={0}
-                className={pk.pkLcard}
-                onClick={() => openModal(f.id)}
-                onKeyDown={onActivate(() => openModal(f.id))}
-              >
-                <div className={pk.pkLcardIcon}>{f.company.slice(0, 2).toUpperCase()}</div>
-                <div>
-                  <div className="mb-1 flex items-center gap-2.5">
-                    <div className={pk.pkLcardTitle}>{f.tagline}</div>
-                    <span className={pk.pkLcardCat}>{f.category}</span>
-                  </div>
-                  <div className={pk.pkLcardDesc}>{f.description}</div>
-                  <div className={pk.pkLcardStack}>
-                    {f.tags.map((s) => <span key={s} className={pk.pkLcardStag}>{s}</span>)}
-                  </div>
-                </div>
-                <div className={pk.pkLcardRight}>
-                  <div className="text-right">
-                    <div className={pk.pkLcardMetricVal}>{f.company}</div>
-                    <div className={pk.pkLcardMetricLbl}>{f.period}</div>
-                  </div>
-                  <ChevronRight size={18} className="text-mt-text-30" />
-                </div>
-              </div>
-            ))}
-          </div>
-        )}
-      </div>
-
-      <AnimatePresence>
-        {active && modalIndex !== null && (
-          <motion.div
-            className={pk.pkModalOverlay}
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.2 }}
-            onClick={(e) => { if (e.target === e.currentTarget) setModalIndex(null); }}
-          >
+      <div className="mx-auto max-w-[1100px] px-12 pt-5 pb-27.5 max-[900px]:px-6 max-[560px]:px-5">
+        {blocks.map((f, i) => {
+          return (
             <motion.div
-              className={pk.pkModal}
-              initial={{ opacity: 0, y: 20, scale: 0.97 }}
-              animate={{ opacity: 1, y: 0, scale: 1 }}
-              exit={{ opacity: 0, y: 20, scale: 0.97 }}
-              transition={{ duration: 0.25, ease: "easeOut" }}
+              key={f.id}
+              initial={{ opacity: 0, y: 22 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.15 }}
+              transition={{ duration: 0.5, delay: i * 0.03, ease: "easeOut" }}
+              className="mb-6 grid grid-cols-2 overflow-hidden rounded-[22px] border border-mt-border bg-mt-card-bg transition-colors duration-300 hover:border-mt-border-bright max-[900px]:grid-cols-1"
             >
-              <div className={pk.pkModalHeader}>
-                <div>
-                  <div className={pk.pkModalCategory}>{active.category} · {active.company}</div>
-                  <div className={pk.pkModalTitle}>{active.tagline}</div>
+              <div className={`flex flex-col justify-center p-9.5 max-[900px]:order-1 max-[900px]:p-7 ${f.flip ? "order-2" : "order-1"}`}>
+                <div className="mb-3 flex items-center gap-2 font-mt-mono text-[10px] tracking-[0.08em] text-mt-orange uppercase before:h-px before:w-4.5 before:bg-mt-orange before:content-['']">
+                  {f.eyebrow}
                 </div>
-                <button className={pk.pkModalClose} onClick={() => setModalIndex(null)} aria-label="Close">
-                  <X size={16} />
-                </button>
-              </div>
+                <h2 className="mb-4 font-mt-display text-2xl leading-[1.15] font-bold tracking-[-0.025em]">{f.title}</h2>
 
-              <div className={pk.pkModalBody}>
-                <div className={`${pk.pkGalleryItem} ${pk.pkGalleryItemWide} mb-6`}>
-                  <PhotoMock variant={modalIndex} tall />
-                </div>
-
-                <p className={`${pk.pkModalDescFull} mb-5`}>{active.description}</p>
-
-                <div className={pk.pkModalKpTitle}>{lang === "es" ? "Qué construí" : "What I built"}</div>
-                <ul className={pk.pkModalKpList}>
-                  {active.highlights.map((h, i) => (
-                    <li key={i} className={pk.pkModalKpItem} dangerouslySetInnerHTML={{ __html: h }} />
-                  ))}
-                </ul>
-
-                <div className={pk.pkStackSection}>
-                  <div className={pk.pkStackSectionTitle}>Stack</div>
-                  <div className={pk.pkStackPills}>
-                    {active.tags.map((s) => <span key={s} className={`${pk.pkStackPill} ${pk.pkStackPillCore}`}>{s}</span>)}
+                <div className="mb-4.5 flex flex-col gap-3">
+                  <div className="rounded-xl border border-mt-border bg-mt-surface px-4 py-3.5">
+                    <div className="mb-1.5 flex items-center gap-1.5 font-mt-mono text-[9.5px] tracking-[0.08em] text-[#f87171] uppercase">
+                      × {t.features.problemLabel}
+                    </div>
+                    <div className="text-[13px] leading-[1.65] text-mt-text-60">{f.problem}</div>
+                  </div>
+                  <div className="rounded-xl border border-mt-border bg-mt-surface px-4 py-3.5">
+                    <div className="mb-1.5 flex items-center gap-1.5 font-mt-mono text-[9.5px] tracking-[0.08em] text-[#4ade80] uppercase">
+                      ✓ {t.features.solutionLabel}
+                    </div>
+                    <div className="text-[13px] leading-[1.65] text-mt-text-60">{f.solution}</div>
                   </div>
                 </div>
+
+                <div className="mb-4.5 flex flex-wrap gap-3.5">
+                  {f.impact.map((im) => (
+                    <div key={im.lbl} className="flex flex-col gap-px">
+                      <span className="font-mt-display text-[19px] font-bold tracking-[-0.02em] text-mt-orange tabular-nums">{im.val}</span>
+                      <span className="font-mt-mono text-[9px] tracking-[0.06em] text-mt-text-30 uppercase">{im.lbl}</span>
+                    </div>
+                  ))}
+                </div>
+
+                <div className="flex flex-wrap gap-1.25">
+                  {f.stack.map((s) => (
+                    <span key={s} className="rounded-[5px] border border-mt-border bg-mt-tag-bg px-2.5 py-[3px] font-mt-mono text-[10.5px] text-mt-text-60">
+                      {s}
+                    </span>
+                  ))}
+                </div>
               </div>
 
-              <div className={pk.pkModalFooter}>
-                <div className={pk.pkModalFooterLinks}>
-                  <span className={`${btnGhost} cursor-default`}>{active.role} · {active.period}</span>
-                </div>
-                <div className={pk.pkModalNavBtns}>
-                  <button className={pk.pkModalNavBtn} disabled={modalIndex === 0} onClick={() => setModalIndex((i) => (i !== null ? i - 1 : i))}>
-                    <ChevronLeft size={16} />
-                  </button>
-                  <button className={pk.pkModalNavBtn} disabled={modalIndex === filtered.length - 1} onClick={() => setModalIndex((i) => (i !== null ? i + 1 : i))}>
-                    <ChevronRight size={16} />
-                  </button>
-                </div>
+              <div
+                className={`relative min-h-85 overflow-hidden bg-mt-surface transition-colors duration-300 max-[900px]:order-2 max-[900px]:min-h-75 max-[900px]:border-t max-[900px]:border-r-0 max-[900px]:border-b-0 max-[900px]:border-l-0 ${
+                  f.flip ? "order-1 border-l" : "order-2 border-r"
+                } border-mt-border`}
+              >
+                <FeatureVisual f={f} />
               </div>
             </motion.div>
-          </motion.div>
-        )}
-      </AnimatePresence>
+          );
+        })}
+
+        <div className="mt-11 flex flex-wrap items-center justify-between gap-6 rounded-[20px] border border-mt-border bg-mt-surface px-9.5 py-8.5 transition-colors duration-300">
+          <div>
+            <h3 className="mb-1.5 font-mt-display text-xl font-bold tracking-[-0.025em]">{t.features.summaryTitle}</h3>
+            <p className="max-w-110 text-[13px] leading-[1.65] text-mt-text-60">{t.features.summaryDesc}</p>
+          </div>
+          <Link href="/#contact" className={`${btnPrimary} shrink-0`}>{t.features.summaryCta}</Link>
+        </div>
+      </div>
     </>
   );
 };

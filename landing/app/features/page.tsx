@@ -2,9 +2,9 @@ import type { Metadata } from "next";
 import FeaturesClient from "@/components/FeaturesClient";
 
 export const metadata: Metadata = {
-  title: "Features | Mauricio Tognoli",
+  title: "Features & Demos | Mauricio Tognoli",
   description:
-    "Funcionalidades concretas que Mauricio Tognoli diseñó y construyó en sus roles actuales en Powip y Devlusoft.",
+    "Los patrones de frontend que Mauricio Tognoli resuelve en producción — design systems, theming, tablas, formularios, performance e i18n — con demos en vivo.",
 };
 
 export default function FeaturesPage() {

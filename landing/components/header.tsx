@@ -61,9 +61,11 @@ const Header = () => {
               {t.nav.experience}
             </a>
           </li>
-          {/* <li>
-            <Link className={navLink} href="/features">{t.nav.features}</Link>
-          </li> */}
+          <li>
+            <Link className={navLink} href="/features">
+              {t.nav.features}
+            </Link>
+          </li>
           <li>
             <a className={navLink} href="#projects">
               {t.nav.projects}

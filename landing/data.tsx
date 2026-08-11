@@ -377,12 +377,32 @@ export const dataProjects: Record<"es" | "en", ProjectItem[]> = {
       ],
       screenshots: {
         desktop: [
-          { label: "Inicio", src: "/freiguel/freiguel-home.png", width: 1920, height: 4503 },
-          { label: "Productos", src: "/freiguel/freiguel-products.png", width: 1920, height: 5451 },
-          { label: "Contacto", src: "/freiguel/freiguel-contact.png", width: 1920, height: 1843 },
+          {
+            label: "Inicio",
+            src: "/freiguel/freiguel-home.png",
+            width: 1920,
+            height: 4503,
+          },
+          {
+            label: "Productos",
+            src: "/freiguel/freiguel-products.png",
+            width: 1920,
+            height: 5451,
+          },
+          {
+            label: "Contacto",
+            src: "/freiguel/freiguel-contact.png",
+            width: 1920,
+            height: 1843,
+          },
         ],
         mobile: [
-          { label: "Sobre nosotros (mobile)", src: "/freiguel/freiguel-about-mobile.png", width: 378, height: 4992 },
+          {
+            label: "Sobre nosotros (mobile)",
+            src: "/freiguel/freiguel-about-mobile.png",
+            width: 378,
+            height: 4992,
+          },
         ],
       },
       liveUrl: "https://www.freiguel.pt/pt",
@@ -427,8 +447,18 @@ export const dataProjects: Record<"es" | "en", ProjectItem[]> = {
       ],
       screenshots: {
         desktop: [
-          { label: "Dashboard", src: "/produp/produp-dashboard.png", width: 1920, height: 1344 },
-          { label: "Inventario", src: "/produp/produp-inventario.png", width: 1920, height: 2094 },
+          {
+            label: "Dashboard",
+            src: "/produp/produp-dashboard.png",
+            width: 1920,
+            height: 1344,
+          },
+          {
+            label: "Inventario",
+            src: "/produp/produp-inventario.png",
+            width: 1920,
+            height: 2094,
+          },
         ],
       },
       liveUrl: null,
@@ -480,7 +510,12 @@ export const dataProjects: Record<"es" | "en", ProjectItem[]> = {
       ],
       screenshots: {
         desktop: [
-          { label: "Inicio", src: "/powip/powip-home.png", width: 1920, height: 7275 },
+          {
+            label: "Inicio",
+            src: "/powip/powip-home.png",
+            width: 1920,
+            height: 7275,
+          },
         ],
       },
       liveUrl: "https://www.powip.lat/",
@@ -649,11 +684,26 @@ export const dataProjects: Record<"es" | "en", ProjectItem[]> = {
         tooling: ["Devix", "Nuxe"],
       },
       stackPills: ["React", "Vue", "Tailwind CSS", "Devix", "Nuxe"],
-      screens: ["Main dashboard", "Product view", "Vue-migrated interface", "Mobile view"],
+      screens: [
+        "Main dashboard",
+        "Product view",
+        "Vue-migrated interface",
+        "Mobile view",
+      ],
       screenshots: {
         desktop: [
-          { label: "Dashboard", src: "/produp/produp-dashboard.png", width: 1920, height: 1344 },
-          { label: "Inventory", src: "/produp/produp-inventario.png", width: 1920, height: 2094 },
+          {
+            label: "Dashboard",
+            src: "/produp/produp-dashboard.png",
+            width: 1920,
+            height: 1344,
+          },
+          {
+            label: "Inventory",
+            src: "/produp/produp-inventario.png",
+            width: 1920,
+            height: 2094,
+          },
         ],
       },
       liveUrl: null,
@@ -705,7 +755,12 @@ export const dataProjects: Record<"es" | "en", ProjectItem[]> = {
       ],
       screenshots: {
         desktop: [
-          { label: "Home", src: "/powip/powip-home.png", width: 1920, height: 7275 },
+          {
+            label: "Home",
+            src: "/powip/powip-home.png",
+            width: 1920,
+            height: 7275,
+          },
         ],
       },
       liveUrl: "https://www.powip.lat/",
@@ -958,278 +1013,263 @@ export const dataFAQ: Record<"es" | "en", FaqItem[]> = {
 // ─── RECRUITER SNAPSHOT ───
 export const recruiterCoreStack = "React · Next.js · TypeScript · Tailwind CSS";
 
-// ─── FEATURES SHIPPED (placeholder — reemplazar con datos reales) ───
-export interface FeatureItem {
-  id: number;
-  company: string;
-  role: string;
-  period: string;
-  category: string;
-  tagline: string;
-  description: string;
-  highlights: string[];
-  tags: string[];
+// ─── FEATURES & LIVE DEMOS ───
+export interface FeatureImpact {
+  val: string;
+  lbl: string;
 }
 
-export const dataFeatures: Record<"es" | "en", FeatureItem[]> = {
+export interface FeatureBlock {
+  id: number;
+  flip: boolean;
+  eyebrow: string;
+  title: string;
+  problem: string;
+  solution: string;
+  impact: FeatureImpact[];
+  stack: string[];
+}
+
+/** Real product screenshot per feature block id — served from /public/features/. Blocks without an entry fall back to the logo. */
+export const featureImages: Partial<Record<number, string>> = {
+  1: "/features/niveles-de-precios.png",
+  2: "/features/catalogos-produp.png",
+  3: "/features/facturacion-sunat.png",
+  5: "/features/ventas-powip.png",
+};
+
+export const dataFeatureBlocks: Record<"es" | "en", FeatureBlock[]> = {
   es: [
     {
       id: 1,
-      company: "Powip",
-      role: "Frontend Developer",
-      period: "2025",
-      category: "Dashboard",
-      tagline: "KPIs de ventas y stock actualizados en vivo",
-      description:
-        "Diseñé y construí el dashboard principal del ERP: un panel con los KPIs de ventas y stock del negocio actualizados en vivo, con gráficos por período y filtros que el equipo de operaciones usa a diario para tomar decisiones.",
-      highlights: [
-        "Gráficos y tarjetas de KPI con <strong>actualización en tiempo real</strong> vía WebSockets",
-        "Filtros por rango de fechas y por depósito, con estado persistido en la URL",
-        "Optimizado para cargar rápido incluso con <strong>grandes volúmenes de datos</strong>",
+      flip: true,
+      eyebrow: "Migración & Rediseño de Producto",
+      title: "Niveles de Precio",
+      problem:
+        "El panel de niveles de precio seguía en el stack legacy (React), con una tabla plana, sin accesibilidad real y sin soportar el modelo de precios que el negocio necesitaba (modificador %, cantidad mínima, activación) antes de que el backend terminara de reescribirse.",
+      solution:
+        "Migré la feature completa a Vue/Nuxt respetando el sistema de diseño ya vigente en la nueva app, la rediseñé como tarjetas de niveles al estilo pricing table con CRUD real contra la API, sumé estados de carga y accesibilidad completa por teclado/lector de pantalla.",
+      impact: [
+        { val: "3", lbl: "Bugs de producción resueltos en el camino" },
+        { val: "100%", lbl: "Flujo operable por teclado y lector de pantalla" },
+        {
+          val: "0",
+          lbl: "Downtime — migración sin interrumpir a usuarios activos",
+        },
+        { val: "5", lbl: "Componentes Vue nuevos y reutilizables" },
       ],
-      tags: ["React", "React Query", "Recharts", "WebSockets"],
+      stack: ["Vue 3", "Nuxt", "TypeScript", "Tailwind CSS", "Go", "REST API"],
     },
     {
       id: 2,
-      company: "Powip",
-      role: "Frontend Developer",
-      period: "2025",
-      category: "Inventario",
-      tagline: "Gestión de stock entre múltiples depósitos",
-      description:
-        "Módulo para administrar inventario entre múltiples almacenes: transferencias entre depósitos, alertas de quiebre de stock y búsqueda avanzada por SKU, categoría o proveedor.",
-      highlights: [
-        "Transferencias de stock entre depósitos con <strong>validación en tiempo real</strong>",
-        "Alertas automáticas de <strong>quiebre de stock</strong> por depósito",
-        "Búsqueda avanzada con filtros combinables (SKU, categoría, proveedor)",
+      flip: false,
+      eyebrow: "Migración de producto",
+      title:
+        "Catálogos: de un stack React heredado a un nuevo sistema de diseño en Vue",
+      problem:
+        "La sección de Catálogos del panel de administración vivía en una app React legacy, desconectada del nuevo sistema de diseño de la plataforma. Cada nueva feature del dashboard tenía que reconstruirse dos veces si quería llegar a ambos mundos, y el equipo necesitaba migrar la sección completa —listado, alta, edición y gestión de productos por catálogo— sin romper el flujo de los usuarios que ya la usaban a diario.",
+      solution:
+        "Rediseñé e implementé la feature completa sobre el nuevo stack (Vue 3 + TypeScript, framework interno 'Nuxe'), respetando al pixel los patrones ya validados del sistema de diseño: tablas, diálogos nativos, toasts y estados de carga. Construí capa por capa: tipos compartidos, rutas de servidor que actúan de proxy autenticado hacia la API en Go, composables para listar/crear/editar catálogos y gestionar sus productos, y los componentes de UI (tabla, modal de alta, selector de productos con búsqueda, confirmación de borrado). En el camino resolví dos bugs sutiles pero bloqueantes: un conflicto de cascada CSS entre Tailwind y el elemento nativo <dialog> que dejaba el modal siempre visible e imposible de cerrar, y un límite de paginación de la API que hacía fallar silenciosamente la búsqueda de productos.",
+      impact: [
+        { val: "7", lbl: "endpoints de API migrados" },
+        { val: "5", lbl: "componentes Vue nuevos" },
+        { val: "2", lbl: "bugs de producción evitados" },
       ],
-      tags: ["Next.js", "TypeScript", "React Query"],
+      stack: ["Vue 3", "TypeScript", "Tailwind CSS", "Nuxe", "Go", "Reka UI"],
     },
     {
       id: 3,
-      company: "Powip",
-      role: "Frontend Developer",
-      period: "2025",
-      category: "Checkout",
-      tagline: "Flujo de checkout con facturación integrada",
-      description:
-        "Flujo de checkout del ERP con validación en tiempo real de los datos de la orden, cálculo automático de impuestos según jurisdicción y generación del comprobante de facturación.",
-      highlights: [
-        "Validación de formularios en tiempo real con <strong>React Hook Form + Zod</strong>",
-        "Cálculo automático de <strong>impuestos por jurisdicción</strong>",
-        "Generación de comprobantes de facturación al confirmar la orden",
+      flip: false,
+      eyebrow: "Cumplimiento fiscal · SaaS B2B",
+      title: "Facturación Electrónica SUNAT",
+      problem:
+        "Los negocios que vendían por WhatsApp e Instagram no tenían forma de emitir boletas y facturas electrónicas válidas ante SUNAT desde la misma plataforma donde gestionaban sus pedidos. Tenían que exportar datos a mano y usar un sistema de facturación aparte, perdiendo tiempo y generando errores en cada cierre contable.",
+      solution:
+        "Diseñé y construí un módulo completo de Facturación Electrónica dentro del dashboard de Powip: emisión real de boletas y facturas (con edición de ítems, verificación de RUC/DNI y emisión en lote), guías de remisión electrónica, notas de crédito/débito, gestión de certificado digital y series/correlativos, más reportes exportables a Excel, CSV y PDF listos para el contador — todo integrado con la pasarela SUNAT vía microservicios.",
+      impact: [
+        { val: "7", lbl: "módulos integrados en un solo panel" },
+        {
+          val: "3",
+          lbl: "tipos de documentos electrónicos (boleta, factura, notas)",
+        },
+        {
+          val: "100%",
+          lbl: "trazabilidad del estado ante SUNAT en tiempo real",
+        },
       ],
-      tags: ["React Hook Form", "Zod", "Axios"],
+      stack: [
+        "Next.js 15",
+        "TypeScript",
+        "TanStack Query",
+        "Tailwind CSS 4",
+        "Radix UI / shadcn",
+        "Microservicios REST",
+      ],
     },
     {
       id: 4,
-      company: "Powip",
-      role: "Frontend Developer",
-      period: "2025",
-      category: "Permisos",
-      tagline: "Control de acceso granular por rol",
-      description:
-        "Sistema de roles y permisos para las distintas áreas del ERP, con vistas y acciones condicionadas según el rol del usuario logueado, evitando exponer funciones que no le corresponden.",
-      highlights: [
-        "Control de acceso <strong>granular por rol</strong> a nivel de vista y de acción",
-        "Componentes condicionados por permiso, reutilizables en todo el ERP",
-        "Pensado para escalar a nuevos roles sin tocar la lógica existente",
+      flip: false,
+      eyebrow: "Panel operativo · Logística",
+      title: "Centro de Envíos",
+      problem:
+        "El equipo de almacén no tenía un solo lugar donde ver qué despachar, qué guías fallaron o qué pedidos llevaban demasiado tiempo varados en agencia. La operación dependía de cruzar manualmente la tabla de pedidos, el panel del courier y WhatsApp, lo que generaba despachos duplicados, errores de estado y pedidos olvidados.",
+      solution:
+        "Diseñé y construí un panel operativo en tiempo real conectado en vivo a los microservicios de ventas y courier: una 'Bandeja de Atención' con accesos directos a lo urgente (por despachar, fallidos, por vencer), un escáner de código de barras/QR con tres modos de entrada (lectora física, teclado y cámara) para despachar y confirmar entregas, seguimiento en vivo por courier con exportación a Excel, y un modal de detalle con acciones logísticas (forzar sincronización, liberar de guía, cambiar courier). Todo con una vista mobile dedicada pensada para escanear desde el propio almacén.",
+      impact: [
+        { val: "6", lbl: "KPIs de acción rápida en un solo panel" },
+        { val: "2", lbl: "microservicios integrados en tiempo real" },
+        { val: "3", lbl: "modos de escaneo: lectora, teclado y cámara" },
+        { val: "100%", lbl: "adaptado a mobile para uso en almacén" },
       ],
-      tags: ["Context API", "TypeScript"],
+      stack: [
+        "Next.js 15",
+        "React 19",
+        "TypeScript",
+        "Tailwind CSS 4",
+        "TanStack Query",
+        "Radix UI / shadcn/ui",
+        "@zxing/browser",
+        "Supabase SSR",
+        "Axios",
+      ],
     },
     {
       id: 5,
-      company: "Devlusoft",
-      role: "Frontend Developer",
-      period: "2026 — Presente",
-      category: "Portal",
-      tagline: "Portal de clientes white-label",
-      description:
-        "Portal de clientes configurable por marca: cada cliente ve su propia identidad visual (logo, colores, tipografía) sobre la misma base de código, sin necesidad de mantener un fork por cliente.",
-      highlights: [
-        "Theming <strong>white-label</strong> vía design tokens, sin forks de código",
-        "Una sola base de código sirviendo a <strong>múltiples marcas</strong>",
-        "Layout responsive pensado mobile-first",
+      flip: true,
+      eyebrow: "UX/UI · Panel interno",
+      title: "Ventas: de planilla plana a centro de control",
+      problem:
+        "La página de gestión de ventas era un componente de más de 2000 líneas con una tabla de 20+ columnas que obligaba a un scroll horizontal interminable incluso para ver datos secundarios. No tenía identidad visual propia, sin KPIs de contexto, colores de botón hardcodeados y un selector de estado nativo del navegador que además quedaba tapado por las columnas fijas en pantallas de laptop.",
+      solution:
+        "Rediseño integral del módulo: header con CTA en gradiente violeta que retoma la identidad ya validada en Centro de Envíos, una fila de KPIs (pendientes, anuladas, por cobrar, adelantado) filtrable por rango de fechas, y una tabla reestructurada que esconde los campos secundarios (ubicación, tracking, ID externo) detrás de una fila expandible por pedido. El estado de cada venta pasó a ser una píldora de color con su propio dropdown, anclada de forma inteligente para que nunca quede oculta, con tamaño responsive según el ancho de pantalla.",
+      impact: [
+        { val: "22 → 13", lbl: "Columnas visibles en la tabla" },
+        { val: "4", lbl: "KPIs en vivo con filtro de fechas" },
+        { val: "0", lbl: "Regresiones funcionales en producción" },
       ],
-      tags: ["Next.js", "Tailwind CSS", "Design Tokens"],
-    },
-    {
-      id: 6,
-      company: "Devlusoft",
-      role: "Frontend Developer",
-      period: "2026 — Presente",
-      category: "Pagos",
-      tagline: "Integraciones con pasarelas de pago",
-      description:
-        "Conexión del frontend con múltiples proveedores de pago, manejando los distintos estados de una transacción (pendiente, aprobada, rechazada) y la lógica de reintento ante fallos.",
-      highlights: [
-        "Integración con <strong>múltiples pasarelas de pago</strong> detrás de una interfaz común",
-        "Manejo de estados de transacción y <strong>reintentos automáticos</strong>",
-        "Feedback claro al usuario en cada paso del pago",
+      stack: [
+        "Next.js",
+        "React",
+        "TypeScript",
+        "Tailwind CSS",
+        "Radix UI / shadcn",
+        "date-fns",
       ],
-      tags: ["TypeScript", "REST APIs"],
-    },
-    {
-      id: 7,
-      company: "Devlusoft",
-      role: "Frontend Developer",
-      period: "2026 — Presente",
-      category: "Notificaciones",
-      tagline: "Centro de notificaciones en tiempo real",
-      description:
-        "Sistema de notificaciones push dentro de la app, con un centro de notificaciones centralizado y preferencias configurables por usuario para qué tipo de eventos quiere recibir.",
-      highlights: [
-        "Notificaciones <strong>en tiempo real</strong> dentro de la app",
-        "Centro de notificaciones con historial y estado leído/no leído",
-        "<strong>Preferencias por usuario</strong> sobre qué eventos recibir",
-      ],
-      tags: ["WebSockets", "React"],
-    },
-    {
-      id: 8,
-      company: "Devlusoft",
-      role: "Frontend Developer",
-      period: "2026 — Presente",
-      category: "Admin",
-      tagline: "Panel de administración modular",
-      description:
-        "Panel interno armado con una librería de componentes reutilizables propia, pensado para que el equipo pueda agregar nuevas features al panel sin duplicar código ni romper consistencia visual.",
-      highlights: [
-        "Librería de <strong>componentes reutilizables</strong> propia del panel interno",
-        "Nuevas features se agregan <strong>sin duplicar código</strong>",
-        "Estructurado como monorepo con Turborepo para escalar entre equipos",
-      ],
-      tags: ["Next.js", "Turborepo", "shadcn/ui"],
     },
   ],
   en: [
     {
       id: 1,
-      company: "Powip",
-      role: "Frontend Developer",
-      period: "2025",
-      category: "Dashboard",
-      tagline: "Live sales and stock KPIs",
-      description:
-        "Designed and built the ERP's main dashboard: a panel with the business's sales and stock KPIs updated live, with per-period charts and filters the operations team uses daily to make decisions.",
-      highlights: [
-        "KPI cards and charts with <strong>real-time updates</strong> via WebSockets",
-        "Date-range and warehouse filters, with state persisted in the URL",
-        "Optimized to stay fast even with <strong>large data volumes</strong>",
+      flip: true,
+      eyebrow: "Product Migration & Redesign",
+      title: "Pricing Tiers",
+      problem:
+        "The pricing tiers panel was still running on the legacy stack (React), with a flat table, limited accessibility, and no support for the pricing model the business needed (percentage modifier, minimum quantity, activation) before the backend rewrite was complete.",
+      solution:
+        "I migrated the entire feature to Vue/Nuxt while following the existing design system in the new app. I redesigned it as pricing-tier cards with real CRUD operations connected to the API, added loading states, and implemented full keyboard and screen reader accessibility.",
+      impact: [
+        { val: "3", lbl: "Production bugs resolved along the way" },
+        { val: "100%", lbl: "Keyboard and screen reader operable" },
+        {
+          val: "0",
+          lbl: "Downtime — migration completed without interrupting active users",
+        },
+        { val: "5", lbl: "New reusable Vue components" },
       ],
-      tags: ["React", "React Query", "Recharts", "WebSockets"],
+      stack: ["Vue 3", "Nuxt", "TypeScript", "Tailwind CSS", "Go", "REST API"],
     },
     {
       id: 2,
-      company: "Powip",
-      role: "Frontend Developer",
-      period: "2025",
-      category: "Inventory",
-      tagline: "Stock management across multiple warehouses",
-      description:
-        "A module to manage inventory across multiple warehouses: transfers between locations, low-stock alerts, and advanced search by SKU, category, or supplier.",
-      highlights: [
-        "Stock transfers between warehouses with <strong>real-time validation</strong>",
-        "Automatic <strong>low-stock alerts</strong> per warehouse",
-        "Advanced search with combinable filters (SKU, category, supplier)",
+      flip: false,
+      eyebrow: "Product Migration",
+      title:
+        "Catalogs: moving a legacy React section into a new Vue design system",
+      problem:
+        "The admin dashboard's Catalogs section lived in a legacy React app, disconnected from the platform's newer design system. Every new dashboard feature had to be built twice to reach both worlds, and the team needed to migrate the section end-to-end — listing, creation, editing, and per-catalog product management — without breaking the flow for users already relying on it daily.",
+      solution:
+        "I redesigned and rebuilt the full feature on the new stack (Vue 3 + TypeScript, in-house 'Nuxe' framework), matching the already-validated design system patterns pixel for pixel: tables, native dialogs, toasts, and loading states. I built it layer by layer: shared types, authenticated server routes proxying to the Go API, composables for listing/creating/editing catalogs and managing their products, and the UI components themselves (table, creation modal, searchable product picker, delete confirmation). Along the way I tracked down and fixed two subtle but blocking bugs: a CSS cascade conflict between Tailwind and the native <dialog> element that left the modal permanently stuck open, and an API pagination limit that was silently breaking product search.",
+      impact: [
+        { val: "7", lbl: "API endpoints migrated" },
+        { val: "5", lbl: "new Vue components" },
+        { val: "2", lbl: "production bugs caught pre-launch" },
       ],
-      tags: ["Next.js", "TypeScript", "React Query"],
+      stack: ["Vue 3", "TypeScript", "Tailwind CSS", "Nuxe", "Go", "Reka UI"],
     },
     {
       id: 3,
-      company: "Powip",
-      role: "Frontend Developer",
-      period: "2025",
-      category: "Checkout",
-      tagline: "Checkout flow with built-in billing",
-      description:
-        "The ERP's checkout flow with real-time order validation, automatic tax calculation by jurisdiction, and invoice generation.",
-      highlights: [
-        "Real-time form validation with <strong>React Hook Form + Zod</strong>",
-        "Automatic <strong>tax calculation by jurisdiction</strong>",
-        "Invoice generation on order confirmation",
+      flip: false,
+      eyebrow: "Tax Compliance · B2B SaaS",
+      title: "SUNAT Electronic Invoicing",
+      problem:
+        "Merchants selling through WhatsApp and Instagram had no way to issue SUNAT-valid electronic receipts and invoices from the same platform where they managed their orders. They had to export data by hand into a separate invoicing system, losing time and introducing errors at every accounting close.",
+      solution:
+        "Designed and built a full Electronic Invoicing module inside the Powip dashboard: real receipt/invoice issuance (with editable line items, RUC/DNI verification, and bulk emission), electronic dispatch guides, credit/debit notes, digital certificate management, and series/correlative tracking — plus Excel, CSV, and PDF reports ready for the accountant, all wired to the SUNAT gateway through backend microservices.",
+      impact: [
+        { val: "7", lbl: "integrated modules in a single panel" },
+        {
+          val: "3",
+          lbl: "electronic document types (receipt, invoice, notes)",
+        },
+        { val: "100%", lbl: "real-time SUNAT status traceability" },
       ],
-      tags: ["React Hook Form", "Zod", "Axios"],
+      stack: [
+        "Next.js 15",
+        "TypeScript",
+        "TanStack Query",
+        "Tailwind CSS 4",
+        "Radix UI / shadcn",
+        "REST microservices",
+      ],
     },
     {
       id: 4,
-      company: "Powip",
-      role: "Frontend Developer",
-      period: "2025",
-      category: "Permissions",
-      tagline: "Granular role-based access control",
-      description:
-        "A roles and permissions system for the ERP's different areas, with views and actions conditioned by the logged-in user's role, avoiding exposing functions they shouldn't have access to.",
-      highlights: [
-        "<strong>Granular role-based</strong> access control at view and action level",
-        "Permission-conditioned components, reused across the whole ERP",
-        "Built to scale to new roles without touching existing logic",
+      flip: false,
+      eyebrow: "Operations Panel · Logistics",
+      title: "Shipping Center",
+      problem:
+        "The warehouse team had no single place to see what needed dispatching, which shipping labels had failed, or which orders had been sitting at the courier agency too long. The workflow relied on manually cross-referencing the orders table, the courier's own panel, and WhatsApp, which led to duplicate dispatches, status errors, and forgotten orders.",
+      solution:
+        "Designed and built a real-time operations dashboard wired directly into the sales and courier microservices: an 'Attention Tray' with one-click access to what's urgent (ready to dispatch, failed deliveries, aging in agency), a barcode/QR scanner with three input modes (handheld reader, keyboard, and camera) for dispatching and confirming deliveries, live per-courier tracking with Excel export, and an order detail modal with logistics actions (force sync, release from waybill, change courier). Includes a dedicated mobile view built for scanning directly from the warehouse floor.",
+      impact: [
+        { val: "6", lbl: "quick-action KPIs in a single panel" },
+        { val: "2", lbl: "backend microservices integrated in real time" },
+        { val: "3", lbl: "scan modes: reader, keyboard, and camera" },
+        { val: "100%", lbl: "mobile-responsive for warehouse use" },
       ],
-      tags: ["Context API", "TypeScript"],
+      stack: [
+        "Next.js 15",
+        "React 19",
+        "TypeScript",
+        "Tailwind CSS 4",
+        "TanStack Query",
+        "Radix UI / shadcn/ui",
+        "@zxing/browser",
+        "Supabase SSR",
+        "Axios",
+      ],
     },
     {
       id: 5,
-      company: "Devlusoft",
-      role: "Frontend Developer",
-      period: "2026 — Present",
-      category: "Portal",
-      tagline: "White-label client portal",
-      description:
-        "A brand-configurable client portal: each client sees their own visual identity (logo, colors, typography) on top of the same codebase, with no need to maintain a fork per client.",
-      highlights: [
-        "<strong>White-label</strong> theming via design tokens, no code forks",
-        "One codebase serving <strong>multiple brands</strong>",
-        "Mobile-first responsive layout",
+      flip: true,
+      eyebrow: "UX/UI · Internal tooling",
+      title: "Sales: from flat spreadsheet to control center",
+      problem:
+        "The sales management page was a 2,000+ line component with a 20+ column table that forced endless horizontal scrolling just to see secondary data. It had no visual identity of its own, no context-giving KPIs, hardcoded button colors, and a native browser status dropdown that could get hidden behind pinned columns on laptop screens.",
+      solution:
+        "A full redesign of the module: a header with a violet-gradient CTA that carries over the identity already validated in the Shipping Center, a KPI row (pending, cancelled, outstanding, advanced) filterable by date range, and a restructured table that tucks secondary fields (location, tracking, external ID) behind a per-row expandable panel. Order status became a color-coded pill with its own dropdown, smartly pinned so it's never hidden, with responsive sizing across screen widths.",
+      impact: [
+        { val: "22 → 13", lbl: "Visible table columns" },
+        { val: "4", lbl: "Live KPIs with date filtering" },
+        { val: "0", lbl: "Functional regressions shipped" },
       ],
-      tags: ["Next.js", "Tailwind CSS", "Design Tokens"],
-    },
-    {
-      id: 6,
-      company: "Devlusoft",
-      role: "Frontend Developer",
-      period: "2026 — Present",
-      category: "Payments",
-      tagline: "Payment gateway integrations",
-      description:
-        "Connected the frontend to multiple payment providers, handling the different transaction states (pending, approved, rejected) and retry logic on failure.",
-      highlights: [
-        "Integration with <strong>multiple payment gateways</strong> behind a common interface",
-        "Transaction state handling and <strong>automatic retries</strong>",
-        "Clear user feedback at every step of the payment",
+      stack: [
+        "Next.js",
+        "React",
+        "TypeScript",
+        "Tailwind CSS",
+        "Radix UI / shadcn",
+        "date-fns",
       ],
-      tags: ["TypeScript", "REST APIs"],
-    },
-    {
-      id: 7,
-      company: "Devlusoft",
-      role: "Frontend Developer",
-      period: "2026 — Present",
-      category: "Notifications",
-      tagline: "Real-time notification center",
-      description:
-        "An in-app push notification system with a centralized notification center and per-user preferences for which kind of events they want to receive.",
-      highlights: [
-        "<strong>Real-time</strong> in-app notifications",
-        "Notification center with history and read/unread state",
-        "<strong>Per-user preferences</strong> for which events to receive",
-      ],
-      tags: ["WebSockets", "React"],
-    },
-    {
-      id: 8,
-      company: "Devlusoft",
-      role: "Frontend Developer",
-      period: "2026 — Present",
-      category: "Admin",
-      tagline: "Modular admin panel",
-      description:
-        "An internal panel built with a proprietary reusable component library, designed so the team can add new features to the panel without duplicating code or breaking visual consistency.",
-      highlights: [
-        "Proprietary <strong>reusable component library</strong> for the internal panel",
-        "New features ship <strong>without duplicating code</strong>",
-        "Structured as a Turborepo monorepo to scale across teams",
-      ],
-      tags: ["Next.js", "Turborepo", "shadcn/ui"],
     },
   ],
 };

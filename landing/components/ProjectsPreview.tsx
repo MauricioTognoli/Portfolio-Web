@@ -49,20 +49,31 @@ const BrowserChrome = ({ project }: { project: ProjectItem }) => (
   </div>
 );
 
-const MiniPreview = () => (
-  <div className="absolute inset-x-3.5 top-3.5 bottom-0 overflow-hidden rounded-t-lg border border-mt-border bg-mt-surface shadow-[0_8px_30px_rgba(0,0,0,.5)]">
-    <div className="flex h-5.5 items-center gap-1 border-b border-mt-border bg-mt-surface-2 px-2">
+const MiniPreview = ({ project }: { project: ProjectItem }) => (
+  <div className="absolute inset-x-3.5 top-3.5 bottom-0 flex flex-col overflow-hidden rounded-t-lg border border-mt-border bg-mt-surface shadow-[0_8px_30px_rgba(0,0,0,.5)]">
+    <div className="flex h-5.5 shrink-0 items-center gap-1 border-b border-mt-border bg-mt-surface-2 px-2">
       <div className="h-[7px] w-[7px] rounded-full bg-[#ff5f57]" />
       <div className="h-[7px] w-[7px] rounded-full bg-[#febc2e]" />
       <div className="h-[7px] w-[7px] rounded-full bg-[#28c840]" />
     </div>
-    <div className="flex flex-col gap-1.25 p-2">
-      <div className="h-1.5 rounded-[3px] bg-mt-border-bright" />
-      <div className="grid grid-cols-2 gap-1.25">
-        <div className="h-6 rounded bg-mt-border" />
-        <div className="h-6 rounded border border-[rgba(242,100,25,.15)] bg-[rgba(242,100,25,.15)]" />
+    {project.screenshots ? (
+      <div className="relative min-h-0 flex-1 overflow-hidden">
+        <ScreenshotFrame
+          src={project.screenshots.desktop[0].src}
+          alt={`${project.title} — ${project.screenshots.desktop[0].label}`}
+          naturalWidth={project.screenshots.desktop[0].width}
+          naturalHeight={project.screenshots.desktop[0].height}
+        />
       </div>
-    </div>
+    ) : (
+      <div className="flex flex-col gap-1.25 p-2">
+        <div className="h-1.5 rounded-[3px] bg-mt-border-bright" />
+        <div className="grid grid-cols-2 gap-1.25">
+          <div className="h-6 rounded bg-mt-border" />
+          <div className="h-6 rounded border border-[rgba(242,100,25,.15)] bg-[rgba(242,100,25,.15)]" />
+        </div>
+      </div>
+    )}
   </div>
 );
 
@@ -139,7 +150,7 @@ const ProjectsPreview = () => {
           {rest.map((p) => (
             <Link href="/proyectos" className={miniCard} key={p.id}>
               <div className={miniPreview}>
-                <MiniPreview />
+                <MiniPreview project={p} />
                 <div className={`${miniBadge} left-2.5 text-mt-text-60 tracking-wider uppercase`}>{p.category}</div>
               </div>
               <div className="p-5">

@@ -51,10 +51,17 @@ export interface Translations {
     title1: string;
     title2: string;
     desc: string;
-    roleAt: string;
     viewAll: string;
     cta: string;
-    disclaimer: string;
+    pageTitle1: string;
+    pageTitle2: string;
+    pageSubtitle: string;
+    hint: string;
+    problemLabel: string;
+    solutionLabel: string;
+    summaryTitle: string;
+    summaryDesc: string;
+    summaryCta: string;
   };
   projects: {
     label: string;
@@ -199,11 +206,14 @@ export const translations: Record<Lang, Translations> = {
       title2: "me quieren en su lado.",
       b1Label: "Años construyendo productos web en React y Next.js",
       b2Label: "Tecnologías del stack frontend moderno que uso a diario",
-      b3Label: "Remoto — async-first, inglés profesional, flexible con husos horarios",
+      b3Label:
+        "Remoto — async-first, inglés profesional, flexible con husos horarios",
       b4Title: "Diseño → Código, pixel-perfect",
-      b4Desc: "Cierro la brecha entre diseño e ingeniería. Trabajo directo desde Figma, extraigo tokens y entrego UI fiel al diseño — sin idas y vueltas.",
+      b4Desc:
+        "Cierro la brecha entre diseño e ingeniería. Trabajo directo desde Figma, extraigo tokens y entrego UI fiel al diseño — sin idas y vueltas.",
       b5Title: "La performance es una prioridad",
-      b5Desc: "Trato el rendimiento y el SEO como requisitos del producto, no como un extra. Code splitting, lazy loading y buenas prácticas desde el día uno.",
+      b5Desc:
+        "Trato el rendimiento y el SEO como requisitos del producto, no como un extra. Code splitting, lazy loading y buenas prácticas desde el día uno.",
     },
     logocloud: { label: "Construido con" },
     experience: {
@@ -212,14 +222,24 @@ export const translations: Record<Lang, Translations> = {
       desc: "No descripciones de puesto. El contexto real, las decisiones técnicas y las interfaces que construí en cada rol.",
     },
     features: {
-      label: "Lo que vengo entregando",
-      title1: "Features que",
-      title2: "diseñé y shippeé.",
-      desc: "Funcionalidades concretas que construí de punta a punta en mis roles actuales — no solo tareas, productos que usan usuarios reales.",
-      roleAt: "en",
+      label: "Features & Soluciones",
+      title1: "Features que construyo,",
+      title2: "problemas que resuelven.",
+      desc: "Ocho patrones que resuelvo una y otra vez en producción — con demos en vivo, no capturas de pantalla. Probalos vos mismo.",
       viewAll: "Ver todas las features →",
-      cta: "Ver detalle →",
-      disclaimer: "Contenido de ejemplo — a reemplazar con features reales.",
+      cta: "Ver features →",
+      pageTitle1: "Features que construyo,",
+      pageTitle2: "problemas que resuelven.",
+      pageSubtitle:
+        "Cada feature de abajo es algo que construí en producción — capturas reales del producto, y donde todavía no subí una, una demo interactiva hecha con el mismo patrón. No me creas de palabra.",
+      hint: "Capturas reales de producción",
+      problemLabel: "El problema",
+      solutionLabel: "Mi solución",
+      summaryTitle:
+        "Cada demo de esta página es código real que escribí para esta página.",
+      summaryDesc:
+        "Sin librerías, sin frameworks — solo para demostrarlo. Imaginate lo que puedo construir con el stack completo de React. Hablemos de lo que necesita tu producto.",
+      summaryCta: "Ponte en contacto →",
     },
     projects: {
       label: "Trabajo seleccionado",
@@ -239,11 +259,14 @@ export const translations: Record<Lang, Translations> = {
       title2: "Components.",
       sub: "Una librería propia de componentes UI reutilizables construidos con React, Next.js, Tailwind CSS, TypeScript y Framer Motion. Actualmente en construcción — la voy armando a partir de los patrones que más repito en proyectos reales.",
       h1Title: "Pensados para producción",
-      h1Desc: "Cada componente accesible, responsive y pensado para uso real — no solo demos.",
+      h1Desc:
+        "Cada componente accesible, responsive y pensado para uso real — no solo demos.",
       h2Title: "Animaciones con Framer Motion",
-      h2Desc: "Micro-interacciones y transiciones que elevan el UX sin sumar complejidad al codebase.",
+      h2Desc:
+        "Micro-interacciones y transiciones que elevan el UX sin sumar complejidad al codebase.",
       h3Title: "Precisión Figma-to-code",
-      h3Desc: "Construido con ojo de diseñador — tokens, espaciado consistente y lenguaje visual coherente.",
+      h3Desc:
+        "Construido con ojo de diseñador — tokens, espaciado consistente y lenguaje visual coherente.",
       cta1: "Ver en GitHub →",
       cta2: "GitHub",
       badge: "En construcción",
@@ -268,7 +291,8 @@ export const translations: Record<Lang, Translations> = {
     testimonials: {
       label: "Testimonios",
       title: "Lo que dicen de mí.",
-      disclaimer: "Testimonios de ejemplo — a reemplazar por referencias reales.",
+      disclaimer:
+        "Testimonios de ejemplo — a reemplazar por referencias reales.",
     },
     recruiter: {
       label: "Para recruiters y hiring managers",
@@ -331,7 +355,11 @@ export const translations: Record<Lang, Translations> = {
       sub: "Roles remotos full-time · Freelance · Frontend",
     },
     sticky: { text: "Abierto a propuestas", btn: "Ver datos →" },
-    footer: { tagline: "Construido con cuidado.", cv: "CV", components: "Componentes" },
+    footer: {
+      tagline: "Construido con cuidado.",
+      cv: "CV",
+      components: "Componentes",
+    },
   },
   en: {
     nav: {
@@ -379,9 +407,11 @@ export const translations: Record<Lang, Translations> = {
       b2Label: "Technologies in the modern frontend stack I use daily",
       b3Label: "Remote — async-first, professional English, timezone flexible",
       b4Title: "Design → Code, pixel-perfect",
-      b4Desc: "I bridge the gap between design and engineering. I work straight from Figma, extract tokens, and ship UI that matches the spec — without back-and-forth.",
+      b4Desc:
+        "I bridge the gap between design and engineering. I work straight from Figma, extract tokens, and ship UI that matches the spec — without back-and-forth.",
       b5Title: "Performance is a priority",
-      b5Desc: "I treat performance and SEO as product requirements, not an afterthought. Code splitting, lazy loading and good practices from day one.",
+      b5Desc:
+        "I treat performance and SEO as product requirements, not an afterthought. Code splitting, lazy loading and good practices from day one.",
     },
     logocloud: { label: "Built with" },
     experience: {
@@ -390,14 +420,23 @@ export const translations: Record<Lang, Translations> = {
       desc: "Not job descriptions. The real context, the technical decisions, and the interfaces I built in every role.",
     },
     features: {
-      label: "What I've been shipping",
-      title1: "Features I",
-      title2: "designed and shipped.",
-      desc: "Concrete features I built end-to-end in my current roles — not just tasks, products real users touch.",
-      roleAt: "at",
-      viewAll: "View all features →",
-      cta: "View detail →",
-      disclaimer: "Sample content — to be replaced with real features.",
+      label: "Features & Solutions",
+      title1: "Features I build,",
+      title2: "problems they solve.",
+      desc: "Eight patterns I solve again and again in production — with live demos, not screenshots. Try them yourself.",
+      viewAll: "See all features →",
+      cta: "See the features →",
+      pageTitle1: "Features I ship,",
+      pageTitle2: "problems they solve.",
+      pageSubtitle:
+        "Every feature below is something I've built in production — real product screenshots, and where I haven't uploaded one yet, a live demo built on the same pattern. Don't take my word for it.",
+      hint: "Real production screenshots",
+      problemLabel: "The problem",
+      solutionLabel: "My solution",
+      summaryTitle: "Every demo here is vanilla code I wrote for this page.",
+      summaryDesc:
+        "No libraries, no frameworks — just to prove the point. Imagine what I ship with the full React toolkit. Let's talk about what your product needs.",
+      summaryCta: "Want this in your project? Let's talk →",
     },
     projects: {
       label: "Selected work",
@@ -417,11 +456,14 @@ export const translations: Record<Lang, Translations> = {
       title2: "Components.",
       sub: "A personal library of reusable UI components built with React, Next.js, Tailwind CSS, TypeScript and Framer Motion. Currently a work in progress — built from the patterns I repeat most in real projects.",
       h1Title: "Built for production",
-      h1Desc: "Every component is accessible, responsive, and meant for real use — not just demos.",
+      h1Desc:
+        "Every component is accessible, responsive, and meant for real use — not just demos.",
       h2Title: "Framer Motion animations",
-      h2Desc: "Micro-interactions and transitions that elevate UX without adding complexity to the codebase.",
+      h2Desc:
+        "Micro-interactions and transitions that elevate UX without adding complexity to the codebase.",
       h3Title: "Figma-to-code precision",
-      h3Desc: "Built with a designer's eye — tokens, consistent spacing, and a coherent visual language.",
+      h3Desc:
+        "Built with a designer's eye — tokens, consistent spacing, and a coherent visual language.",
       cta1: "View on GitHub →",
       cta2: "GitHub",
       badge: "Work in progress",
@@ -509,7 +551,11 @@ export const translations: Record<Lang, Translations> = {
       sub: "Full-time remote roles · Freelance · Frontend",
     },
     sticky: { text: "Open to offers", btn: "View facts →" },
-    footer: { tagline: "Built with craft.", cv: "Resume", components: "Components" },
+    footer: {
+      tagline: "Built with craft.",
+      cv: "Resume",
+      components: "Components",
+    },
   },
 };
 
@@ -519,7 +565,9 @@ interface LanguageContextValue {
   toggleLang: () => void;
 }
 
-const LanguageContext = createContext<LanguageContextValue | undefined>(undefined);
+const LanguageContext = createContext<LanguageContextValue | undefined>(
+  undefined,
+);
 
 export function LanguageProvider({ children }: { children: React.ReactNode }) {
   const [lang, setLang] = useState<Lang>("es");
@@ -538,7 +586,9 @@ export function LanguageProvider({ children }: { children: React.ReactNode }) {
   };
 
   return (
-    <LanguageContext.Provider value={{ lang, t: translations[lang], toggleLang }}>
+    <LanguageContext.Provider
+      value={{ lang, t: translations[lang], toggleLang }}
+    >
       {children}
     </LanguageContext.Provider>
   );
