@@ -1031,11 +1031,17 @@ export interface FeatureBlock {
 }
 
 /** Real product screenshot per feature block id — served from /public/features/. Blocks without an entry fall back to the logo. */
-export const featureImages: Partial<Record<number, string>> = {
-  1: "/features/niveles-de-precios.png",
-  2: "/features/catalogos-produp.png",
-  3: "/features/facturacion-sunat.png",
-  5: "/features/ventas-powip.png",
+export interface FeatureImage {
+  src: string;
+  width: number;
+  height: number;
+}
+
+export const featureImages: Partial<Record<number, FeatureImage>> = {
+  1: { src: "/features/niveles-de-precios.png", width: 2048, height: 1776 },
+  2: { src: "/features/catalogos-produp.png", width: 2304, height: 1776 },
+  3: { src: "/features/facturacion-sunat.png", width: 2368, height: 2212 },
+  5: { src: "/features/ventas-powip.png", width: 2368, height: 2534 },
 };
 
 export const dataFeatureBlocks: Record<"es" | "en", FeatureBlock[]> = {

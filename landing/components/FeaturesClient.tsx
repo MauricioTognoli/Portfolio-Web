@@ -1,34 +1,44 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { motion } from "framer-motion";
-import { Camera } from "lucide-react";
+import { AnimatePresence, motion } from "framer-motion";
+import { Camera, Maximize2, X } from "lucide-react";
 import { useLanguage } from "@/lib/i18n";
 import { dataFeatureBlocks, featureImages, type FeatureBlock } from "@/data";
 import { btnPrimary } from "./uiClasses";
+import * as pk from "./pageKit";
+import ScreenshotFrame from "./ScreenshotFrame";
 
-const FeatureVisual = ({ f }: { f: FeatureBlock }) => {
+const FeatureVisual = ({ f, onExpand }: { f: FeatureBlock; onExpand: (id: number) => void }) => {
   const { lang } = useLanguage();
   const [imageFailed, setImageFailed] = useState(false);
-  const src = featureImages[f.id];
+  const image = featureImages[f.id];
 
-  if (src && !imageFailed) {
+  if (image && !imageFailed) {
     return (
-      <>
+      <button
+        type="button"
+        onClick={() => onExpand(f.id)}
+        className="group absolute inset-0 h-full w-full cursor-zoom-in border-none bg-transparent p-0"
+        aria-label={lang === "es" ? `Ver ${f.title} completa` : `View ${f.title} in full`}
+      >
         <span className="absolute top-3.5 left-3.5 z-10 rounded-full border border-mt-border-bright bg-mt-bg/80 px-3 py-1 font-mt-mono text-[9px] tracking-widest text-mt-text-60 uppercase backdrop-blur-sm">
           {lang === "es" ? "En producción" : "In production"}
         </span>
+        <span className="absolute top-3.5 right-3.5 z-10 flex h-8 w-8 items-center justify-center rounded-full border border-mt-border-bright bg-mt-bg/80 text-mt-text-60 backdrop-blur-sm transition-colors duration-200 group-hover:text-mt-orange">
+          <Maximize2 size={13} />
+        </span>
         <Image
-          src={src}
+          src={image.src}
           alt={f.title}
           fill
           sizes="(max-width: 900px) 100vw, 550px"
-          className="object-cover"
+          className="object-cover transition-transform duration-400 group-hover:scale-[1.03]"
           onError={() => setImageFailed(true)}
         />
-      </>
+      </button>
     );
   }
 
@@ -42,6 +52,22 @@ const FeatureVisual = ({ f }: { f: FeatureBlock }) => {
 const FeaturesClient = () => {
   const { lang, t } = useLanguage();
   const blocks = dataFeatureBlocks[lang];
+  const [expandedId, setExpandedId] = useState<number | null>(null);
+  const expanded = expandedId !== null ? blocks.find((f) => f.id === expandedId) : undefined;
+  const expandedImage = expandedId !== null ? featureImages[expandedId] : undefined;
+
+  useEffect(() => {
+    if (expandedId === null) return;
+    document.body.style.overflow = "hidden";
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setExpandedId(null);
+    };
+    window.addEventListener("keydown", onKey);
+    return () => {
+      document.body.style.overflow = "";
+      window.removeEventListener("keydown", onKey);
+    };
+  }, [expandedId]);
 
   return (
     <>
@@ -122,7 +148,7 @@ const FeaturesClient = () => {
                   f.flip ? "order-1 border-l" : "order-2 border-r"
                 } border-mt-border`}
               >
-                <FeatureVisual f={f} />
+                <FeatureVisual f={f} onExpand={setExpandedId} />
               </div>
             </motion.div>
           );
@@ -136,6 +162,48 @@ const FeaturesClient = () => {
           <Link href="/#contact" className={`${btnPrimary} shrink-0`}>{t.features.summaryCta}</Link>
         </div>
       </div>
+
+      <AnimatePresence>
+        {expanded && expandedImage && (
+          <motion.div
+            className={pk.pkModalOverlay}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.2 }}
+            onClick={(e) => { if (e.target === e.currentTarget) setExpandedId(null); }}
+          >
+            <motion.div
+              className={`${pk.pkModal} max-w-[820px]!`}
+              initial={{ opacity: 0, y: 20, scale: 0.97 }}
+              animate={{ opacity: 1, y: 0, scale: 1 }}
+              exit={{ opacity: 0, y: 20, scale: 0.97 }}
+              transition={{ duration: 0.25, ease: "easeOut" }}
+            >
+              <div className={pk.pkModalHeader}>
+                <div>
+                  <div className={pk.pkModalCategory}>{expanded.eyebrow}</div>
+                  <div className={pk.pkModalTitle}>{expanded.title}</div>
+                </div>
+                <button className={pk.pkModalClose} onClick={() => setExpandedId(null)} aria-label="Close">
+                  <X size={16} />
+                </button>
+              </div>
+              <div className="min-h-0 flex-1 p-7 pt-5 max-[560px]:px-4.5">
+                <div className="h-[70vh] overflow-hidden rounded-xl border border-mt-border">
+                  <ScreenshotFrame
+                    src={expandedImage.src}
+                    alt={expanded.title}
+                    naturalWidth={expandedImage.width}
+                    naturalHeight={expandedImage.height}
+                    mode="scroll"
+                  />
+                </div>
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </>
   );
 };
