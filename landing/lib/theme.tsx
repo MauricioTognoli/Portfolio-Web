@@ -16,9 +16,21 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
 
   useEffect(() => {
     const stored = window.localStorage.getItem("mt-theme") as Theme | null;
-    const initial = stored ?? "dark";
+    const systemPrefersLight = window.matchMedia("(prefers-color-scheme: light)").matches;
+    const initial = stored ?? (systemPrefersLight ? "light" : "dark");
+    // eslint-disable-next-line react-hooks/set-state-in-effect -- reads localStorage/matchMedia, only available client-side after mount
     setTheme(initial);
     document.documentElement.setAttribute("data-theme", initial);
+
+    if (stored) return;
+    const mql = window.matchMedia("(prefers-color-scheme: light)");
+    const onChange = (e: MediaQueryListEvent) => {
+      const next = e.matches ? "light" : "dark";
+      setTheme(next);
+      document.documentElement.setAttribute("data-theme", next);
+    };
+    mql.addEventListener("change", onChange);
+    return () => mql.removeEventListener("change", onChange);
   }, []);
 
   const toggleTheme = () => {

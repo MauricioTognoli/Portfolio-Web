@@ -7,7 +7,7 @@ const Marquee = () => {
   const items = [...t.marquee, ...t.marquee];
 
   return (
-    <div className="overflow-hidden border-t border-b border-mt-border py-3.5 bg-mt-surface transition-colors duration-300">
+    <div aria-hidden="true" className="overflow-hidden border-t border-b border-mt-border py-3.5 bg-mt-surface transition-colors duration-300">
       <div className="flex w-max gap-12 whitespace-nowrap animate-mt-marquee">
         {items.map((item, i) => (
           <div className="flex shrink-0 items-center gap-2.5 font-mt-mono text-xs text-mt-text-30" key={`${item}-${i}`}>

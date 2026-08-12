@@ -16,6 +16,17 @@ const fadeUp = {
   }),
 };
 
+// No opacity gating on these — they're the LCP candidates (headline text /
+// hero image) and must be visible in the very first paint, not hidden
+// behind a JS-driven fade-in.
+const slideUpVisible = {
+  hidden: { y: 20 },
+  visible: (delay = 0) => ({
+    y: 0,
+    transition: { duration: 0.6, delay, ease: "easeOut" as const },
+  }),
+};
+
 const Hero = () => {
   const { t } = useLanguage();
 
@@ -28,7 +39,7 @@ const Hero = () => {
 
   return (
     <section className="relative flex min-h-screen flex-col justify-center overflow-hidden px-12 pt-35 pb-20 max-[900px]:px-6 max-[560px]:min-h-0 max-[560px]:px-5 max-[560px]:pt-27.5 max-[560px]:pb-14">
-      <div className="absolute inset-0 [background-image:linear-gradient(var(--mt-grid-line)_1px,transparent_1px),linear-gradient(90deg,var(--mt-grid-line)_1px,transparent_1px)] [background-size:64px_64px] [mask-image:radial-gradient(ellipse_80%_70%_at_50%_50%,black_30%,transparent_100%)]" />
+      <div className="absolute inset-0 bg-[linear-gradient(var(--mt-grid-line)_1px,transparent_1px),linear-gradient(90deg,var(--mt-grid-line)_1px,transparent_1px)] bg-size-[64px_64px] mask-[radial-gradient(ellipse_80%_70%_at_50%_50%,black_30%,transparent_100%)]" />
       <div className="pointer-events-none absolute -top-50 -right-50 h-200 w-200 bg-[radial-gradient(circle,rgba(242,100,25,0.13)_0%,transparent_70%)]" />
       <div className="relative mx-auto grid w-full max-w-[1320px] grid-cols-[1fr_auto] items-center gap-20 max-[900px]:grid-cols-1 max-[900px]:text-center">
         <div>
@@ -68,7 +79,7 @@ const Hero = () => {
             initial="hidden"
             animate="visible"
             custom={0.15}
-            variants={fadeUp}
+            variants={slideUpVisible}
           >
             {t.hero.line1}
             <br />
@@ -123,9 +134,9 @@ const Hero = () => {
         </div>
 
         <motion.div
-          className="flex items-center justify-center max-[900px]:order-[-1]"
-          initial={{ opacity: 0, scale: 0.85 }}
-          animate={{ opacity: 1, scale: 1 }}
+          className="flex items-center justify-center max-[900px]:-order-1"
+          initial={{ scale: 0.85 }}
+          animate={{ scale: 1 }}
           transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
         >
           <Image
@@ -134,7 +145,7 @@ const Hero = () => {
             width={280}
             height={280}
             priority
-            className="h-55 w-55 [filter:drop-shadow(0_0_48px_rgba(242,100,25,0.25))] max-[560px]:h-40 max-[560px]:w-40"
+            className="h-55 w-55 filter-[drop-shadow(0_0_48px_rgba(242,100,25,0.25))] max-[560px]:h-40 max-[560px]:w-40"
           />
         </motion.div>
       </div>

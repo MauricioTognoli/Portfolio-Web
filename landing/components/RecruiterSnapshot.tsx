@@ -1,19 +1,19 @@
 "use client";
 
+import Image from "next/image";
 import { motion } from "framer-motion";
 import { useLanguage } from "@/lib/i18n";
-import { recruiterCoreStack, socialNetworks } from "@/data";
+import { recruiterCoreStack, cvFiles } from "@/data";
 import { sectionPad, SectionInner, SectionLabel, SectionTitle, SectionDesc } from "./Section";
 import { btnPrimary, btnSecondary } from "./uiClasses";
-
-const cvLink = socialNetworks.find((s) => s.description === "Currículum")?.src ?? "#";
 
 const factLabel = "font-mt-mono text-[10px] tracking-[0.08em] text-mt-text-30 uppercase";
 const factValue = "flex items-center gap-[7px] font-mt-display text-sm font-semibold tracking-[-0.2px]";
 const factSub = "text-[11px] text-mt-text-30";
 
 const RecruiterSnapshot = () => {
-  const { t } = useLanguage();
+  const { t, lang } = useLanguage();
+  const cvLink = cvFiles[lang];
 
   return (
     <section className={`border-t border-mt-border bg-mt-bg transition-colors duration-300 ${sectionPad}`} id="hire">
@@ -35,8 +35,8 @@ const RecruiterSnapshot = () => {
         >
           <div className="flex flex-wrap items-center justify-between gap-4 border-b border-mt-border px-8 py-6.5 max-[560px]:flex-col max-[560px]:items-start">
             <div className="flex items-center gap-3.5">
-              <div className="flex h-13 w-13 items-center justify-center rounded-[14px] bg-linear-to-br from-mt-orange to-[#8B3A00] font-mt-display text-lg font-extrabold text-white">
-                MT
+              <div className="flex h-13 w-13 shrink-0 items-center justify-center rounded-[14px] bg-mt-card-bg">
+                <Image src="/logo-mt.png" alt="Mauricio Tognoli" width={40} height={40} />
               </div>
               <div>
                 <div className="font-mt-display text-lg font-bold tracking-[-0.4px]">Mauricio Tognoli</div>
@@ -44,7 +44,7 @@ const RecruiterSnapshot = () => {
               </div>
             </div>
             <div className="flex flex-wrap gap-2.5 max-[560px]:w-full max-[560px]:[&>a]:flex-1 max-[560px]:[&>a]:justify-center">
-              <a href={cvLink} target="_blank" rel="noopener noreferrer" className={btnPrimary}>{t.recruiter.cv}</a>
+              <a href={cvLink} download className={btnPrimary}>{t.recruiter.cv}</a>
               <a href="#contact" className={btnSecondary}>{t.recruiter.call}</a>
             </div>
           </div>

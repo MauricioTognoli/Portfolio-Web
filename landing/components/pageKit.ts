@@ -24,7 +24,7 @@ export const pkFilterPill =
 export const pkFilterPillActive = "border-mt-orange! bg-mt-orange! text-black! font-medium!";
 export const pkSep = "mx-1 h-7 w-px shrink-0 bg-mt-border";
 export const pkSortSelect =
-  "cursor-pointer rounded-lg border border-mt-border bg-mt-text-10 px-3 py-1.5 font-mt-body text-xs text-mt-text-60 outline-none transition-all duration-200 hover:border-mt-border-bright hover:text-mt-text max-[560px]:min-w-35 max-[560px]:flex-1";
+  "cursor-pointer rounded-lg border border-mt-border bg-mt-text-10 px-3 py-1.5 font-mt-body text-xs text-mt-text-60 outline-none transition-all duration-200 hover:border-mt-border-bright hover:text-mt-text focus-visible:border-mt-orange focus-visible:ring-2 focus-visible:ring-mt-orange-dim max-[560px]:min-w-35 max-[560px]:flex-1";
 export const pkResultsCount = "ml-2 text-xs whitespace-nowrap text-mt-text-30 max-[560px]:ml-0 max-[560px]:order-3 max-[560px]:w-full";
 export const pkViewToggle = "ml-auto flex gap-1 max-[560px]:ml-0";
 export const pkViewBtn =
@@ -81,6 +81,8 @@ export const pkLcard =
   "grid w-full cursor-pointer grid-cols-[56px_1fr_auto] items-center gap-5 rounded-[14px] border border-mt-border bg-mt-card-bg px-6 py-5 text-left transition-all duration-250 hover:border-mt-border-bright hover:bg-mt-surface max-[900px]:grid-cols-1 max-[900px]:gap-3";
 export const pkLcardIcon =
   "flex h-14 w-14 items-center justify-center rounded-[14px] border border-[rgba(242,100,25,.2)] bg-mt-orange-dim font-mt-mono text-sm font-medium tracking-[0.02em] text-mt-orange max-[900px]:hidden";
+export const pkLcardLogo =
+  "flex h-14 w-14 items-center justify-center overflow-hidden rounded-[14px] border border-[rgba(242,100,25,.2)] bg-white p-2.5 max-[900px]:hidden";
 export const pkLcardTitle = "font-mt-display text-base font-bold tracking-[-0.015em]";
 export const pkLcardCat =
   "rounded-full border border-[rgba(242,100,25,.2)] bg-mt-orange-dim px-2 py-0.5 text-[10px] tracking-[0.08em] text-mt-orange uppercase";

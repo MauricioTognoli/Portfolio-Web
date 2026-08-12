@@ -19,4 +19,4 @@ export const miniCard =
 export const miniPreview = "relative h-[170px] overflow-hidden bg-mt-surface-2";
 
 export const miniBadge =
-  "absolute top-2.5 rounded-full border border-mt-border-bright bg-[rgba(8,8,8,.8)] px-2.25 py-[3px] text-[10px] backdrop-blur-[8px]";
+  "absolute top-2.5 rounded-full border border-mt-border-bright bg-mt-bg/80 px-2.25 py-[3px] text-[10px] backdrop-blur-[8px]";

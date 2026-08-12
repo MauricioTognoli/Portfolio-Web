@@ -40,7 +40,7 @@ const BrowserChrome = ({ project }: { project: ProjectItem }) => (
         <div className="relative mt-1 h-20 overflow-hidden rounded-md bg-mt-surface-2">
           <div className="absolute inset-x-0 bottom-0 flex items-end gap-0.75 p-1.5">
             {[45, 65, 50, 80, 60, 90, 70, 95].map((h, i) => (
-              <div key={i} className="flex-1 rounded-t-[2px] bg-mt-orange" style={{ height: `${h}%`, opacity: 0.6 + i * 0.04 }} />
+              <div key={i} className="flex-1 rounded-t-xs bg-mt-orange" style={{ height: `${h}%`, opacity: 0.6 + i * 0.04 }} />
             ))}
           </div>
         </div>
@@ -108,10 +108,10 @@ const ProjectsPreview = () => {
           >
             <div className="relative min-h-[300px] overflow-hidden bg-mt-surface-2">
               <BrowserChrome project={featured} />
-              <div className="absolute top-4 left-4 rounded-full border border-mt-border-bright bg-[rgba(8,8,8,.8)] px-3 py-1 text-[11px] tracking-[0.06em] text-mt-text-60 uppercase backdrop-blur-[10px]">
+              <div className="absolute top-4 left-4 rounded-full border border-mt-border-bright bg-mt-bg/80 px-3 py-1 text-[11px] tracking-[0.06em] text-mt-text-60 uppercase backdrop-blur-[10px]">
                 {featured.category}
               </div>
-              <div className="absolute top-4 right-4 flex items-center gap-[5px] rounded-full border border-mt-border-bright bg-[rgba(8,8,8,.8)] px-3 py-1 text-[11px] backdrop-blur-[10px]">
+              <div className="absolute top-4 right-4 flex items-center gap-[5px] rounded-full border border-mt-border-bright bg-mt-bg/80 px-3 py-1 text-[11px] backdrop-blur-[10px]">
                 <div className="h-1.5 w-1.5 rounded-full bg-[#4ade80] shadow-[0_0_6px_#4ade80]" />
                 <span className="text-mt-text-60">{t.projects.liveNow}</span>
               </div>

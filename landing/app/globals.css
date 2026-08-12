@@ -1,10 +1,5 @@
 @import "tailwindcss";
 
-@source "./app/**/*.{js,ts,jsx,tsx}";
-@source "./src/**/*.{js,ts,jsx,tsx}";
-@source "../../../components/**/*.{ts,tsx}";
-@source "../**/*.{ts,tsx}";
-
 /* ================================================================
    MT DESIGN SYSTEM — tokens
    Runtime dark/light values live here; @theme inline below exposes
@@ -19,7 +14,7 @@
   --mt-border-bright: rgba(255,255,255,0.14);
   --mt-text: #FAFAFA;
   --mt-text-60: rgba(250,250,250,0.6);
-  --mt-text-30: rgba(250,250,250,0.3);
+  --mt-text-30: rgba(250,250,250,0.52);
   --mt-text-10: rgba(250,250,250,0.08);
   --mt-nav-bg: rgba(8,8,8,0.88);
   --mt-card-bg: #0c0c0c;
@@ -40,7 +35,7 @@
   --mt-border-bright: rgba(0,0,0,0.16);
   --mt-text: #111111;
   --mt-text-60: rgba(17,17,17,0.55);
-  --mt-text-30: rgba(17,17,17,0.35);
+  --mt-text-30: rgba(17,17,17,0.62);
   --mt-text-10: rgba(17,17,17,0.06);
   --mt-nav-bg: rgba(247,245,242,0.9);
   --mt-card-bg: #F0EDE9;
@@ -93,7 +88,6 @@
   --animate-mt-pulse: mt-pulse 2s infinite;
   --animate-mt-marquee: mt-marquee 22s linear infinite;
   --animate-mt-shot-scroll: mt-shot-scroll var(--mt-shot-dur, 16s) ease-in-out infinite;
-  --animate-mt-shimmer: mt-shimmer 1.4s infinite;
 }
 
 html[data-theme] { scroll-behavior: smooth; }
@@ -126,4 +120,10 @@ body::before {
   46%, 54% { transform:translateY(calc(-1 * var(--mt-shot-dist, 0px))); }
   92%, 100% { transform:translateY(0); }
 }
-@keyframes mt-shimmer { 0%{background-position:200% 0} 100%{background-position:-200% 0} }
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-mt-pulse, .animate-mt-marquee, .animate-mt-shot-scroll {
+    animation: none !important;
+  }
+  html[data-theme] { scroll-behavior: auto; }
+}

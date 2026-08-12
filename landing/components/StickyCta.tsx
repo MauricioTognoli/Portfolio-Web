@@ -12,6 +12,7 @@ const StickyCta = () => {
 
   useEffect(() => {
     if (pathname !== "/") {
+      // eslint-disable-next-line react-hooks/set-state-in-effect -- syncs visibility with route + scroll position, both external to React state
       setShow(false);
       return;
     }

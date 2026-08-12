@@ -7,7 +7,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import { Camera, Maximize2, X } from "lucide-react";
 import { useLanguage } from "@/lib/i18n";
 import { dataFeatureBlocks, featureImages, type FeatureBlock } from "@/data";
-import { btnPrimary } from "./uiClasses";
+import { btnPrimary, btnGhost } from "./uiClasses";
 import * as pk from "./pageKit";
 import ScreenshotFrame from "./ScreenshotFrame";
 
@@ -72,7 +72,7 @@ const FeaturesClient = () => {
   return (
     <>
       <div className="relative overflow-hidden px-12 pt-32.5 pb-17.5 max-[900px]:px-6 max-[560px]:px-5 max-[560px]:pt-25 max-[560px]:pb-11">
-        <div className="absolute inset-0 [background-image:linear-gradient(var(--mt-grid-line)_1px,transparent_1px),linear-gradient(90deg,var(--mt-grid-line)_1px,transparent_1px)] [background-size:56px_56px] [mask-image:radial-gradient(ellipse_100%_100%_at_50%_0%,black_20%,transparent_100%)]" />
+        <div className="absolute inset-0 bg-[linear-gradient(var(--mt-grid-line)_1px,transparent_1px),linear-gradient(90deg,var(--mt-grid-line)_1px,transparent_1px)] bg-size-[56px_56px] mask-[radial-gradient(ellipse_100%_100%_at_50%_0%,black_20%,transparent_100%)]" />
         <div className="pointer-events-none absolute -top-30 left-1/2 h-112.5 w-175 -translate-x-1/2 bg-[radial-gradient(circle,rgba(242,100,25,0.12)_0%,transparent_70%)]" />
         <div className="relative mx-auto max-w-[1100px]">
           <div className="mb-5.5 flex items-center gap-2 font-mt-mono text-[11px] text-mt-text-30">
@@ -134,6 +134,17 @@ const FeaturesClient = () => {
                   ))}
                 </div>
 
+                {f.demoLabel && (
+                  <button
+                    type="button"
+                    onClick={() => setExpandedId(f.id)}
+                    className={`${btnGhost} mb-4.5 w-fit cursor-pointer`}
+                  >
+                    <Camera size={14} className="text-mt-orange" />
+                    <span>{f.demoLabel}</span>
+                  </button>
+                )}
+
                 <div className="flex flex-wrap gap-1.25">
                   {f.stack.map((s) => (
                     <span key={s} className="rounded-[5px] border border-mt-border bg-mt-tag-bg px-2.5 py-[3px] font-mt-mono text-[10.5px] text-mt-text-60">
@@ -174,6 +185,9 @@ const FeaturesClient = () => {
             onClick={(e) => { if (e.target === e.currentTarget) setExpandedId(null); }}
           >
             <motion.div
+              role="dialog"
+              aria-modal="true"
+              aria-labelledby="feature-modal-title"
               className={`${pk.pkModal} max-w-[820px]!`}
               initial={{ opacity: 0, y: 20, scale: 0.97 }}
               animate={{ opacity: 1, y: 0, scale: 1 }}
@@ -183,7 +197,7 @@ const FeaturesClient = () => {
               <div className={pk.pkModalHeader}>
                 <div>
                   <div className={pk.pkModalCategory}>{expanded.eyebrow}</div>
-                  <div className={pk.pkModalTitle}>{expanded.title}</div>
+                  <div id="feature-modal-title" className={pk.pkModalTitle}>{expanded.title}</div>
                 </div>
                 <button className={pk.pkModalClose} onClick={() => setExpandedId(null)} aria-label="Close">
                   <X size={16} />

@@ -1,41 +1,16 @@
-import {
-  Linkedin,
-  GithubIcon,
-  Mail,
-  FileUserIcon,
-  Twitter,
-} from "lucide-react";
+export const cvFiles: Record<"es" | "en", string> = {
+  es: "/cv/CV_Mauricio_Tognoli_Es.docx",
+  en: "/cv/CV_Mauricio_Tognoli_En.docx",
+};
 
 export const socialNetworks = [
   {
-    id: 1,
-    logo: <Linkedin size={30} strokeWidth={1} />,
     src: "https://www.linkedin.com/in/mauricio-tognoli/",
     description: "LinkedIn",
   },
   {
-    id: 2,
-    logo: <Twitter size={30} strokeWidth={1} />,
-    src: "https://x.com/MauricioTognoli",
-    description: "Twitter",
-  },
-  {
-    id: 3,
-    logo: <GithubIcon size={30} strokeWidth={1} />,
     src: "https://github.com/MauricioTognoli",
     description: "GitHub",
-  },
-  {
-    id: 4,
-    logo: <FileUserIcon size={30} strokeWidth={1} />,
-    src: "https://docs.google.com/document/d/13k-dT-JRagXQx-YnZ1PNsU8A6FJBiA-q/edit?usp=drivesdk&ouid=114730073055255632550&rtpof=true&sd=true",
-    description: "Currículum",
-  },
-  {
-    id: 5,
-    logo: <Mail size={30} strokeWidth={1} />,
-    src: "mailto:tognolimauricio@gmail.com",
-    description: "Correo",
   },
 ];
 
@@ -223,7 +198,11 @@ export interface ProjectItem {
   category: string;
   type: "landing" | "web" | "app" | "saas";
   year: string;
+  /** ISO year-month (e.g. "2025-07") used to sort by most recent. */
+  date: string;
   status: "live" | "wip" | "private";
+  /** Client logo shown in the list view (path under /public). */
+  logo?: string;
   tagline: string;
   desc: string;
   challenge: string;
@@ -248,11 +227,13 @@ export const dataProjects: Record<"es" | "en", ProjectItem[]> = {
       title: "SOS Service",
       category: "Landing Corporativa",
       type: "landing",
-      year: "2026",
+      year: "2025",
+      date: "2025-12",
       status: "live",
+      logo: "/sos-service/sos-services-logo.svg",
       tagline:
         "Landing corporativa para una empresa de mantenimiento del hogar en Madeira, Portugal",
-      desc: "Desarrollo de una landing page corporativa desde cero para SOS Service, empresa de servicios de reparación y mantenimiento del hogar con sede en Madeira, Portugal. Implementación completa de la interfaz a partir de un diseño provisto, aplicando buenas prácticas de UI/UX, accesibilidad y diseño responsive. Optimización de SEO y performance para mejorar la visibilidad y la captación de clientes, incorporando estructura semántica, metadata y microinteracciones.",
+      desc: "Desarrollo de una landing page corporativa desde cero para SOS Service, empresa de servicios de reparación y mantenimiento del hogar con sede en Madeira, Portugal, como freelance para ZimaBlue. Implementación completa de la interfaz a partir de un diseño provisto, aplicando buenas prácticas de UI/UX, accesibilidad y diseño responsive. Optimización de SEO y performance para mejorar la visibilidad y la captación de clientes, incorporando estructura semántica, metadata y microinteracciones.",
       challenge:
         "El sitio necesitaba transmitir confianza a clientes residenciales en un mercado local partiendo de un diseño ya definido, sin sacrificar performance ni accesibilidad, y quedar listo para escalar a otros idiomas.",
       metrics: [
@@ -328,20 +309,22 @@ export const dataProjects: Record<"es" | "en", ProjectItem[]> = {
           },
         ],
       },
-      liveUrl: "https://prepro-sos-service-web.vercel.app/en",
+      liveUrl: "https://www.sosservice.pt/pt",
       githubUrl: "https://github.com/mauriciotognoli",
     },
     {
       id: 2,
       featured: false,
       title: "Freiguel",
-      category: "Plataforma Web",
-      type: "web",
+      category: "Landing Corporativa",
+      type: "landing",
       year: "2025",
+      date: "2025-07",
       status: "live",
+      logo: "/freiguel/freiguel-logo.svg",
       tagline:
-        "Interfaces accesibles y mobile-first para una plataforma pública",
-      desc: "Desarrollo de interfaces web accesibles y mobile-first utilizando Next.js 14, Tailwind CSS y TypeScript. Implementación del sistema de navegación y las páginas públicas de la plataforma, colaborando estrechamente con el equipo de diseño para asegurar consistencia visual y una experiencia de usuario óptima.",
+        "Landing corporativa accesible y mobile-first para una plataforma pública",
+      desc: "Desarrollo de una landing corporativa accesible y mobile-first utilizando Next.js 14, Tailwind CSS y TypeScript, como freelance para ZimaBlue — el mismo tipo de proyecto y stack que SOS Service. Implementación del sistema de navegación y las páginas públicas de la plataforma, colaborando estrechamente con el equipo de diseño para asegurar consistencia visual y una experiencia de usuario óptima.",
       challenge:
         "El equipo necesitaba páginas públicas rápidas y accesibles, coherentes con un sistema de diseño existente, sin frenar el ritmo de entrega del resto del monorepo.",
       metrics: [
@@ -408,6 +391,7 @@ export const dataProjects: Record<"es" | "en", ProjectItem[]> = {
       liveUrl: "https://www.freiguel.pt/pt",
       githubUrl: "https://github.com/mauriciotognoli",
     },
+    /* Produp — comentado hasta tener permiso del cliente para mostrarlo públicamente.
     {
       id: 3,
       featured: false,
@@ -464,14 +448,17 @@ export const dataProjects: Record<"es" | "en", ProjectItem[]> = {
       liveUrl: null,
       githubUrl: null,
     },
+    */
     {
       id: 4,
       featured: false,
       title: "Powip",
       category: "SaaS · ERP",
       type: "saas",
-      year: "2025",
+      year: "2026",
+      date: "2026-01",
       status: "live",
+      logo: "/powip/logo-powip.svg",
       tagline: "Plataforma ERP SaaS de e-commerce construida desde cero",
       desc: "Plataforma ERP SaaS de e-commerce desarrollada desde cero para reemplazar una solución anterior que no soportaba la alta carga de usuarios y datos. Participación activa en el diseño de UX/UI y en la implementación de una arquitectura frontend escalable y modular, con integración a REST APIs y gestión de datos optimizada mediante React Query.",
       challenge:
@@ -529,11 +516,13 @@ export const dataProjects: Record<"es" | "en", ProjectItem[]> = {
       title: "SOS Service",
       category: "Corporate Landing",
       type: "landing",
-      year: "2026",
+      year: "2025",
+      date: "2025-12",
       status: "live",
+      logo: "/sos-service/sos-services-logo.svg",
       tagline:
         "Corporate landing page for a home-maintenance company in Madeira, Portugal",
-      desc: "Built a corporate landing page from scratch for SOS Service, a home repair and maintenance company based in Madeira, Portugal. Full UI implementation from a provided design, applying UI/UX best practices, accessibility, and responsive design. SEO and performance optimization to improve visibility and lead generation, including semantic structure, metadata, and micro-interactions.",
+      desc: "Built a corporate landing page from scratch for SOS Service, a home repair and maintenance company based in Madeira, Portugal, as a freelancer for ZimaBlue. Full UI implementation from a provided design, applying UI/UX best practices, accessibility, and responsive design. SEO and performance optimization to improve visibility and lead generation, including semantic structure, metadata, and micro-interactions.",
       challenge:
         "The site needed to convey trust to residential clients in a local market, starting from an already-defined design, without sacrificing performance or accessibility, and ready to scale to other languages.",
       metrics: [
@@ -611,12 +600,14 @@ export const dataProjects: Record<"es" | "en", ProjectItem[]> = {
       id: 2,
       featured: false,
       title: "Freiguel",
-      category: "Web Platform",
-      type: "web",
+      category: "Corporate Landing",
+      type: "landing",
       year: "2025",
+      date: "2025-07",
       status: "live",
-      tagline: "Accessible, mobile-first interfaces for a public platform",
-      desc: "Built accessible, mobile-first web interfaces using Next.js 14, Tailwind CSS and TypeScript. Implemented the navigation system and public pages of the platform, working closely with the design team to ensure visual consistency and an optimal user experience.",
+      logo: "/freiguel/freiguel-logo.svg",
+      tagline: "Accessible, mobile-first corporate landing for a public platform",
+      desc: "Built an accessible, mobile-first corporate landing using Next.js 14, Tailwind CSS and TypeScript, as a freelancer for ZimaBlue — the same kind of project and stack as SOS Service. Implemented the navigation system and public pages of the platform, working closely with the design team to ensure visual consistency and an optimal user experience.",
       challenge:
         "The team needed fast, accessible public pages consistent with an existing design system, without slowing down the rest of the monorepo's delivery pace.",
       metrics: [
@@ -653,6 +644,7 @@ export const dataProjects: Record<"es" | "en", ProjectItem[]> = {
       liveUrl: "https://www.freiguel.pt/pt",
       githubUrl: "https://github.com/mauriciotognoli",
     },
+    /* Produp — commented out until the client gives permission to show it publicly.
     {
       id: 3,
       featured: false,
@@ -709,14 +701,17 @@ export const dataProjects: Record<"es" | "en", ProjectItem[]> = {
       liveUrl: null,
       githubUrl: null,
     },
+    */
     {
       id: 4,
       featured: false,
       title: "Powip",
       category: "SaaS · ERP",
       type: "saas",
-      year: "2025",
+      year: "2026",
+      date: "2026-01",
       status: "live",
+      logo: "/powip/logo-powip.svg",
       tagline: "SaaS e-commerce ERP platform built from scratch",
       desc: "A SaaS e-commerce ERP platform built from scratch to replace a previous solution that couldn't handle the user and data load. Active participation in UX/UI design and in a scalable, modular frontend architecture, with REST API integration and optimized data management via React Query.",
       challenge:
@@ -765,40 +760,6 @@ export const dataProjects: Record<"es" | "en", ProjectItem[]> = {
       },
       liveUrl: "https://www.powip.lat/",
       githubUrl: null,
-    },
-  ],
-};
-
-// ─── EDUCATION ───
-export interface EducationItem {
-  institution: string;
-  program: string;
-  year: string;
-}
-
-export const dataEducation: Record<"es" | "en", EducationItem[]> = {
-  es: [
-    {
-      institution: "Henry Bootcamp",
-      program: "Full Stack Web Developer",
-      year: "2024",
-    },
-    {
-      institution: "Codecademy",
-      program: "HTML, CSS & JavaScript",
-      year: "2023",
-    },
-  ],
-  en: [
-    {
-      institution: "Henry Bootcamp",
-      program: "Full Stack Web Developer",
-      year: "2024",
-    },
-    {
-      institution: "Codecademy",
-      program: "HTML, CSS & JavaScript",
-      year: "2023",
     },
   ],
 };
@@ -921,12 +882,12 @@ export interface ProcessStep {
 export const dataProcess: Record<"es" | "en", ProcessStep[]> = {
   es: [
     {
-      title: "Entender primero",
-      desc: "Empiezo entendiendo el objetivo del producto y el problema real — no solo el ticket. Hago las preguntas que evitan retrabajo después.",
+      title: "Entender el problema",
+      desc: "No me limito al ticket. Busco entender qué problema estamos resolviendo, para quién y por qué. Así puedo proponer soluciones más simples, útiles y sostenibles.",
     },
     {
       title: "Comunicar temprano",
-      desc: "Updates async claros y alertas apenas algo se ve raro. Sin sorpresas cerca del deadline.",
+      desc: "Antes de escribir código, me aseguro de que estamos alineados en el objetivo y el enfoque. Prefiero revisar un plan de 5 minutos que corregir un PR de 3 horas.",
     },
     {
       title: "Entregar en partes",
@@ -939,8 +900,8 @@ export const dataProcess: Record<"es" | "en", ProcessStep[]> = {
   ],
   en: [
     {
-      title: "Understand first",
-      desc: "I start by understanding the product goal and the real problem — not just the ticket. I ask the questions that prevent rework later.",
+      title: "Understand the Problem",
+      desc: "I don’t just focus on the ticket. I take the time to understand what problem we’re solving, who we’re solving it for, and why. This helps me propose simpler, more useful, and sustainable solutions.",
     },
     {
       title: "Communicate early",
@@ -1028,6 +989,7 @@ export interface FeatureBlock {
   solution: string;
   impact: FeatureImpact[];
   stack: string[];
+  demoLabel?: string;
 }
 
 /** Real product screenshot per feature block id — served from /public/features/. Blocks without an entry fall back to the logo. */

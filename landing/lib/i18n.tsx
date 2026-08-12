@@ -308,7 +308,7 @@ export const translations: Record<Lang, Translations> = {
       f2l: "Buscando",
       f2v: "Roles Frontend remotos",
       f2s: "Full-time o contrato",
-      f3l: "Huso horario",
+      f3l: "Uso horario",
       f3s: "Overlap total con US · Mañanas EU",
       f4l: "Inglés",
       f4v: "Profesional",
@@ -321,8 +321,8 @@ export const translations: Record<Lang, Translations> = {
     },
     process: {
       label: "Cómo trabajo",
-      title: "Un proceso confiable.",
-      desc: "La seniority no es solo código — es qué tan predecible sos entregando. Así es trabajar conmigo.",
+      title: "Claridad, criterio y entregas confiables.",
+      desc: "No se trata solo de escribir código. Se trata de entender el problema, tomar buenas decisiones y entregar soluciones que sean claras, mantenible",
     },
     faq: {
       label: "Preguntas frecuentes",
@@ -331,25 +331,26 @@ export const translations: Record<Lang, Translations> = {
     },
     contact: {
       label: "Contacto",
-      title: "Construyamos",
-      titleAccent: "algo genial.",
-      desc: "Ya sea una startup que necesita un frontend engineer, una empresa armando su design system, o un founder que quiere una UI prolija — hablemos.",
-      formTitle: "Enviar un mensaje",
-      name: "Tu nombre",
+      title: "Hablemos de",
+      titleAccent: "tu próximo proyecto.",
+      desc: "¿Buscás un frontend engineer para construir un producto, mejorar una interfaz o llevar una idea a producción? Contame qué estás construyendo y veamos cómo puedo ayudarte.",
+      formTitle: "Enviame un mensaje",
+      name: "Nombre",
       email: "Email",
       subject: "Asunto",
-      message: "¿Qué estás construyendo?",
+      message: "Mensaje",
       namePh: "Tu nombre",
       emailPh: "tu@email.com",
       subjectPh: "¿En qué puedo ayudarte?",
-      messagePh: "Contame sobre tu proyecto o rol...",
+      messagePh: "Contame brevemente sobre tu proyecto, idea o propuesta...",
       submit: "Enviar mensaje →",
       sending: "Enviando...",
       infoTitle: "Información de contacto",
       emailLabel: "Email",
       locationLabel: "Ubicación",
-      followLabel: "Seguime en",
+      followLabel: "Encontrame en",
     },
+
     otw: {
       title: "Abierto a oportunidades",
       sub: "Roles remotos full-time · Freelance · Frontend",
@@ -517,8 +518,8 @@ export const translations: Record<Lang, Translations> = {
     },
     process: {
       label: "How I work",
-      title: "A process you can trust.",
-      desc: "Seniority isn't just about code — it's about how predictably you deliver. This is what working with me looks like.",
+      title: "Clarity, sound judgment, and reliable delivery.",
+      desc: "It’s not just about writing code. It’s about understanding the problem, making thoughtful decisions, and delivering solutions that are clear, maintainable, and predictable.",
     },
     faq: {
       label: "Common questions",
@@ -527,25 +528,26 @@ export const translations: Record<Lang, Translations> = {
     },
     contact: {
       label: "Contact",
-      title: "Let's build",
-      titleAccent: "something great.",
-      desc: "Whether you're a startup needing a frontend engineer, a company building their design system, or a founder who wants polished UI — let's talk.",
-      formTitle: "Send a message",
-      name: "Your name",
+      title: "Let’s talk about",
+      titleAccent: "your next project.",
+      desc: "Looking for a frontend engineer to build a product, improve an interface, or bring an idea to production? Tell me what you’re working on and let’s see how I can help.",
+      formTitle: "Send me a message",
+      name: "Name",
       email: "Email",
       subject: "Subject",
-      message: "What are you building?",
+      message: "Message",
       namePh: "Your name",
       emailPh: "you@email.com",
       subjectPh: "How can I help?",
-      messagePh: "Tell me about your project or role...",
+      messagePh: "Tell me briefly about your project, idea, or opportunity...",
       submit: "Send message →",
       sending: "Sending...",
       infoTitle: "Contact information",
       emailLabel: "Email",
       locationLabel: "Location",
-      followLabel: "Follow me",
+      followLabel: "Find me on",
     },
+
     otw: {
       title: "Open to opportunities",
       sub: "Full-time remote roles · Freelance · Frontend",
@@ -574,13 +576,23 @@ export function LanguageProvider({ children }: { children: React.ReactNode }) {
 
   useEffect(() => {
     const stored = window.localStorage.getItem("mt-lang") as Lang | null;
-    if (stored) setLang(stored);
+    const browserLang = (
+      navigator.languages?.[0] ??
+      navigator.language ??
+      "es"
+    ).toLowerCase();
+    const detected: Lang = browserLang.startsWith("es") ? "es" : "en";
+    const initial = stored ?? detected;
+    // eslint-disable-next-line react-hooks/set-state-in-effect -- reads localStorage/navigator.language, only available client-side after mount
+    setLang(initial);
+    document.documentElement.lang = initial;
   }, []);
 
   const toggleLang = () => {
     setLang((prev) => {
       const next: Lang = prev === "es" ? "en" : "es";
       window.localStorage.setItem("mt-lang", next);
+      document.documentElement.lang = next;
       return next;
     });
   };

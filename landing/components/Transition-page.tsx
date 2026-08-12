@@ -6,7 +6,7 @@ import Image from "next/image";
 const TransitionPage = () => {
   return (
     <AnimatePresence mode="wait">
-      <div>
+      <div aria-hidden="true">
         <motion.div
           className="fixed top-0 bottom-0 right-full w-screen h-screen z-30 bg-[#F26419]"
           variants={transitionVariantPage}
