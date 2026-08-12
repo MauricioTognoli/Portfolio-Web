@@ -5,6 +5,7 @@ import Image from "next/image";
 import { motion } from "framer-motion";
 import { Globe2 } from "lucide-react";
 import { useLanguage } from "@/lib/i18n";
+import { cvFiles } from "@/data";
 import { btnPrimary, btnSecondary } from "./uiClasses";
 
 const fadeUp = {
@@ -28,7 +29,7 @@ const slideUpVisible = {
 };
 
 const Hero = () => {
-  const { t } = useLanguage();
+  const { t, lang } = useLanguage();
 
   const stats = [
     { value: "4", suffix: "+", label: t.hero.stat1 },
@@ -108,7 +109,7 @@ const Hero = () => {
             variants={fadeUp}
           >
             <a href="#projects" className={btnPrimary}>{t.hero.cta1}</a>
-            <a href="#contact" className={btnSecondary}>{t.hero.cta2}</a>
+            <a href={cvFiles[lang]} download className={btnSecondary}>{t.hero.cta2}</a>
           </motion.div>
 
           <motion.div

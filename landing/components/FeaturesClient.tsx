@@ -11,7 +11,13 @@ import { btnPrimary, btnGhost } from "./uiClasses";
 import * as pk from "./pageKit";
 import ScreenshotFrame from "./ScreenshotFrame";
 
-const FeatureVisual = ({ f, onExpand }: { f: FeatureBlock; onExpand: (id: number) => void }) => {
+const FeatureVisual = ({
+  f,
+  onExpand,
+}: {
+  f: FeatureBlock;
+  onExpand: (id: number) => void;
+}) => {
   const { lang } = useLanguage();
   const [imageFailed, setImageFailed] = useState(false);
   const image = featureImages[f.id];
@@ -22,7 +28,9 @@ const FeatureVisual = ({ f, onExpand }: { f: FeatureBlock; onExpand: (id: number
         type="button"
         onClick={() => onExpand(f.id)}
         className="group absolute inset-0 h-full w-full cursor-zoom-in border-none bg-transparent p-0"
-        aria-label={lang === "es" ? `Ver ${f.title} completa` : `View ${f.title} in full`}
+        aria-label={
+          lang === "es" ? `Ver ${f.title} completa` : `View ${f.title} in full`
+        }
       >
         <span className="absolute top-3.5 left-3.5 z-10 rounded-full border border-mt-border-bright bg-mt-bg/80 px-3 py-1 font-mt-mono text-[9px] tracking-widest text-mt-text-60 uppercase backdrop-blur-sm">
           {lang === "es" ? "En producción" : "In production"}
@@ -44,7 +52,13 @@ const FeatureVisual = ({ f, onExpand }: { f: FeatureBlock; onExpand: (id: number
 
   return (
     <div className="flex h-full w-full items-center justify-center p-10">
-      <Image src="/logo-mt.png" alt="Mauricio Tognoli" width={96} height={96} className="opacity-90" />
+      <Image
+        src="/logo-mt.png"
+        alt="Mauricio Tognoli"
+        width={96}
+        height={96}
+        className="opacity-90"
+      />
     </div>
   );
 };
@@ -53,8 +67,10 @@ const FeaturesClient = () => {
   const { lang, t } = useLanguage();
   const blocks = dataFeatureBlocks[lang];
   const [expandedId, setExpandedId] = useState<number | null>(null);
-  const expanded = expandedId !== null ? blocks.find((f) => f.id === expandedId) : undefined;
-  const expandedImage = expandedId !== null ? featureImages[expandedId] : undefined;
+  const expanded =
+    expandedId !== null ? blocks.find((f) => f.id === expandedId) : undefined;
+  const expandedImage =
+    expandedId !== null ? featureImages[expandedId] : undefined;
 
   useEffect(() => {
     if (expandedId === null) return;
@@ -76,20 +92,25 @@ const FeaturesClient = () => {
         <div className="pointer-events-none absolute -top-30 left-1/2 h-112.5 w-175 -translate-x-1/2 bg-[radial-gradient(circle,rgba(242,100,25,0.12)_0%,transparent_70%)]" />
         <div className="relative mx-auto max-w-[1100px]">
           <div className="mb-5.5 flex items-center gap-2 font-mt-mono text-[11px] text-mt-text-30">
-            <Link href="/" className="text-mt-text-30 no-underline transition-colors duration-200 hover:text-mt-orange">home</Link>
+            <Link
+              href="/"
+              className="text-mt-text-30 no-underline transition-colors duration-200 hover:text-mt-orange"
+            >
+              home
+            </Link>
             <span>/</span>
             <span className="text-mt-text-60">features</span>
           </div>
           <h1 className="mb-5 font-mt-display text-[clamp(38px,5.5vw,72px)] leading-[1.02] font-bold tracking-[-0.04em]">
             {t.features.pageTitle1}
             <br />
-            <span className="font-mt-serif font-normal text-mt-orange italic">{t.features.pageTitle2}</span>
+            <span className="font-mt-serif font-normal text-mt-orange italic">
+              {t.features.pageTitle2}
+            </span>
           </h1>
-          <p className="max-w-[540px] text-[15px] leading-[1.7] text-mt-text-60">{t.features.pageSubtitle}</p>
-          <div className="mt-6.5 inline-flex items-center gap-2 rounded-full border border-[rgba(242,100,25,.25)] bg-mt-orange-dim px-4 py-2 text-[12.5px] text-mt-orange">
-            <Camera size={14} className="shrink-0" />
-            {t.features.hint}
-          </div>
+          <p className="max-w-[540px] text-[15px] leading-[1.7] text-mt-text-60">
+            {t.features.pageSubtitle}
+          </p>
         </div>
       </div>
 
@@ -104,32 +125,44 @@ const FeaturesClient = () => {
               transition={{ duration: 0.5, delay: i * 0.03, ease: "easeOut" }}
               className="mb-6 grid grid-cols-2 overflow-hidden rounded-[22px] border border-mt-border bg-mt-card-bg transition-colors duration-300 hover:border-mt-border-bright max-[900px]:grid-cols-1"
             >
-              <div className={`flex flex-col justify-center p-9.5 max-[900px]:order-1 max-[900px]:p-7 ${f.flip ? "order-2" : "order-1"}`}>
+              <div
+                className={`flex flex-col justify-center p-9.5 max-[900px]:order-1 max-[900px]:p-7 ${f.flip ? "order-2" : "order-1"}`}
+              >
                 <div className="mb-3 flex items-center gap-2 font-mt-mono text-[10px] tracking-[0.08em] text-mt-orange uppercase before:h-px before:w-4.5 before:bg-mt-orange before:content-['']">
                   {f.eyebrow}
                 </div>
-                <h2 className="mb-4 font-mt-display text-2xl leading-[1.15] font-bold tracking-[-0.025em]">{f.title}</h2>
+                <h2 className="mb-4 font-mt-display text-2xl leading-[1.15] font-bold tracking-[-0.025em]">
+                  {f.title}
+                </h2>
 
                 <div className="mb-4.5 flex flex-col gap-3">
                   <div className="rounded-xl border border-mt-border bg-mt-surface px-4 py-3.5">
                     <div className="mb-1.5 flex items-center gap-1.5 font-mt-mono text-[9.5px] tracking-[0.08em] text-[#f87171] uppercase">
                       × {t.features.problemLabel}
                     </div>
-                    <div className="text-[13px] leading-[1.65] text-mt-text-60">{f.problem}</div>
+                    <div className="text-[13px] leading-[1.65] text-mt-text-60">
+                      {f.problem}
+                    </div>
                   </div>
                   <div className="rounded-xl border border-mt-border bg-mt-surface px-4 py-3.5">
                     <div className="mb-1.5 flex items-center gap-1.5 font-mt-mono text-[9.5px] tracking-[0.08em] text-[#4ade80] uppercase">
                       ✓ {t.features.solutionLabel}
                     </div>
-                    <div className="text-[13px] leading-[1.65] text-mt-text-60">{f.solution}</div>
+                    <div className="text-[13px] leading-[1.65] text-mt-text-60">
+                      {f.solution}
+                    </div>
                   </div>
                 </div>
 
                 <div className="mb-4.5 flex flex-wrap gap-3.5">
                   {f.impact.map((im) => (
                     <div key={im.lbl} className="flex flex-col gap-px">
-                      <span className="font-mt-display text-[19px] font-bold tracking-[-0.02em] text-mt-orange tabular-nums">{im.val}</span>
-                      <span className="font-mt-mono text-[9px] tracking-[0.06em] text-mt-text-30 uppercase">{im.lbl}</span>
+                      <span className="font-mt-display text-[19px] font-bold tracking-[-0.02em] text-mt-orange tabular-nums">
+                        {im.val}
+                      </span>
+                      <span className="font-mt-mono text-[9px] tracking-[0.06em] text-mt-text-30 uppercase">
+                        {im.lbl}
+                      </span>
                     </div>
                   ))}
                 </div>
@@ -147,7 +180,10 @@ const FeaturesClient = () => {
 
                 <div className="flex flex-wrap gap-1.25">
                   {f.stack.map((s) => (
-                    <span key={s} className="rounded-[5px] border border-mt-border bg-mt-tag-bg px-2.5 py-[3px] font-mt-mono text-[10.5px] text-mt-text-60">
+                    <span
+                      key={s}
+                      className="rounded-[5px] border border-mt-border bg-mt-tag-bg px-2.5 py-[3px] font-mt-mono text-[10.5px] text-mt-text-60"
+                    >
                       {s}
                     </span>
                   ))}
@@ -167,10 +203,16 @@ const FeaturesClient = () => {
 
         <div className="mt-11 flex flex-wrap items-center justify-between gap-6 rounded-[20px] border border-mt-border bg-mt-surface px-9.5 py-8.5 transition-colors duration-300">
           <div>
-            <h3 className="mb-1.5 font-mt-display text-xl font-bold tracking-[-0.025em]">{t.features.summaryTitle}</h3>
-            <p className="max-w-110 text-[13px] leading-[1.65] text-mt-text-60">{t.features.summaryDesc}</p>
+            <h3 className="mb-1.5 font-mt-display text-xl font-bold tracking-[-0.025em]">
+              {t.features.summaryTitle}
+            </h3>
+            <p className="max-w-110 text-[13px] leading-[1.65] text-mt-text-60">
+              {t.features.summaryDesc}
+            </p>
           </div>
-          <Link href="/#contact" className={`${btnPrimary} shrink-0`}>{t.features.summaryCta}</Link>
+          <Link href="/#contact" className={`${btnPrimary} shrink-0`}>
+            {t.features.summaryCta}
+          </Link>
         </div>
       </div>
 
@@ -182,7 +224,9 @@ const FeaturesClient = () => {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.2 }}
-            onClick={(e) => { if (e.target === e.currentTarget) setExpandedId(null); }}
+            onClick={(e) => {
+              if (e.target === e.currentTarget) setExpandedId(null);
+            }}
           >
             <motion.div
               role="dialog"
@@ -197,9 +241,15 @@ const FeaturesClient = () => {
               <div className={pk.pkModalHeader}>
                 <div>
                   <div className={pk.pkModalCategory}>{expanded.eyebrow}</div>
-                  <div id="feature-modal-title" className={pk.pkModalTitle}>{expanded.title}</div>
+                  <div id="feature-modal-title" className={pk.pkModalTitle}>
+                    {expanded.title}
+                  </div>
                 </div>
-                <button className={pk.pkModalClose} onClick={() => setExpandedId(null)} aria-label="Close">
+                <button
+                  className={pk.pkModalClose}
+                  onClick={() => setExpandedId(null)}
+                  aria-label="Close"
+                >
                   <X size={16} />
                 </button>
               </div>

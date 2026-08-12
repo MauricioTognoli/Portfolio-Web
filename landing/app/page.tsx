@@ -27,7 +27,7 @@ export default function Home() {
       <ProjectsPreview />
       {/* <MTComponents /> */}
       <Skills />
-      <Testimonials />
+      {/* <Testimonials /> */}
       <RecruiterSnapshot />
       <Process />
       <FAQ />

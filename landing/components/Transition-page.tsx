@@ -22,6 +22,7 @@ const TransitionPage = () => {
               className="flex items-center content-center justify-center m-auto  "
               width={500}
               height={500}
+              priority
             />
           </div>
         </motion.div>

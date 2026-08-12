@@ -41,8 +41,9 @@ const Experience = () => {
                     <li
                       key={ai}
                       className="flex items-start gap-[9px] text-[13px] leading-normal text-mt-text-60 before:mt-px before:shrink-0 before:text-xs before:text-mt-orange before:content-['✓']"
-                      dangerouslySetInnerHTML={{ __html: a }}
-                    />
+                    >
+                      <span dangerouslySetInnerHTML={{ __html: a }} />
+                    </li>
                   ))}
                 </ul>
               </div>

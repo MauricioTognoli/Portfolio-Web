@@ -161,13 +161,13 @@ const Header = () => {
                 >
                   {t.nav.projects}
                 </a>
-                <a
+                {/* <a
                   className={mobileLink}
                   href="#components"
                   onClick={() => setMobileOpen(false)}
                 >
                   {t.nav.components}
-                </a>
+                </a> */}
                 <a
                   className={mobileLink}
                   href="#skills"

@@ -665,11 +665,9 @@ const ProyectosClient = () => {
                     </div>
                     <ul className={pk.pkModalKpList}>
                       {activeProject.keypoints.map((k, i) => (
-                        <li
-                          key={i}
-                          className={pk.pkModalKpItem}
-                          dangerouslySetInnerHTML={{ __html: k }}
-                        />
+                        <li key={i} className={pk.pkModalKpItem}>
+                          <span dangerouslySetInnerHTML={{ __html: k }} />
+                        </li>
                       ))}
                     </ul>
                   </div>
